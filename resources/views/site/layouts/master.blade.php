@@ -321,7 +321,7 @@
     <!-- scroll to top button end -->
     @include('site.partials.header')
     <!-- app layout start -->
-    <div class="min-h-screen lg:ml-[240px] lg:mr-[136px]">
+    <div class="min-h-screen lg:ml-[240px] lg:mr-[136px] px-[10px]">
         <!-- main start -->
         @yield('content')
         <!-- main end -->

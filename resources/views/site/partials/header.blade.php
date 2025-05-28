@@ -104,10 +104,10 @@
                                         <i class="ti ti-menu-2"></i>
                                     </button>
                                 @else
-                                    <a href="{{ route('front.login-client') }}" class="btn btn-primary">
+                                    <a href="{{ route('front.login-client') }}" class="btn btn-primary lg:block hidden">
                                         <i class="ti ti-login"></i> Đăng nhập
                                     </a>
-                                    <a href="{{ route('front.login-client') }}?register=true" class="btn btn-primary">
+                                    <a href="{{ route('front.login-client') }}?register=true" class="btn btn-primary lg:block hidden">
                                         <i class="ti ti-user-plus"></i> Đăng ký
                                     </a>
                                 @endif

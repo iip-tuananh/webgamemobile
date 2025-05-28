@@ -100,9 +100,6 @@
                                             {{-- <a href="./contact-us.html" class="dropdown-item">Help</a> --}}
                                         </div>
                                     </div>
-                                    <button class="lg:hidden btn-c btn-c-lg btn-c-dark-outline nav-toggole shrink-0">
-                                        <i class="ti ti-menu-2"></i>
-                                    </button>
                                 @else
                                     <a href="{{ route('front.login-client') }}" class="btn btn-primary lg:block hidden">
                                         <i class="ti ti-login"></i> Đăng nhập
@@ -111,6 +108,9 @@
                                         <i class="ti ti-user-plus"></i> Đăng ký
                                     </a>
                                 @endif
+                                <button class="lg:hidden btn-c btn-c-lg btn-c-dark-outline nav-toggole shrink-0">
+                                    <i class="ti ti-menu-2"></i>
+                                </button>
                             </div>
                         </div>
                     </nav>

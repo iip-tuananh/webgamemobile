@@ -241,7 +241,7 @@
                         <ul class="grid grid-cols-1 gap-y-3">
                             <li class="sub-menu mobail-submenu border-none pb-0">
                                 <span
-                                    class="mobail-submenu-btn flex-y justify-between px-3 py-16p bg-primary text-m-regular rounded-12 w-full transition-1"
+                                    class="mobail-submenu-btn flex-y justify-between px-2 py-16p bg-primary text-m-regular rounded-12 w-full transition-1"
                                     ng-click="goToHomePage()">
                                     <span class="submenu-btn text-b-neutral-4 flex-y gap-3 ">
                                         <span class="icon-28">
@@ -269,7 +269,7 @@
                             @foreach ($specialCategories as $category)
                                 <li>
                                     <a href="{{ route('front.show-product-category', $category->slug) }}"
-                                        class="flex-y gap-3 px-3 py-16p hover:bg-primary text-m-regular text-w-neutral-1 hover:text-b-neutral-4 rounded-12 justify-normal w-full transition-1">
+                                        class="flex-y gap-3 px-2 py-16p hover:bg-primary text-m-regular text-w-neutral-1 hover:text-b-neutral-4 rounded-12 justify-normal w-full transition-1">
                                         <span class="icon-28">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -287,7 +287,7 @@
                             @foreach ($productCategories as $category)
                                 <li class="sub-menu mobail-submenu border-none pb-0">
                                     <span
-                                        class="mobail-submenu-btn flex-y justify-between px-3 py-16p text-m-regular rounded-12 w-full transition-1">
+                                        class="mobail-submenu-btn flex-y justify-between px-2 py-16p text-m-regular rounded-12 w-full transition-1">
                                         <span class="submenu-btn flex-y gap-3 ">
                                             <a href="{{ route('front.show-product-category', $category->slug) }}">
                                                 <span class="icon-28">
@@ -339,7 +339,7 @@
                         <ul class="grid grid-cols-1 gap-y-3">
                             <li>
                                 <a href="{{ route('front.contact-us') }}"
-                                    class="flex-y gap-3 px-3 py-16p hover:bg-primary text-m-regular text-w-neutral-1 hover:text-b-neutral-4 rounded-12 justify-normal w-full transition-1">
+                                    class="flex-y gap-3 px-2 py-16p hover:bg-primary text-m-regular text-w-neutral-1 hover:text-b-neutral-4 rounded-12 justify-normal w-full transition-1">
                                     <span class="icon-28">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"

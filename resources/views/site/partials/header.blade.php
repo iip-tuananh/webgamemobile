@@ -7,7 +7,7 @@
                         class="relative xl:grid xl:grid-cols-12 flex justify-between items-center gap-24p text-semibold w-full">
                         <div class="3xl:col-span-6 xl:col-span-5 flex items-center 3xl:gap-x-10 gap-x-5">
                             <a href="{{ route('front.home-page') }}" class="shrink-0">
-                                <img class="xl:w-[170px] sm:w-36 w-30 h-auto shrink-0" src="{{ $config->image->path }}"
+                                <img class="xl:w-[70px] sm:w-30 w-25 h-auto shrink-0" src="{{ $config->image->path }}"
                                     alt="brand" />
                             </a>
                             <form action="{{ route('front.search') }}" method="get"

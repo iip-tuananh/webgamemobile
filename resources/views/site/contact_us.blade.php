@@ -4,165 +4,153 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('site/css/style_page.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('site/css/contact_style.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('site/css/breadcrumb_style.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
 @endsection
 
 @section('content')
     <main ng-controller="ContactUsController" ng-cloak>
-        <!--page-title-area start-->
-        {{-- <div class="page-title-area pt-100 pb-md-60"
-            data-background="/site/images/page-title-shadow-bg-1a.png">
-            <img class="shape__p1" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <img class="shape__p2" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <img class="shape__p3" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <div class="blur__p4"></div>
-            <div class="blur__p5"></div>
-            <div class="blur__p6"></div>
-            <div class="blur__p7"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="page-title-wrapper text-lg-start text-center mb-40">
-                            <h2 class="page-title mb-10">Liên hệ</h2>
-                            <div class="page-title-border mt-1 mb-10"></div>
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb list-none justify-content-center justify-content-md-start">
-                                    <li><a href="{{route('front.home-page')}}">Trang chủ</a></li>
-                                    <li><a href="#">Pages</a></li>
-                                    <li class="active" aria-current="page">Liên hệ</li>
+        <!-- breadcrumb start -->
+        <section class="pt-30p">
+            <div class="section-pt">
+                <div
+                    class="relative bg-cover bg-no-repeat rounded-24 overflow-hidden" style="background-image: url('/site/images/breadcrumbImg.png');">
+                    <div class="container">
+                        <div class="grid grid-cols-12 gap-30p relative xl:py-[130px] md:py-30 sm:py-25 py-20 z-[2]">
+                            <div class="lg:col-start-2 lg:col-end-12 col-span-12">
+                                <h2 class="heading-2 text-w-neutral-1 mb-3">
+                                    Liên hệ
+                                </h2>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('front.home-page') }}" class="breadcrumb-link">
+                                            Trang chủ
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-icon">
+                                            <i class="ti ti-chevrons-right"></i>
+                                        </span>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-current">Liên hệ với chúng tôi</span>
+                                    </li>
                                 </ul>
-                            </nav>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="page__title__img__wrapper text-xl-end text-center mb-40">
-                            <img class="main__1 img-fluid" src="/site/images/ilustration-2a.svg"
-                                alt="ilustration" loading="lazy">
-                            <img class="main__2" src="/site/images/ilustration-1a.svg" alt="ilustration" loading="lazy">
-                        </div>
-                    </div>
+                    <div class="overlay-11"></div>
                 </div>
             </div>
-        </div> --}}
-        <!--page-title-area end-->
-        <!--contact__section start-->
-        <div class="contact__section pt-50 pb-50 pt-lg-60 pb-lg-60">
+        </section>
+        <!-- breadcrumb end -->
+        <!-- contact us section start -->
+        <section class="section-py">
             <div class="container">
-                <div class="contact-form mb-30">
-                    <h3 class="section__title-main text-center mb-55">Gửi liên hệ đến chúng tôi</h3>
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="input-box mb-40">
-                                    <label class="label text-dark">Name</label>
-                                    <input type="text" placeholder="Enter Name" ng-model="your_name">
-                                    <div class="invalid-feedback d-block error" role="alert">
-                                        <span ng-if="errors && errors.your_name">
-                                            <% errors.your_name[0] %>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-box mb-40">
-                                    <label class="label text-dark">Email</label>
-                                    <input type="email" placeholder="Email Address" ng-model="your_email">
-                                    <div class="invalid-feedback d-block error" role="alert">
-                                        <span ng-if="errors && errors.your_email">
-                                            <% errors.your_email[0] %>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-box mb-40">
-                                    <label class="label text-dark">Phone Number</label>
-                                    <input type="text" placeholder="Mobile Num" ng-model="your_phone">
-                                    <div class="invalid-feedback d-block error" role="alert">
-                                        <span ng-if="errors && errors.your_phone">
-                                            <% errors.your_phone[0] %>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="input-box mb-40">
-                                    <label class="label text-dark">Message</label>
-                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Write Your Messages" ng-model="your_message"></textarea>
-                                    <div class="invalid-feedback d-block error" role="alert">
-                                        <span ng-if="errors && errors.your_message">
-                                            <% errors.your_message[0] %>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <button class="ht_btn mt-10 border-0" type="submit" ng-click="submitContact()">Send Message</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!--contact__section end-->
-        <!--contact__info__section end-->
-        <div class="contact__info__section pt-45 pt-lg-30 pb-100">
-            <div class="container">
-                <div class="contact__info__wrapper white-bg pt-30">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single__info__box mb-30">
-                                <div class="icon">
-                                    <i class="bi bi-telephone"></i>
-                                </div>
-                                <span class="mb-15">HOTLINE: <a href="tel:{{ str_replace(' ', '', $config->hotline) }}">{{ $config->hotline }}</a><br>
-                                    <span class="mb-15">ZALO: <a href="https://zalo.me/{{ str_replace(' ', '', $config->zalo) }}">{{ $config->zalo }}</a></span>
+                <div class="grid grid-cols-12 gap-30p">
+                    <div class="3xl:col-start-3 xxl:col-start-2 3xl:col-end-11 xxl:col-end-12 col-span-12">
+                        <h2 class="heading-2 text-center text-w-neutral-1 mb-48p">
+                            Hãy liên hệ với chúng tôi
+                        </h2>
+                        <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-30p mb-60p">
+                            <div class="bg-b-neutral-3 rounded-4 flex-col-c text-center p-32p">
+                                <span
+                                    class="flex-c size-80p rounded-full border border-primary text-primary icon-40 mb-32p">
+                                    <i class="ti ti-map-pin-filled"></i>
                                 </span>
+                                <h5 class="heading-5 text-w-neutral-1 mb-3">
+                                    Địa chỉ
+                                </h5>
+                                <a href="#" class="text-m-regular text-body">
+                                    {{ $config->address_company }}
+                                </a>
+                            </div>
+                            <div class="bg-b-neutral-3 rounded-4 flex-col-c text-center p-32p">
+                                <span
+                                    class="flex-c size-80p rounded-full border border-primary text-primary icon-40 mb-32p">
+                                    <i class="ti ti-mail-opened-filled"></i>
+                                </span>
+                                <h5 class="heading-5 text-w-neutral-1 mb-3">
+                                    Địa chỉ Email
+                                </h5>
+                                <a href="mailto:{{ $config->email }}" class="text-m-regular text-body">
+                                    {{ $config->email }}
+                                </a>
+                            </div>
+                            <div class="bg-b-neutral-3 rounded-4 flex-col-c text-center p-32p">
+                                <span
+                                    class="flex-c size-80p rounded-full border border-primary text-primary icon-40 mb-32p">
+                                    <i class="ti ti-phone-call"></i>
+                                </span>
+                                <h5 class="heading-5 text-w-neutral-1 mb-3">
+                                    Hotline
+                                </h5>
+                                <a href="tel:{{ str_replace(' ', '', $config->hotline) }}" class="text-m-regular text-body">
+                                    {{ $config->hotline }}
+                                </a>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single__info__box mb-30">
-                                <div class="icon">
-                                    <i class="bi bi-envelope"></i>
+                        <div class="bg-b-neutral-3 rounded-4 p-40p">
+                            <form>
+                                <div class="grid grid-cols-8 gap-30p mb-48p">
+                                    <div class="sm:col-span-4 col-span-8">
+                                        <label for="name" class="label label-md font-normal text-white mb-3">
+                                            Họ tên
+                                        </label>
+                                        <input class="box-input-4" type="text" name="name" id="name"
+                                            ng-model="your_name" placeholder="Name" />
+                                        <div class="invalid-feedback d-block error" role="alert">
+                                            <span ng-if="errors && errors.your_email">
+                                                <% errors.your_email[0] %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-4 col-span-8">
+                                        <label for="contactEmail" class="label label-md font-normal text-white mb-3">
+                                            Email
+                                        </label>
+                                        <input class="box-input-4" type="text" name="contactEmail" id="contactEmail"
+                                            ng-model="your_email" placeholder="Email" />
+                                        <div class="invalid-feedback d-block error" role="alert">
+                                            <span ng-if="errors && errors.your_email">
+                                                <% errors.your_email[0] %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-4 col-span-8">
+                                        <label for="phone" class="label label-md font-normal text-white mb-3">
+                                            Số điện thoại
+                                        </label>
+                                        <input class="box-input-4" type="number" name="phone" id="phone"
+                                            ng-model="your_phone" placeholder="--- --- ---" />
+                                        <div class="invalid-feedback d-block error" role="alert">
+                                            <span ng-if="errors && errors.your_phone">
+                                                <% errors.your_phone[0] %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-8">
+                                        <label for="subject" class="label label-md font-normal text-white mb-3">
+                                            Nội dung
+                                        </label>
+                                        <textarea class="box-input-4 h-[156px]" name="message" id="message" placeholder="Nội dung" ng-model="your_message"></textarea>
+                                        <div class="invalid-feedback d-block error" role="alert">
+                                            <span ng-if="errors && errors.your_message">
+                                                <% errors.your_message[0] %>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="mb-15"><a href="mailto:{{ $config->email }}">{{ $config->email }}</a></span>
-                            </div>
+                                <button class="btn btn-sm btn-primary rounded-12 w-full" ng-click="submitContact()">
+                                    Gửi liên hệ
+                                </button>
+                            </form>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single__info__box mb-30">
-                                <div class="icon">
-                                    <i class="bi bi-facebook"></i>
-                                </div>
-                                <span class="mb-15"><a href="{{ $config->facebook }}" target="_blank">{{ $config->facebook }}</a></span>
-                            </div>
-                        </div>
-                        {{-- <div class="col-lg-3 col-md-6">
-                            <div class="single__info__box mb-30">
-                                <div class="icon">
-                                    <i class="bi bi-skype"></i>
-                                </div>
-                                <span class="mb-15"><a href="{{ $config->facebook }}" target="_blank">{{ $config->facebook }}</a></span>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
-        </div>
-        <!--contact__info__section end-->
-        <!--contact__map__section end-->
-        <div class="contact__map__section">
-            <div class="container-fluid px-0">
-                <div class="row">
-                    <div class="contact__map">
-                        {!! $config->location !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--contact__map__section end-->
+        </section>
+        <!-- contact us section end -->
     </main>
+    <!-- main end -->
 @endsection
 
 @push('script')

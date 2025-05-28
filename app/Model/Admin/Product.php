@@ -71,7 +71,9 @@ class Product extends BaseModel
 
     public function canEdit()
     {
-        return Auth::user()->type == User::SUPER_ADMIN || Auth::user()->type == User::QUAN_TRI_VIEN;
+        if(Auth::user()->type == User::SUPER_ADMIN || Auth::user()->type == User::QUAN_TRI_VIEN) return true;
+        if(Auth::user()->type == User::KHACH_HANG && $this->created_by == Auth::user()->id && auth()->user()->can('Sửa sản phẩm')) return true;
+        return false;
     }
 
     public function image()
@@ -151,6 +153,10 @@ class Product extends BaseModel
             'category',
             'image',
         ]);
+        if (!Auth::user()->is_customer) {
+        } else {
+            $result->where('created_by', Auth::user()->id);
+        }
 
         if (!empty($request->name)) {
             $result = $result->where('name', 'like', '%' . $request->name . '%');
@@ -285,6 +291,10 @@ class Product extends BaseModel
 
             $deleted = ProductGallery::where('product_id', $this->id)->whereNotIn('id', $exist_ids)->get();
             foreach ($deleted as $item) {
+                if ($item->image) {
+                    FileHelper::forceDeleteFiles($item->image->id, $item->id, ProductGallery::class, 'image');
+                    $item->image->removeFromDB();
+                }
                 $item->removeFromDB();
             }
 
@@ -304,6 +314,15 @@ class Product extends BaseModel
                     FileHelper::uploadFile($file, 'product_gallery', $gallery->id, ProductGallery::class, null, 1);
                 }
             }
+        } else {
+            $galleries = $this->galleries;
+            foreach ($galleries as $gallery) {
+                if ($gallery->image) {
+                    FileHelper::forceDeleteFiles($gallery->image->id, $gallery->id, ProductGallery::class, 'image');
+                    $gallery->image->removeFromDB();
+                }
+            }
+            $this->galleries()->delete();
         }
     }
 
@@ -511,5 +530,10 @@ class Product extends BaseModel
         } else {
             return $this->price;
         }
+    }
+
+    public function getProductImageAttribute()
+    {
+        return $this->image ? $this->image->path : '/site/images/top-game.png';
     }
 }

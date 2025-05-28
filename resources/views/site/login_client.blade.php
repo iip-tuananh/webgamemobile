@@ -11,203 +11,142 @@
 @endsection
 @section('content')
     <main ng-controller="LoginClientController" ng-cloak>
-        <!--page-title-area start-->
-        {{-- <div class="page-title-area pt-100 pb-md-60"
-        data-background="/site/images/page-title-shadow-bg-1a.png">
-        <img class="shape__p1" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-        <img class="shape__p2" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-        <img class="shape__p3" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-        <div class="blur__p4"></div>
-        <div class="blur__p5"></div>
-        <div class="blur__p6"></div>
-        <div class="blur__p7"></div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-4 col-lg-5">
-                    <div class="page-title-wrapper text-lg-start text-center mb-40">
-                        <h2 class="page-title mb-10"><% title %></h2>
-                        <div class="page-title-border mt-1 mb-10"></div>
-                        <nav aria-label="breadcrumb">
-                            <ul class="breadcrumb list-none justify-content-center justify-content-md-start">
-                                <li><a href="{{route('front.home-page')}}">Trang chủ</a></li>
-                                <li><a href="#">Pages</a></li>
-                                <li class="active" aria-current="page"><% title %></li>
-                            </ul>
-                        </nav>
+        <!-- breadcrumb start -->
+        <section class="pt-30p">
+            <div class="section-pt">
+                <div class="relative bg-cover bg-no-repeat rounded-24 overflow-hidden"
+                    style="background-image: url('/site/images/breadcrumbImg.png');">
+                    <div class="container">
+                        <div class="grid grid-cols-12 gap-30p relative xl:py-[130px] md:py-30 sm:py-25 py-20 z-[2]">
+                            <div class="lg:col-start-2 lg:col-end-12 col-span-12">
+                                <h2 class="heading-2 text-w-neutral-1 mb-3">
+                                    <% title %>
+                                </h2>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('front.home-page') }}" class="breadcrumb-link">
+                                            Trang chủ
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-icon">
+                                            <i class="ti ti-chevrons-right"></i>
+                                        </span>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-current"><% title %></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-8 col-lg-7">
-                    <div class="page__title__img__wrapper text-xl-end text-center mb-40">
-                        <img class="main__1 img-fluid" src="/site/images/ilustration-2a.svg"
-                            alt="ilustration" loading="lazy">
-                        <img class="main__2" src="/site/images/ilustration-1a.svg" alt="ilustration" loading="lazy">
-                    </div>
+                    <div class="overlay-11"></div>
                 </div>
             </div>
-        </div>
-    </div> --}}
-        <!--page-title-area end-->
-        <!--login__section start-->
-        <div class="login__section" ng-if="formLogin">
-            <div class="container">
-                <div class="form__wrapper__bg">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="signup-form text-center mb-30"
-                                style="background-color: #cccc; padding: 20px; border-radius: 10px; box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.12);">
-                                <h3 class="section__title-main mb-30">Đăng nhập tài khoản</h3>
-                                <form id="login_client">
-                                    <div class="mb-20">
-                                        <div class="input-box mail">
-                                            <span><img src="/site/images/message-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="text" placeholder="Username or Email" name="account_name">
-                                        </div>
+        </section>
+        <!-- breadcrumb end -->
+        <section class="section-py">
+            <div class="container pt-30p">
+                <div class="grid grid-cols-12 gap-30p">
+                    <div class="xxl:col-start-3 xxl:col-end-11 col-span-12 ">
+                        <div class="bg-b-neutral-3 rounded-12 p-40p" ng-if="formRegister">
+                            <h4 class="heading-4 text-w-neutral-1 mb-60p">
+                                <% title %>
+                            </h4>
+                            <form id="customer_register">
+                                <div class="grid grid-cols-8 gap-30p">
+                                    <div class="col-span-8">
+                                        <label for="account_name" class="label label-lg mb-3">Họ và tên</label>
+                                        <input type="text" name="account_name" id="account_name" class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
                                             role="alert" ng-if="errors && errors['account_name']">
                                             <strong><% errors['account_name'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="mb-20">
-                                        <div class="input-box pass">
-                                            <span><img src="/site/images/lock-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="text" placeholder="Password" name="password">
-                                        </div>
-                                        <span class="invalid-feedback d-block error" style="text-align: left;"
-                                            role="alert" ng-if="errors && errors['password']">
-                                            <strong><% errors['password'][0] %></strong>
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="ht_btn" ng-click="loginClient()">Đăng nhập</button>
-                                    </div>
-                                </form>
-                                <p class="text-dark mt-40">Bạn chưa có tài khoản? <a href="javascript:void(0)"
-                                        ng-click="showFormRegister()"
-                                        style="
-                                            background: linear-gradient(93.42deg, #ff6737 0%, #ff4f13 53.12%, #ff3131 100%);
-                                            -webkit-background-clip: text;
-                                            -webkit-text-fill-color: transparent;
-                                            font-weight: bold;
-                                        "><b>Đăng
-                                            ký
-                                            ngay</b></a>
-                                </p>
-                                <h5 class="text-dark">Quên mật khẩu</h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="signup__right__content mb-30">
-                                <img class="w-100" src="/site/images/login-ilus-2.svg" alt="ilustration" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--login__section end-->
-        <div class="signup__section" ng-if="formRegister">
-            <div class="container">
-                <div class="form__wrapper__bg">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="signup-form mb-30"
-                                style="background-color: #cccc; padding: 20px; border-radius: 10px; box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.12);">
-                                <h3 class="section__title-main mb-30">Tạo tài khoản</h3>
-                                <form id="customer_register">
-                                    <div class="mb-20">
-                                        <div class="input-box">
-                                            <span><img src="/site/images/profile.svg" alt="icon" loading="lazy"></span>
-                                            <input type="text" placeholder="Username" name="account_name">
-                                        </div>
-                                        <span class="invalid-feedback d-block error" style="text-align: left;"
-                                            role="alert" ng-if="errors && errors['account_name']">
-                                            <strong><% errors['account_name'][0] %></strong>
-                                        </span>
-                                    </div>
-                                    <div class="mb-20">
-                                        <div class="input-box mail">
-                                            <span><img src="/site/images/message-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="email" placeholder="Email Name" name="email">
-                                        </div>
+                                    <div class="col-span-8">
+                                        <label for="email" class="label label-lg mb-3">Email</label>
+                                        <input type="email" name="email" id="email" class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
                                             role="alert" ng-if="errors && errors['email']">
                                             <strong><% errors['email'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="mb-20">
-                                        <div class="input-box phone">
-                                            <span><img src="/site/images/call-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="text" placeholder="Phone Number" name="phone_number">
-                                        </div>
+                                    <div class="col-span-8">
+                                        <label for="phone_number" class="label label-lg mb-3">Số điện thoại</label>
+                                        <input type="text" name="phone_number" id="phone_number" class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
                                             role="alert" ng-if="errors && errors['phone_number']">
                                             <strong><% errors['phone_number'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="mb-20">
-                                        <div class="input-box pass">
-                                            <span><img src="/site/images/lock-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="text" placeholder="Password" name="password">
-                                        </div>
+                                    <div class="sm:col-span-4 col-span-8">
+                                        <label for="password" class="label label-lg mb-3">Mật khẩu</label>
+                                        <input type="password" name="password" id="password" class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
                                             role="alert" ng-if="errors && errors['password']">
                                             <strong><% errors['password'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="mb-20">
-                                        <div class="input-box pass">
-                                            <span><img src="/site/images/lock-bold.svg" alt="icon"
-                                                    loading="lazy"></span>
-                                            <input type="text" placeholder="Confirm Password"
-                                                name="password_confirmation">
-                                        </div>
+                                    <div class="sm:col-span-4 col-span-8">
+                                        <label for="password_confirmation" class="label label-lg mb-3">Nhập lại mật
+                                            khẩu</label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation"
+                                            class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
                                             role="alert" ng-if="errors && errors['password_confirmation']">
                                             <strong><% errors['password_confirmation'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="mb-20">
-                                        <div class="input-check">
-                                            <input type="checkbox" name="agree">
-                                            <span class="text-dark">Tôi đã đọc và đồng ý với điều khoản và điều kiện</span>
-                                        </div>
+                                </div>
+                                <div class="flex items-center md:justify-between justify-center">
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormLogin()">
+                                        Đăng nhập?
+                                    </a>
+                                    <button class="btn btn-md btn-primary rounded-12 mt-60p" ng-click="registerClient()">
+                                        Đăng ký
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="bg-b-neutral-3 rounded-12 p-40p" ng-if="formLogin">
+                            <h4 class="heading-4 text-w-neutral-1 mb-60p">
+                                <% title %>
+                            </h4>
+                            <form id="login_client">
+                                <div class="grid grid-cols-8 gap-30p">
+                                    <div class="col-span-8">
+                                        <label for="account_name" class="label label-lg mb-3">Họ và tên</label>
+                                        <input type="text" name="account_name" id="account_name" class="box-input-3" />
                                         <span class="invalid-feedback d-block error" style="text-align: left;"
-                                            role="alert" ng-if="errors && errors['agree']">
-                                            <strong><% errors['agree'][0] %></strong>
+                                            role="alert" ng-if="errors && errors['account_name']">
+                                            <strong><% errors['account_name'][0] %></strong>
                                         </span>
                                     </div>
-                                    <div class="col-12">
-                                        <button class="ht_btn" ng-click="registerClient()">Đăng ký</button>
+                                    <div class="col-span-8">
+                                        <label for="password" class="label label-lg mb-3">Mật khẩu</label>
+                                        <input type="password" name="password" id="password" class="box-input-3" />
+                                        <span class="invalid-feedback d-block error" style="text-align: left;"
+                                            role="alert" ng-if="errors && errors['password']">
+                                            <strong><% errors['password'][0] %></strong>
+                                        </span>
                                     </div>
-                                </form>
-                                <p class="text-dark mt-40">Bạn đã có tài khoản? <a href="javascript:void(0)"
-                                        ng-click="showFormLogin()"
-                                        style="
-                                            background: linear-gradient(93.42deg, #ff6737 0%, #ff4f13 53.12%, #ff3131 100%);
-                                            -webkit-background-clip: text;
-                                            -webkit-text-fill-color: transparent;
-                                            font-weight: bold;
-                                        "><b>Đăng
-                                            nhập ngay</b></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="signup__right__content mb-30">
-                                <img class="w-100" src="/site/images/signup-ilus-1.svg" alt="ilustration"
-                                    loading="lazy">
-                            </div>
+                                </div>
+                                <div class="flex items-center md:justify-between justify-center">
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormRegister()">
+                                        Đăng ký tài khoản?
+                                    </a>
+                                    <button class="btn btn-md btn-primary rounded-12 mt-60p" ng-click="loginClient()">
+                                        Đăng nhập
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--signup__section end-->
+        </section>
     </main>
 @endsection
 @push('script')
@@ -278,7 +217,6 @@
             $scope.errors = {};
             $scope.loginClient = function() {
                 let data = $('#login_client').serialize();
-                console.log(data);
 
                 $.ajax({
                     url: '{{ route('front.login-client-submit') }}',
@@ -290,7 +228,7 @@
                     success: function(response) {
                         if (response.success) {
                             toastr.success(response.message);
-                            window.location.href = '{{ route('ip_products.index') }}';
+                            window.location.href = '{{ route('Product.index') }}';
                         } else {
                             toastr.error(response.message);
                             $scope.errors = response.errors;

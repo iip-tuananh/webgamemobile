@@ -275,6 +275,6 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function getAvatarAttribute() {
-        return $this->image ? $this->image->path : asset('site/images/avatar.png');
+        return $this->image ? $this->image->path : asset('site/images/avatar.jpg');
     }
 }

@@ -163,8 +163,7 @@ class PostCategoryController extends Controller
 			}
 
 			if($request->image) {
-				// FileHelper::uploadFile($request->image, 'post_categories', $object->id, ThisModel::class, 'image',1);
-				FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+				FileHelper::uploadFile($request->image, 'post_categories', $object->id, ThisModel::class, 'image',1);
 			}
 			DB::commit();
 			$json->success = true;
@@ -253,11 +252,9 @@ class PostCategoryController extends Controller
 
 			if($request->image) {
 				if($object->image) {
-					// FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
-					FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
+					FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
 				}
-				// FileHelper::uploadFile($request->image, 'post_categories', $object->id, ThisModel::class, 'image',1);
-				FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+				FileHelper::uploadFile($request->image, 'post_categories', $object->id, ThisModel::class, 'image',1);
 			}
 
 

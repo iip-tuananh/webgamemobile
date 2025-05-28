@@ -52,7 +52,7 @@
             </span>
         </div> --}}
         <div class="form-group custom-group mb-4">
-            <label class="form-label" ng-class="{'required-label': form.type == 0}">Danh mục Plan</label>
+            <label class="form-label" ng-class="{'required-label': form.type == 0}">Danh mục sản phẩm</label>
             <ui-select class="" remove-selected="true" ng-model="form.cate_id" theme="select2" ng-change="changeCategory(form.cate_id)">
                 <ui-select-match placeholder="Chọn danh mục">
                     <% $select.selected.name %>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group custom-group mb-4">
-            <label class="form-label required-label">Tên Plan</label>
+            <label class="form-label required-label">Tên sản phẩm</label>
             <input class="form-control " type="text" ng-model="form.name">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
@@ -77,7 +77,16 @@
                 </strong>
             </span>
         </div>
-        <div class="form-group">
+        <div class="form-group custom-group mb-4">
+            <label class="form-label required-label">Tiêu đề sản phẩm</label>
+            <input class="form-control " type="text" ng-model="form.title_seo">
+            <span class="invalid-feedback d-block" role="alert">
+                <strong>
+                    <% errors.title_seo[0] %>
+                </strong>
+            </span>
+        </div>
+        {{-- <div class="form-group">
             <label class="form-label">Cấu hình Plan</label>
             <div class="row">
                 <div class="col-md-2">
@@ -147,7 +156,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="form-group custom-group mb-4">
             <label class="form-label">Mô tả ngắn</label>
             <textarea class="form-control ck-editor" ck-editor rows="5" ng-model="form.intro"></textarea>
@@ -158,7 +167,7 @@
             </span>
         </div>
 
-        {{-- <div class="form-group custom-group mb-4">
+        <div class="form-group custom-group mb-4">
             <label class="form-label">Chi tiết sản phẩm</label>
             <textarea class="form-control ck-editor" ck-editor rows="5" ng-model="form.body"></textarea>
             <span class="invalid-feedback d-block" role="alert">
@@ -166,10 +175,10 @@
                     <% errors.body[0] %>
                 </strong>
             </span>
-        </div> --}}
+        </div>
 
-        {{-- <div class="form-group custom-group mb-4">
-            <label class="form-label" ng-class="{'required-label': form.type == 1}">Link gốc sản phẩm</label>
+        <div class="form-group custom-group mb-4">
+            <label class="form-label" ng-class="{'required-label': form.type == 1}">Link game</label>
             <input class="form-control " type="text" ng-model="form.origin_link">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
@@ -178,7 +187,7 @@
             </span>
         </div>
         <div class="form-group custom-group mb-4">
-            <label class="form-label" ng-class="{'required-label': form.type == 1}">Link affiliate</label>
+            <label class="form-label" ng-class="{'required-label': form.type == 1}">Zalo</label>
             <input class="form-control " type="text" ng-model="form.aff_link">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
@@ -187,26 +196,17 @@
             </span>
         </div>
         <div class="form-group custom-group mb-4">
-            <label class="form-label" ng-class="{'required-label': form.type == 1}">Link rút gọn</label>
+            <label class="form-label" ng-class="{'required-label': form.type == 1}">Fanpage</label>
             <input class="form-control " type="text" ng-model="form.short_link">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
                     <% errors.short_link[0] %>
                 </strong>
             </span>
-        </div> --}}
+        </div>
     </div>
     <div class="col-sm-4">
         {{-- <div class="form-group custom-group mb-4">
-            <label class="form-label" ng-class="{'required-label': form.type == 0}">Người phụ trách (email)</label>
-            <input class="form-control " type="text" ng-model="form.person_in_charge">
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>
-                    <% errors.person_in_charge[0] %>
-                </strong>
-            </span>
-        </div> --}}
-        <div class="form-group custom-group mb-4">
             <label class="form-label">Nguồn gốc</label>
             <input class="form-control " type="text" ng-model="form.origin">
             <span class="invalid-feedback d-block" role="alert">
@@ -214,9 +214,9 @@
                     <% errors.origin[0] %>
                 </strong>
             </span>
-        </div>
+        </div> --}}
         <div class="form-group custom-group mb-4">
-            <label class="form-label">Giá VIP</label>
+            <label class="form-label">Lượt xem</label>
             <input class="form-control " type="text" ng-model="form.base_price">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
@@ -224,7 +224,7 @@
                 </strong>
             </span>
         </div>
-        <div class="form-group custom-group mb-4">
+        {{-- <div class="form-group custom-group mb-4">
             <label class="form-label">Giá thường</label>
             <input class="form-control " type="text" ng-model="form.price" ng-change="form.updateRevenuePrice()">
             <span class="invalid-feedback d-block" role="alert">
@@ -232,46 +232,9 @@
                     <% errors.price[0] %>
                 </strong>
             </span>
-        </div>
-        {{-- <div class="form-group custom-group mb-4">
-            <label class="form-label">Hoa hồng (người mua hàng có thể nhận) / sản phẩm</label>
-            <input class="form-control " type="text" ng-model="form.revenue_price" disabled>
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>
-                    <% errors.revenue_price[0] %>
-                </strong>
-            </span>
         </div> --}}
 
-        {{-- <div class="col-md-12">
-            <div class="form-group">
-                <label>Cấu hình Plan</label>
-                <button class="btn btn-info btn-sm float-right" ng-click="form.addAttribute()">
-                    <i class="fa fa-plus"></i> Thêm
-                </button>
-                <div class="d-flex mt-2" ng-repeat="attribute in form.attribute_values track by $index">
-                    <div class="form-group">
-                        <ui-select class="" remove-selected="true" ng-model="attribute.attribute_id" theme="select2">
-                            <ui-select-match placeholder="Chọn cấu hình">
-                                <% $select.selected.name %>
-                            </ui-select-match>
-                            <ui-select-choices repeat="t.id as t in (attributes | filter: $select.search)">
-                                <span ng-bind="t.name"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" ng-model="attribute.value" placeholder="Giá trị">
-                    </div>
-                    <div>
-                        <button class="btn btn-danger btn-sm p-2" ng-click="form.removeAttribute($index)">
-                            <i class="fa fa-times"></i> Xóa
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        {{-- <div class="form-group custom-group mb-4">
+        <div class="form-group custom-group mb-4">
             <label class="form-label">Chọn tags</label>
             <ui-select remove-selected="false" multiple ng-model="form.tag_ids">
                 <ui-select-match placeholder="Chọn tag">
@@ -282,7 +245,7 @@
                     <span ng-bind="item.name"></span>
                 </ui-select-choices>
             </ui-select>
-        </div> --}}
+        </div>
         <div class="form-group custom-group mb-4">
             <label class="form-label required-label">Trạng thái</label>
             <select id="my-select" class="form-control custom-select" ng-model="form.status">
@@ -297,14 +260,14 @@
             </span>
         </div>
 
-        <div class="form-group custom-group mb-4">
+        {{-- <div class="form-group custom-group mb-4">
             <label class="form-label">Tình trạng</label>
             <select id="my-select" class="form-control custom-select" ng-model="form.state">
                 <option value="">Chọn tình trạng hàng hóa</option>
                 <option value="1">Còn hàng</option>
                 <option value="2">Hết hàng</option>
             </select>
-        </div>
+        </div> --}}
 
 {{--        <div class="form-group custom-group mb-4">--}}
 {{--            <label class="form-label">Ghim sản phẩm</label>--}}
@@ -314,7 +277,7 @@
 {{--            </select>--}}
 {{--        </div>--}}
 
-        {{-- <div class="form-group text-center">
+        <div class="form-group text-center">
             <div class="main-img-preview">
                 <p class="help-block-img">* Ảnh định dạng: jpg, png không quá 2MB.</p>
                 <img class="thumbnail img-preview" ng-src="<% form.image.path %>">
@@ -376,7 +339,7 @@
                     <% errors.galleries[0] %>
                 </strong>
             </span>
-        </div> --}}
+        </div>
 
 {{--        <div class="col-md-12">--}}
 {{--            <div class="form-group">--}}

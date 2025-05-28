@@ -51,12 +51,12 @@
 	<!-- SEARCH FORM -->
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
-        <li class="nav-item" ng-cloak>
+        {{-- <li class="nav-item" ng-cloak>
             <a class="nav-link" href="{{ route('orders.cart') }}">
                 <i class="fa fa-shopping-cart" style="font-size: 30px !important;"></i>
                 <span class="badge badge-warning navbar-badge" style="font-size: 16px"><% cart.count || 0 %></span>
             </a>
-        </li>
+        </li> --}}
 		<!-- Notifications Dropdown Menu -->
 		<li class="nav-item dropdown" ng-cloak>
 			<a class="nav-link" data-toggle="dropdown" href="#">

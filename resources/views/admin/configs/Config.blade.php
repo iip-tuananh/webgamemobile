@@ -5,6 +5,7 @@
         no_set = [];
         before(form) {
             this.image = {};
+            this.background_website = {};
         }
         after(form) {
         }
@@ -26,48 +27,20 @@
             this._favicon= new Image(value, this);
         }
 
-        get revenue_percent_5() {
-            return this._revenue_percent_5;
-        }
-
-        set revenue_percent_5(value) {
-            this._revenue_percent_5= value || 0;
-        }
-
-        get revenue_percent_4() {
-            return this._revenue_percent_4;
-        }
-
-        set revenue_percent_4(value) {
-            this._revenue_percent_4= value || 0;
-        }
-
-        get revenue_percent_3() {
-            return this._revenue_percent_3;
-        }
-
-        set revenue_percent_3(value) {
-            this._revenue_percent_3= value || 0;
-        }
-
-        get revenue_percent_2() {
-            return this._revenue_percent_2;
-        }
-
-        set revenue_percent_2(value) {
-            this._revenue_percent_2= value || 0;
-        }
-
-        get revenue_percent_1() {
-            return this._revenue_percent_1;
-        }
-
-        set revenue_percent_1(value) {
-            this._revenue_percent_1= value || 0;
-        }
-
         clearFavicon() {
             if (this.favicon) this.favicon.clear();
+        }
+
+        get background_website() {
+            return this._background_website;
+        }
+
+        set background_website(value) {
+            this._background_website= new Image(value, this);
+        }
+
+        clearBackgroundWebsite() {
+            if (this.background_website) this.background_website.clear();
         }
 
         get galleries() {
@@ -121,6 +94,8 @@
             if (image) data.append('image', image);
             let favicon = this.favicon.submit_data;
             if (favicon) data.append('favicon', favicon);
+            let background_website = this.background_website.submit_data;
+            if (background_website) data.append('background_website', background_website);
 
             this.galleries.forEach((g, i) => {
                 if (g.id) data.append(`galleries[${i}][id]`, g.id);

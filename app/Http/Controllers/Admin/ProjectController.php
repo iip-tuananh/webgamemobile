@@ -86,8 +86,7 @@ class ProjectController extends Controller
             $project->save();
 
 
-            // FileHelper::uploadFile($request->image, 'project', $project->id, ThisModel::class, 'image', 99);
-            FileHelper::uploadFileToCloudflare($request->image, $project->id, ThisModel::class, 'image');
+            FileHelper::uploadFile($request->image, 'project', $project->id, ThisModel::class, 'image', 99);
 
             DB::commit();
             return $this->responseSuccess();
@@ -108,11 +107,9 @@ class ProjectController extends Controller
 
             if($request->image) {
                 if($project->image) {
-                    // FileHelper::forceDeleteFiles($project->image->id, $project->id, ThisModel::class, 'image');
-                    FileHelper::deleteFileFromCloudflare($project->image, $project->id, ThisModel::class, 'image');
+                    FileHelper::forceDeleteFiles($project->image->id, $project->id, ThisModel::class, 'image');
                 }
-                // FileHelper::uploadFile($request->image, 'project', $project->id, ThisModel::class, 'image', 99);
-                FileHelper::uploadFileToCloudflare($request->image, $project->id, ThisModel::class, 'image');
+                FileHelper::uploadFile($request->image, 'project', $project->id, ThisModel::class, 'image', 99);
             }
 
             DB::commit();

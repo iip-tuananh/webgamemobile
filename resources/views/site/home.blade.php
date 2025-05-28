@@ -9,459 +9,477 @@
     {{ url('' . $banners[0]->image->path) }}
 @endsection
 @section('css')
-<style>
-    .theme__main__banner-one .nice-select {
-        width: 100%;
-        border: 2px solid;
-        /* border-image: linear-gradient(to right, #ff6737, #ff4f13) 1; */
-        border-radius: 5px;
-        line-height: 28px;
-    }
-
-    .theme__main__banner-one .domain-list {
-        position: relative;
-        width: 100%;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        grid-auto-flow: dense;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
-        justify-content: center;
-    }
-
-    @media (max-width: 768px) {
-        .theme__main__banner-one .domain-list {
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        }
-    }
-
-    .theme__main__banner-one .domain-list li {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        overflow: hidden;
-        text-align: center;
-        margin: 20px;
-        border-radius: 1rem;
-        border: 1px solid #ebebeb;
-    }
-
-    .theme__main__banner-one .custom-shadow {
-        -webkit-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.12);
-        box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.12);
-        -webkit-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-        border-radius: 1.5rem !important;
-    }
-
-    .theme__main__banner-one .custom-shadow:hover {
-        -webkit-transform: translateY(-5px);
-        transform: translateY(-5px);
-        -webkit-box-shadow: 0 1rem 3rem rgba(31, 45, 61, 0.125) !important;
-        box-shadow: 0 1rem 3rem rgba(31, 45, 61, 0.125) !important;
-    }
-
-    .theme__main__banner-one .single-domain img {
-        display: inline-block;
-        max-width: 100px;
-        min-height: 13px;
-        max-height: 34px;
-        border-radius: 50%;
-    }
-
-    .btn-order-vps {
-        background: linear-gradient(to right, #ff6737, #ff4f13);
-        color: #fff;
-        border: none;
-    }
-</style>
 @endsection
 @section('content')
-<main ng-controller="HomeController" ng-cloak>
-    <!-- theme__main__banner start -->
-    <section class="theme__main__banner-one position-relative pb-50 pt-50 pb-md-100" style="background: url('/site/images/map-bg.png') no-repeat center center;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="theme__content text-lg-start text-center mb-5 mb-lg-0">
-                        <h2 class="text-dark">Bạn muốn tìm vps nước nào ?</h2>
-                        <h5 class="theme__subtitle text-dark">Bắt đầu xây dựng thương hiệu của bạn trên internet</h5>
-
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-7">
-                                <select class="form-select" ng-model="selectedCategory" ng-change="redirectToCategory(selectedCategory)">
-                                    <option value="">Vui lòng chọn vps phù hợp</option>
-                                    @foreach ($productCategories as $category)
-                                    <option value="{{$category->slug}}"><a href="{{route('front.show-product-category', $category->slug)}}">{{$category->name}}</a></option>
-                                    @endforeach
-                                    <option value="vps-dat-hang" >VPS - ĐẶT HÀNG</option>
-                                </select>
+<main>
+    <!-- hero section start -->
+    <section class="section-pt overflow-visible">
+        <div class="container relative pt-[30px]">
+            <div class="grid grid-cols-12 items-center gap-30p">
+                <div class="xxl:col-span-12 col-span-12">
+                    <div class="relative">
+                        <div class="swiper one-card-carousel rounded-12" data-carousel-name="home-two-hero">
+                            <div class="swiper-wrapper">
+                                @foreach ($banners as $banner)
+                                <div class="swiper-slide">
+                                    <div class="w-full rounded-16 overflow-hidden relative">
+                                        <img class="w-full lg:h-[506px] md:h-[440px] h-[380px] object-cover"
+                                            src="{{$banner->image->path}}" alt="banner" />
+                                        {{-- <div class="overlay-1"></div> --}}
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-primary btn-order-vps" ng-click="redirectToCategory('vps-dat-hang')" style="height: 42px;">ĐẶT HÀNG VPS</button>
+                            <div>
+                                <div
+                                    class="swiper-pagination pagination-two home-two-hero-carousel-pagination items-center gap-2.5  pb-40p px-40p sm:flex justify-end hidden">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="hero__img">
-                        <img src="/site/images/dedicated-server.svg " alt="hero__img" loading="lazy">
-                        <img src="/site/images/logo-coin.png " alt="hero__img" class="animation-icon-img animation-icon-5" loading="lazy">
-                        {{-- <img src="/site/images/wordpress-logo.svg " alt="hero__img" class="animation-icon-img animation-icon-5" loading="lazy"> --}}
-                    </div>
-                </div>
             </div>
-            <div class="domain-name-block pt-100 mt--125">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <ul class="list-inline domain-list">
-                            @foreach ($productCategories as $item)
-                                <li class="list-inline-item white-bg custom-shadow">
-                                    <a href="{{route('front.show-product-category', $item->slug)}}" style="padding: 15px;">
-                                        <div class="single-domain">
-                                            <img src="{{$item->image ? $item->image->path : ''}}" alt="domain" class="img-fluid">
-                                            <div class="text-center mt-2" style="font-weight: 600;">{{$item->name}}</div>
-                                        </div>
+        </div>
+    </section>
+    <!-- hero section end -->
+    <!-- home 3 all games section start -->
+    @foreach ($categorySpecial as $category)
+    <section class="section-pt">
+        <div class="container">
+            <div class="flex items-center justify-between flex-wrap gap-24p">
+                <h2 class="heading-2">
+                    {{$category->name}}
+                </h2>
+            </div>
+            <div class="mt-40p" data-aos="fade-up">
+                <div class="swiper four-card-carousel" data-carousel-name="all-games-one"
+                    data-carousel-reverse="true">
+                    <div class="swiper-wrapper pb-15">
+                        <!-- Card 1 -->
+                        @foreach ($category->products as $product)
+                        <div class="swiper-slide">
+                            <div
+                                class="relative bg-b-neutral-3 rounded-24 group overflow-hidden w-full p-20p pb-24p pt-20p">
+                                <div class="relative overflow-hidden rounded-12">
+                                    <span
+                                        class="absolute top-3 right-3 badge badge-xs badge-danger gap-1 z-10">
+                                        <i class="ti ti-eye"></i>
+                                        {{ formatCurrency($product->base_price) }}
+                                    </span>
+                                    <img src="{{$product->product_image}}"
+                                        class="w-full lg:h-[228px] md:h-[200px] h-[180px] object-cover object-top group-hover:scale-110 transition-1"
+                                        alt="img" />
+                                </div>
+                                <div class="mt-20p">
+                                    <a href="{{route('front.show-product-detail', $product->slug)}}" class="heading-4 link-1 mb-2 line-clamp-2" style="height: 60px;">
+                                        {{$product->title_seo}}
                                     </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- theme__maina__banner end -->
-
-    <!-- services__area start -->
-    <section class="services__area pt-50 pb-50 pt-lg-60 pb-lg-30">
-        <img class="shapes__one" src="/site/images/s-pattern-1a.svg" alt="pattern">
-        <img class="shapes__two" src="/site/images/s-pattern-2a.svg" alt="pattern two">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section__title text-center mb-60" data-aos="fade-up" data-aos-delay="100">
-                        {{-- <h4 class="section__title-sub">Services</h4> --}}
-                        <h2 class="section__title-main">Tổng quan về dịch vụ</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="justify-content: center;">
-                @foreach($productCategories as $productCategory)
-                <div class="col-xl-4 col-lg-4 col-md-6 mb-50" data-aos="fade-up">
-                    <div class="ht-services text-center">
-                        <a class="ht-services__icon" href="{{route('front.show-product-category', $productCategory->slug)}}">
-                            <div class="ht-services__icon-front">
-                                <img src="{{$productCategory->image ? $productCategory->image->path : ''}}" alt="cloud" class="img-fluid" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 5px solid #fff;">
-                            </div>
-                            <div class="ht-services__icon-back">
-                                <img src="{{$productCategory->image ? $productCategory->image->path : ''}}" alt="cloud" class="img-fluid" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 5px solid #fff;">
-                            </div>
-                        </a>
-                        <h3 class="ht-services__title text-dark"><a href="{{route('front.show-product-category', $productCategory->slug)}}">{{$productCategory->name}}</a></h3>
-                        <p class="text-dark m-0">{{$productCategory->short_des}}</p>
-                    </div>
-                    <div class="text-center" style="background-color: #383838; padding: 20px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-                        <h4 class="ht-services__price mb-2 text-white">
-                            <span>{{ formatCurrency($productCategory->min_sell_price) }}đ/tháng</span>
-                        </h4>
-                        <a class="ht-services__btn text-white" href="{{route('front.show-product-category', $productCategory->slug)}}">Learn More</a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- services__area end -->
-    <!-- price__area start -->
-    @foreach($categorySpecial as $category)
-    <section class="price__area pt-50 pb-50 pt-lg-60 pb-lg-30" style="background: linear-gradient(to bottom, #0073ec 45%, rgba(114, 2, 187, 0.25) 100%);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section__title text-center mb-60" data-aos="fade-up" data-aos-delay="100">
-                        {{-- <h4 class="section__title-sub">Our Pricing</h4> --}}
-                        <h2 class="section__title-main text-white">{{$category->name}}</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                @foreach($category->products as $key => $product)
-                @if($key == 1)
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="ht-plan active mb-30">
-                        <div class="ht-plan__header">
-                            {{-- <div class="ht-plan__icon">
-                                <img class="ht-plan__icon-front" src="/site/images/server.svg"
-                                    alt="icon" loading="lazy">
-                                <img class="ht-plan__icon-back" src="/site/images/server.svg"
-                                    alt="icon" loading="lazy">
-                            </div> --}}
-                            <h3 class="ht-plan__header-title">{{$product->name}}</h3>
-                            <p class="ht-plan__header-desc">{{$product->short_des}}</p>
-                            <div class="ht-plan__header-price">
-                                <h2 class="price-title">{{ formatCurrency($product->sell_price) }}</h2>
-                                <span>đ/tháng</span>
-                            </div>
-                        </div>
-                        <div class="ht-plan__body mb-35">
-                            <ul class="ht-plan__body-feature">
-                                <li><a href="#">{{$product->cpu}} CPU</a></li>
-                                <li><a href="#">{{$product->ram}} RAM</a></li>
-                                <li><a href="#">{{$product->storage}} Storage</a></li>
-                                <li><a href="#">{{$product->band_width}} Bandwidth</a></li>
-                                @if($product->stream)
-                                <li><a href="#">{{$product->stream}} Stream</a></li>
-                                @endif
-                                @if($product->os)
-                                <li><a href="#">{{$product->os}}</a></li>
-                                @endif
-                                @if($product->origin)
-                                <li><a href="#">{{$product->origin}}</a></li>
-                                @endif
-                            </ul>
-                        </div>
-                        <div class="ht-plan__footer">
-                            <a class="ht_btn" href="javascript:void(0)" ng-click="addToCart({{$product->id}})">Đăng ký</a>
-                        </div>
-                    </div>
-                </div>
-                @else
-                <div class="col-lg-4 col-md-6 mt-lg-4 pt-lg-1" data-aos="fade-up" data-aos-delay="200">
-                    <div class="ht-plan mb-30">
-                        <div class="ht-plan__header">
-                            {{-- <div class="ht-plan__icon">
-                                <img class="ht-plan__icon-front" src="/site/images/server.svg" alt="icon" loading="lazy">
-                                <img class="ht-plan__icon-back" src="/site/images/server.svg" alt="icon" loading="lazy">
-                            </div> --}}
-                            <h3 class="ht-plan__header-title">{{$product->name}}</h3>
-                            <p class="ht-plan__header-desc">{{$product->short_des}}</p>
-                            <div class="ht-plan__header-price">
-                                <h2 class="price-title">{{ formatCurrency($product->sell_price) }}</h2>
-                                <span>đ/tháng</span>
-                            </div>
-                        </div>
-                        <div class="ht-plan__body mb-25">
-                            <ul class="ht-plan__body-feature">
-                                <li><a href="#">{{$product->cpu}} CPU</a></li>
-                                <li><a href="#">{{$product->ram}} RAM</a></li>
-                                <li><a href="#">{{$product->storage}} Storage</a></li>
-                                <li><a href="#">{{$product->band_width}} Bandwidth</a></li>
-                                @if($product->stream)
-                                <li><a href="#">{{$product->stream}} Stream</a></li>
-                                @endif
-                                @if($product->os)
-                                <li><a href="#">{{$product->os}}</a></li>
-                                @endif
-                                @if($product->origin)
-                                <li><a href="#">{{$product->origin}}</a></li>
-                                @endif
-                            </ul>
-                        </div>
-                        <div class="ht-plan__footer">
-                            <a class="ht_btn" href="javascript:void(0)" ng-click="addToCart({{$product->id}})">Đăng ký</a>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endforeach
-    <!-- price__area end -->
-    <!-- chose__area start -->
-    <section class="chose__area pt-50 pb-50 pt-lg-55 pb-lg-30" style="background: url(/site/images/offer-bg-3.png) no-repeat center center / cover;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-5 col-lg-6" data-aos="fade-right" data-aos-delay="100">
-                    <div class="chose__content-wrapper mb-30">
-                        <div class="section__title mb-40 pe-xl-3">
-                            {{-- <h4 class="section__title-sub">Why Choose Us</h4> --}}
-                            <h2 class="section__title-main text-white">Tại sao nên chọn chúng tôi</h2>
-                            {{-- <p>Dynamically innovate enabled synergy vis-a-vis user friendly channels.
-                                Appropriately engage extensible supply chains before cutting-edge opportunities.
-                            </p> --}}
-                        </div>
-                        <div class="chose__feature">
-                            <a href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#collapseOne"> Hiệu suất mạnh mẽ <span class="float-end"><i class="fa fa-caret-down"></i></span></a>
-                            <div class="collapse p-3" id="collapseOne" style="background-color: #f8f9fa;">
-                                <p class="text-dark">Chúng tôi sử dụng CPU Intel Xeon dòng E3 và E5 trên các máy chủ của mình, cùng với ổ SSD trong RAID để mang đến cho bạn những máy ảo nhanh vượt trội</p>
-                            </div>
-                            <a href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#collapseTwo"> Hệ điều hành đa dạng <span class="float-end"><i class="fa fa-caret-down"></i></span></a>
-                            <div class="collapse p-3" id="collapseTwo" style="background-color: #f8f9fa;">
-                                <p class="text-dark">Chúng tôi hỗ trợ nhiều hệ điều hành khác nhau bao gồm Windows Server, Windows Desktop và Linux</p>
-                            </div>
-                            <a href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#collapseThree"> An toàn thông tin<span class="float-end"><i class="fa fa-caret-down"></i></span></a>
-                            <div class="collapse p-3" id="collapseThree" style="background-color: #f8f9fa;">
-                                <p class="text-dark">Kiểm soát, ngăn chặn xâm nhập, hạn chế rủi ro hệ thống. Bảo đảm dữ liệu bảo mật và an toàn</p>
-                            </div>
-                            <a href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#collapseFour"> Hỗ trợ 24/7<span class="float-end"><i class="fa fa-caret-down"></i></span></a>
-                            <div class="collapse p-3" id="collapseFour" style="background-color: #f8f9fa;">
-                                <p class="text-dark">Đội ngũ IT, Chăm sóc khách hàng chuyên nghiệp, sẵn sàng cho mọi tình huống, hỗ trợ nhanh chóng</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-6">
-                    <div class="chose__img text-lg-end mb-30 pe-lg-3">
-                        <img src="/site/images/ilus-main-1a.png" alt="ilustration"
-                            class="chose__img-ilus img-fluid">
-                        <img src="/site/images/tick-mark-1a.svg" alt="tickmark" class="chose__img-top">
-                        <img src="/site/images/board-1a.svg" alt="board" class="chose__img-top-1">
-                        <img class="chose__img-shapes-two" src="/site/images/ab-star-1a.svg"
-                            alt="About Shape Two">
-                        <img class="chose__img-shapes-three" src="/site/images/ch-big-star-1a.svg"
-                            alt="About Shape Three">
-                        <img class="chose__img-shapes-four" src="/site/images/ab-star-3a.svg"
-                            alt="About Shape Four">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- chose__area end -->
-    <!-- testimonial__area start -->
-    {{-- <section class="testimonial__area pt-50 pb-50 pt-lg-60 pb-lg-30">
-        <img class="shapes__one" src="/site/images/s-pattern-1a.svg" alt="pattern">
-        <img class="shapes__two" src="/site/images/s-pattern-2a.svg" alt="pattern two">
-        <div class="container">
-            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-xl-6">
-                    <div class="section__title text-center mb-60">
-                        <h2 class="section__title-main">Đánh giá khách hàng
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial-slider-container">
-            <div class="row testimonial__slider">
-                @foreach($reviews as $review)
-                <div class="col-lg-4">
-                    <div class="testimonial__wrapper">
-                        <div class="rating">
-                            <a href="#"><i class="fas fa-star"></i></a>
-                            <a href="#"><i class="fas fa-star"></i></a>
-                            <a href="#"><i class="fas fa-star"></i></a>
-                            <a href="#"><i class="fas fa-star"></i></a>
-                            <a href="#"><i class="fas fa-star"></i></a>
-                        </div>
-                        <p>
-                            {{$review->message}}
-                        </p>
-                        <img class="author__avatar" src="assets/img/testimonial/author-1.jpg"
-                            alt="autho avatar">
-                        <h3 class="author__name text-white">
-                            {{$review->name}}
-                        </h3>
-                        <h5 class="author__designation">
-                            Medical Assistant
-                        </h5>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="pagination-area d-none d-md-inline-block">
-                <div class="next_t1"><i class="bi bi-chevron-left"></i></div>
-                <div class="prev_t1"><i class="bi bi-chevron-right"></i></div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- testimonial__area end -->
-    <!-- blog__area start -->
-    {{-- @foreach($categorySpecialPost as $category)
-    <section class="blog__area pt-50 pb-50 pt-lg-60">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section__title text-center mb-60" data-aos="fade-up" data-aos-delay="100">
-                        <h2 class="section__title-main">{{$category->name}}</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row blog__slider__one">
-                @foreach($category->posts as $post)
-                <div class="col-lg-4">
-                    <div class="ht-blog">
-                        <div class="ht-blog__thumb mb-20">
-                            <img class="w-100" src="{{$post->image ? $post->image->path : ''}}" alt="blog" loading="lazy">
-                            <div class="ht-blog__date">
-                                {{ formatDate($post->created_at) }}
-                            </div>
-                        </div>
-                        <div class="ht-blog__content mb-20">
-                            <div class="ht-blog__meta mt-10">
-                                <span><a href="#" class="text-dark"><img src="/site/images/icon-1a.svg" alt="icon">
-                                        Admin</a></span>
-                                <span><a href="#" class="text-dark"><img src="/site/images/icon-2a.svg" alt="icon">
-                                        {{$post->category->name}}</a></span>
-                            </div>
-                            <h3 class="blog-title text-dark"><a href="{{route('front.detail-blog', $post->slug)}}">{{$post->name}}</a>
-                            </h3>
-                            <p class="text-dark">{{$post->intro}}</p>
-                            <div class="ht-blog-btn mt-2">
-                                <a class="ht_btn" href="{{route('front.detail-blog', $post->slug)}}">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endforeach --}}
-    <section class="blog__area pt-50 pb-50 pt-lg-60">
-        <div class="container">
-            <div class="row">
-                @foreach($postCategories as $category)
-                <div class="col-xl-6 col-lg-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="section__title mb-10" data-aos="fade-up" data-aos-delay="100">
-                                <h4 class="section__title-main">{{$category->name}}</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        @foreach($category->posts as $post)
-                        <div class="col-lg-12">
-                            <div class="ht-blog mb-20">
-                                <div class="ht-blog__content mb-20">
-                                    <div class="blog-title text-dark" style="font-size: 18px"><a href="{{route('front.detail-blog', $post->slug)}}">{{$post->name}}</a>
+                                    <p class="text-l-regular text-w-neutral-2 mb-20p">
+                                        {{$product->intro}}
+                                    </p>
+                                    <div class="flex-y gap-4 justify-between">
+                                        <div class="flex-y gap-3">
+                                            <img class="avatar size-60p shrink-0"
+                                                src="{{$product->user_create->avatar}}" alt="user" />
+                                            <div>
+                                                <a href="javascript:void(0)" class="flex-y gap-2 mb-1">
+                                                    <span
+                                                        class="span text-l-medium text-w-neutral-1 link-1 line-clamp-1 whitespace-nowrap">{{$product->user_create->name}}</span>
+                                                    <i
+                                                        class="ti ti-circle-check-filled text-secondary icon-24"></i>
+                                                </a>
+                                                <span class="text-s-medium text-w-neutral-3">
+                                                    Leader
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a href="{{$product->origin_link}}" class="btn btn-md btn-primary rounded-12">
+                                                <i class="fas fa-play"></i>
+                                                Chơi ngay
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
+                    <div
+                        class="swiper-pagination pagination-one all-games-one-carousel-pagination flex-c gap-2.5">
+                    </div>
                 </div>
-                @endforeach
             </div>
         </div>
     </section>
-    <!-- blog__area end -->
+    @endforeach
+    <!-- home 3 all games section end -->
+    <!-- Popular Games Two section start -->
+    @foreach ($productCategories as $category)
+    @if ($category->products->count() > 0)
+    <section class="section-pt">
+        <div class="container">
+            <div class="flex items-center justify-between flex-wrap gap-24p">
+                <h2 class="heading-2 text-w-neutral-1 text-split-left">
+                    {{$category->name}}
+                </h2>
+                <a href="{{route('front.show-product-category', $category->slug)}}" class="btn btn-lg py-3 btn-neutral-2 shrink-0">
+                    Xem tất cả
+                </a>
+            </div>
+            <div class="mt-40p" data-aos="fade-up">
+                <div class="swiper four-card-carousel" data-carousel-name="popular-games-one">
+                    <div class="swiper-wrapper pb-15">
+                        <!-- card 1 -->
+                        @foreach ($category->products as $product)
+                        <div class="swiper-slide">
+                            <div class="w-full bg-b-neutral-3 rounded-12 group">
+                                <div class="overflow-hidden rounded-t-12">
+                                    <img class="w-full 4xl:h-[320px] xl:h-[280px] lg:h-[260px] sm:h-[220px] h-[200px] group-hover:scale-110 object-cover transition-1"
+                                        src="{{$product->product_image}}" alt="item" />
+                                </div>
+                                <div class="p-20p">
+                                    <a href="{{route('front.show-product-detail', $product->slug)}}"
+                                        class="heading-4 text-w-neutral-1 link-1 line-clamp-1 mb-20p">
+                                        {{$product->title_seo}}
+                                    </a>
+                                    <div class="flex-y flex-wrap gap-1">
+                                        <a href="{{$product->origin_link}}" class="btn btn-xs btn-primary rounded-12">
+                                            {{-- <i class="fas fa-play"></i> --}}
+                                            Chơi ngay
+                                        </a>
+                                        <a href="{{$product->short_link}}" class="btn btn-xs rounded-12 btn-facebook">
+                                            <i class="fab fa-facebook-f"></i>
+                                            Fanpage
+                                        </a>
+                                        <a href="{{$product->aff_link}}" class="btn btn-xs rounded-12 btn-zalo">
+                                            <i class="fas fa-comments"></i>
+                                            Box Zalo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div
+                        class="swiper-pagination pagination-one popular-games-one-carousel-pagination flex-c gap-2.5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    @endforeach
+    <!-- Popular Games Two section end -->
+    <!-- Twitch Streaming section start -->
+    {{-- <section class="section-pt">
+        <div class="container">
+            <div class="flex items-center justify-between flex-wrap gap-24p">
+                <h2 class="heading-2 text-w-neutral-1 text-split-left">
+                    Twitch Streaming
+                </h2>
+                <form class="select-1 shrink-0">
+                    <select class="select w-full sm:py-3 py-2 px-24p rounded-full">
+                        <option value="popular">Popular</option>
+                        <option value="new-releases">New Releases</option>
+                        <option value="action">Action</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="sports">Sports</option>
+                    </select>
+                </form>
+            </div>
+            <div class="mt-40p">
+                <div class="grid 3xl:grid-cols-2 grid-cols-1 gap-30p">
+                    <div>
+                        <div class="swiper one-card-carousel rounded-32"
+                            data-carousel-name="twitch-streaming" data-carousel-reverse="true">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="relative rounded-32 overflow-hidden w-full group">
+                                        <img class="w-full xl:h-[630px] md:h-[580px] sm:h-[500px] h-[420px] object-cover rounded-32 group-hover:scale-110 transition-1"
+                                            src="./assets/images/photos/heroBanner11.webp" alt="img" />
+                                        <div
+                                            class="overlay-6 p-40p flex flex-col items-start justify-between">
+                                            <span class="badge badge-lg badge-primary">
+                                                430 Viewers
+                                            </span>
+                                            <div
+                                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                                <a href="./live-stream.html"
+                                                    class="btn-c size-100p icon-40 bg-primary text-b-neutral-4">
+                                                    <i class="ti ti-player-play-filled"></i>
+                                                </a>
+                                            </div>
+                                            <div class="w-full">
+                                                <h2
+                                                    class="heading-2 text-w-neutral-1 line-clamp-1 p-1 mb-20p">
+                                                    The Legend of Zelda: Breath of the Wild
+                                                </h2>
+                                                <div class="flex-y gap-3 text-sm text-w-neutral-1">
+                                                    <span class="px-24p py-3">
+                                                        English
+                                                    </span>
+                                                    <span class="px-24p py-3">
+                                                        Strumming
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="relative rounded-32 overflow-hidden w-full group">
+                                        <img class="w-full xl:h-[630px] md:h-[580px] sm:h-[500px] h-[420px] object-cover rounded-32 group-hover:scale-110 transition-1"
+                                            src="./assets/images/photos/heroBanner4.webp" alt="img" />
+                                        <div
+                                            class="overlay-6 p-40p flex flex-col items-start justify-between">
+                                            <span class="badge badge-lg badge-primary">
+                                                270 Viewers
+                                            </span>
+                                            <div
+                                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                                <a href="./live-stream.html"
+                                                    class="btn-c size-100p icon-40 bg-primary text-b-neutral-4">
+                                                    <i class="ti ti-player-play-filled"></i>
+                                                </a>
+                                            </div>
+                                            <div class="w-full">
+                                                <h2
+                                                    class="heading-2 text-w-neutral-1 line-clamp-1 p-1 mb-20p">
+                                                    Fortnite - Hints to beat them all!
+                                                </h2>
+                                                <div class="flex-y gap-3 text-sm text-w-neutral-1">
+                                                    <span class="px-24p py-3">
+                                                        English
+                                                    </span>
+                                                    <span class="px-24p py-3">
+                                                        Strumming
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="relative rounded-32 overflow-hidden w-full group">
+                                        <img class="w-full xl:h-[630px] md:h-[580px] sm:h-[500px] h-[420px] object-cover rounded-32 group-hover:scale-110 transition-1"
+                                            src="./assets/images/photos/heroBanner5.webp" alt="img" />
+                                        <div
+                                            class="overlay-6 p-40p flex flex-col items-start justify-between">
+                                            <span class="badge badge-lg badge-primary">
+                                                340 Viewers
+                                            </span>
+                                            <div
+                                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                                <a href="./live-stream.html"
+                                                    class="btn-c size-100p icon-40 bg-primary text-b-neutral-4">
+                                                    <i class="ti ti-player-play-filled"></i>
+                                                </a>
+                                            </div>
+                                            <div class="w-full">
+                                                <h2
+                                                    class="heading-2 text-w-neutral-1 line-clamp-1 p-1 mb-20p">
+                                                    The Legend of Zelda: Breath of the Wild
+                                                </h2>
+                                                <div class="flex-y gap-3 text-sm text-w-neutral-1">
+                                                    <span class="px-24p py-3">
+                                                        English
+                                                    </span>
+                                                    <span class="px-24p py-3">
+                                                        Strumming
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="swiper-navigation swp-navigation-one absolute top-0 right-0 z-[3] p-40p">
+                                <button type="button"
+                                    class="navigation-btn-one twitch-streaming-carousel-prev">
+                                    <i class="ti ti-chevron-left"></i>
+                                </button>
+                                <button type="button"
+                                    class="navigation-btn-one twitch-streaming-carousel-next">
+                                    <i class="ti ti-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid 3xl:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-24p">
+                        <div class="grid 3xl:grid-cols-2 grid-cols-1 gap-24p items-center p-20p bg-b-neutral-3 rounded-12 group"
+                            data-aos="fade-up">
+                            <div
+                                class="w-full xl:h-[264px] sm:h-[240px] h-[220px] overflow-hidden rounded-12">
+                                <img class="w-full xl:h-[264px] sm:h-[240px] h-[220px] group-hover:scale-110 object-cover rounded-12 transition-1"
+                                    src="./assets/images/games/game50.png" alt="img" />
+                            </div>
+                            <div>
+                                <a href="./live-stream.html"
+                                    class="heading-3 text-w-neutral-1 link-1 line-clamp-2 text-split-left">
+                                    Odyssey through the Prism Realm
+                                </a>
+                                <div class="flex items-normal gap-3 my-20p">
+                                    <div class="shrink-0 relative h-[70px] w-fit">
+                                        <img class="avatar size-[60px]"
+                                            src="./assets/images/users/user30.png" alt="user" />
+                                        <span
+                                            class="absolute md:-bottom-2 -bottom-0 left-1/2 -translate-x-1/2 badge px-2 py-1 badge-danger">
+                                            Live
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Online
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Action
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Shooter
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Strategy
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            PVP
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 *:btn-socal-accent-4 *:rounded-full">
+                                    <a href="#">
+                                        <i class="ti ti-brand-twitch"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-instagram"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-discord"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-youtube"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid 3xl:grid-cols-2 grid-cols-1 gap-24p p-20p bg-b-neutral-3 rounded-12 group"
+                            data-aos="fade-up">
+                            <div
+                                class="w-full xl:h-[264px] sm:h-[240px] h-[220px] overflow-hidden rounded-12">
+                                <img class="w-full xl:h-[264px] sm:h-[240px] h-[220px] group-hover:scale-110 object-cover rounded-12 transition-1"
+                                    src="./assets/images/games/game49.png" alt="img" />
+                            </div>
+                            <div>
+                                <a href="./live-stream.html"
+                                    class="heading-3 text-w-neutral-1 link-1 line-clamp-2 text-split-left">
+                                    Odyssey through the Prism Realm
+                                </a>
+                                <div class="flex items-normal gap-3 my-20p">
+                                    <div class="shrink-0 relative h-[70px]">
+                                        <img class="avatar size-[60px]"
+                                            src="./assets/images/users/user30.png" alt="user" />
+                                        <span
+                                            class="absolute md:-bottom-2 -bottom-0 left-1/2 -translate-x-1/2 badge px-2 py-1 badge-danger">
+                                            Live
+                                        </span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Online
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Action
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Shooter
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            Strategy
+                                        </span>
+                                        <span class="badge badge-smm badge-neutral-2 font-normal">
+                                            PVP
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 *:btn-socal-accent-4 *:rounded-full">
+                                    <a href="#">
+                                        <i class="ti ti-brand-twitch"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-instagram"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-discord"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="ti ti-brand-youtube"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <!-- Twitch Streaming section end -->
+    <!--Top Rated section start -->
+    @foreach ($categorySpecialPost as $category)
+    <section class="section-py">
+        <div class="container">
+            <div class="flex items-center justify-between flex-wrap gap-24p">
+                <h2 class="heading-2 text-w-neutral-1 text-split-left">
+                    {{$category->name}}
+                </h2>
+                <a href="{{route('front.list-blog', $category->slug)}}" class="btn btn-lg px-32p btn-neutral-2">
+                    Xem tất cả
+                </a>
+            </div>
+            <div class="mt-40p">
+                <div class="swiper three-card-carousel" data-carousel-name="top-rated-stream">
+                    <div class="swiper-wrapper pb-15">
+                        <!-- card 1 -->
+                        @foreach ($category->posts as $post)
+                        <div class="swiper-slide">
+                            <div class="relative rounded-12 overflow-hidden w-full group">
+                                <img class="w-full h-[300px] group-hover:scale-110 object-cover transition-1"
+                                    src="{{$post->image ? $post->image->path : ''}}" alt="img" />
+                                <div class="overlay-6 p-20p flex flex-col items-start justify-between">
+                                    <span
+                                        class="badge badge-compact badge-glass flex-y gap-1 text-w-neutral-1">
+                                        <i class="ti ti-calendar-event icon-24 text-primary"></i>
+                                        {{$post->created_at->format('d/m/Y')}}
+                                    </span>
+                                    <div class="w-full">
+                                        <a href="{{route('front.detail-blog', $post->slug)}}"
+                                            class="library-title heading-4 link-1 mb-2 line-clamp-2">
+                                            {{$post->name}}
+                                        </a>
+                                        <span class="text-l-regular text-w-neutral-2 mb-20p line-clamp-2">{{$post->intro}}</span>
+                                        <div class="flex-y justify-between gap-16p">
+                                            <a href="{{route('front.detail-blog', $post->slug)}}"
+                                                class="btn btn-md btn-danger rounded-12">
+                                                Xem chi tiết
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div
+                        class="swiper-pagination pagination-one top-rated-stream-carousel-pagination flex-c gap-2.5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endforeach
+    <!-- Top Rated section start -->
 </main>
 @endsection
 @push('script')
-<script>
-    app.controller('HomeController', function($scope, $http) {
-        $scope.selectedCategory = '';
-        $scope.redirectToCategory = function(category) {
-            if(category == 'vps-dat-hang') {
-                $('#modal-vps-dat-hang').modal('show');
-            } else if(category == '') {
-                $scope.selectedCategory = '';
-                $scope.$applyAsync();
-            } else {
-                window.location.href = '{{route('front.show-product-category', ['categorySlug' => 'categorySlug'])}}'.replace('categorySlug', category);
-            }
-        };
-    });
-</script>
 @endpush

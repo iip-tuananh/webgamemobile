@@ -48,7 +48,7 @@
                 <a href="" class="nav-link {{ Request::routeIs('Product.index') || Request::routeIs('Product.create') || Request::routeIs('Product.edit') || Request::routeIs('Product.show') || Request::routeIs('ip_products.index') || Request::routeIs('ip_products.show') ? 'active' : '' }}">
                     <i class="nav-icon fab fa-dropbox"></i>
                     <p>
-                        Quản lý VPS
+                        Quản lý sản phẩm
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -56,33 +56,33 @@
                     <li class="nav-item">
                         <a href="{{ route('Category.index') }}" class="nav-link {{ Request::routeIs('Category.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
-                            <p>Danh sách danh mục VPS</p>
+                            <p>Danh sách danh mục</p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('Category.create') }}" class="nav-link {{ Request::routeIs('Category.create') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
                             <p>Thêm mới danh mục</p>
                         </a>
-                    </li> --}}
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('Product.index') }}" class="nav-link {{ Request::routeIs('Product.create') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
-                            <p>Danh sách Plan</p>
+                            <p>Danh sách sản phẩm</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('ip_products.index') }}" class="nav-link {{ Request::routeIs('ip_products.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
                             <p>Quản lý IP</p>
                         </a>
-                    </li>
-                    {{-- <li class="nav-item">
+                    </li> --}}
+                    <li class="nav-item">
                         <a href="{{ route('Product.create') }}" class="nav-link {{ Request::routeIs('Product.create') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
-                            <p>Thêm mới hàng hóa</p>
+                            <p>Thêm mới sản phẩm</p>
                         </a>
-                    </li> --}}
+                    </li>
                     {{-- <li class="nav-item">
                         <a href="{{ route('attributes.index') }}" class="nav-link {{ Request::routeIs('attributes.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
@@ -181,12 +181,12 @@
                         </a>
                     </li> --}}
 
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('tags.index') }}" class="nav-link {{ Request::routeIs('tags.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
                             <p>Danh mục tag</p>
                         </a>
-                    </li> --}}
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{ route('banners.index') }}" class="nav-link {{ Request::routeIs('banners.index') ? 'active' : '' }}">
@@ -195,12 +195,19 @@
                         </a>
                     </li>
 
-{{--                    <li class="nav-item">--}}
+                    <li class="nav-item">
+                        <a href="{{ route('policies.index') }}" class="nav-link {{ Request::routeIs('policies.index') ? 'active' : '' }}">
+                            <i class="far fas  fa-angle-right nav-icon"></i>
+                            <p>Danh mục chính sách</p>
+                        </a>
+                    </li>
+
+                   {{-- <li class="nav-item">--}}
 {{--                        <a href="{{ route('stores.index') }}" class="nav-link {{ Request::routeIs('stores.index') ? 'active' : '' }}">--}}
 {{--                            <i class="far fas  fa-angle-right nav-icon"></i>--}}
 {{--                            <p>Danh mục đơn vị thành viên</p>--}}
 {{--                        </a>--}}
-{{--                    </li>--}}
+{{--                    </li> --}}
 
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route('consultants.index') }}" class="nav-link {{ Request::routeIs('consultants.index') ? 'active' : '' }}">--}}
@@ -240,7 +247,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item has-treeview  {{ request()->is('admin/tickets') ? 'menu-open' : '' }} ">
+            {{-- <li class="nav-item has-treeview  {{ request()->is('admin/tickets') ? 'menu-open' : '' }} ">
                 <a href="#" class="nav-link {{ Request::routeIs('Ticket.index') || Request::routeIs('Ticket.show') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-ticket-alt"></i>
                     <p>
@@ -256,9 +263,9 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
-            <li class="nav-item has-treeview">
+            {{-- <li class="nav-item has-treeview">
                 <a href="{{ route('orders.index') }}" class="nav-link {{ Request::routeIs('orders.index') || Request::routeIs('orders.show') ? 'active' : '' }}">
                     <i class="nav-icon fa fa-file-invoice-dollar"></i>
 
@@ -266,7 +273,7 @@
                         Quản lý đơn hàng
                     </p>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- <li class="nav-item has-treeview  {{ request()->is('admin/blocks') || request()->is('admin/blocks/*') ? 'menu-open' : '' }} ">
                 <a href="#" class="nav-link">
@@ -548,23 +555,23 @@
                 </a>
             </li> --}}
             <li class="nav-item has-treeview  {{ request()->is('common/products') || request()->is('uptek/products*') || request()->is('admin/categories') || request()->is('admin/categories*') ? 'menu-open' : '' }} ">
-                <a href="#" class="nav-link {{ Request::routeIs('ip_products.index') || Request::routeIs('ip_products.show') ? 'active' : '' }}">
+                <a href="#" class="nav-link {{ Request::routeIs('Product.index') || Request::routeIs('Product.show') ? 'active' : '' }}">
                     <i class="nav-icon fab fa-dropbox"></i>
                     <p>
-                        Quản lý VPS
+                        Quản lý sản phẩm
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('ip_products.index') }}" class="nav-link {{ Request::routeIs('ip_products.index') ? 'active' : '' }}">
+                        <a href="{{ route('Product.index') }}" class="nav-link {{ Request::routeIs('Product.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>
-                            <p>Danh sách IP</p>
+                            <p>Danh sách sản phẩm</p>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item has-treeview">
+            {{-- <li class="nav-item has-treeview">
                 <a href="#" class="nav-link {{ Request::routeIs('orders.create') || Request::routeIs('orders.cart') || Request::routeIs('orders.index') ? 'active' : '' }}">
                     <i class="nav-icon fa fa-file-invoice-dollar"></i>
                     <p>
@@ -592,8 +599,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="nav-item has-treeview  {{ request()->is('admin/tickets') ? 'menu-open' : '' }} ">
+            </li> --}}
+            {{-- <li class="nav-item has-treeview  {{ request()->is('admin/tickets') ? 'menu-open' : '' }} ">
                 <a href="#" class="nav-link {{ Request::routeIs('Ticket.index') || Request::routeIs('Ticket.show') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-ticket-alt"></i>
                     <p>
@@ -609,7 +616,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="nav-item {{ request()->is('admin/users') ? 'active' : '' }}">
                 <a href="{{ route('User.editProfile', Auth::user()->id) }}" class="nav-link {{ Request::routeIs('User.editProfile') ? 'active' : '' }}">
                     <i class="nav-icon far fa-user"></i>

@@ -147,8 +147,7 @@ class UserController extends Controller
                 $object->roles()->sync($request->roles);
             }
 
-			// FileHelper::uploadFile($request->image, 'users', $object->id, ThisModel::class, 'image');
-			FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+			FileHelper::uploadFile($request->image, 'users', $object->id, ThisModel::class, 'image');
 
 
 			DB::commit();
@@ -206,10 +205,9 @@ class UserController extends Controller
 
 			if($request->image) {
                 if($object->image) {
-                    FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
+                    FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
                 }
-				// FileHelper::uploadFile($request->image, 'users', $object->id, ThisModel::class, 'image');
-				FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+				FileHelper::uploadFile($request->image, 'users', $object->id, ThisModel::class, 'image');
 			}
 
 			DB::commit();

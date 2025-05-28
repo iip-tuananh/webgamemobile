@@ -7,542 +7,180 @@
 @endsection
 
 @section('css')
-    <link href="/site/css/product_style.scss.css?1729657650563" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('site/css/breadcrumb_style.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link rel="preload stylesheet" as="style" fetchpriority="low" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
-    <link rel="preload stylesheet" as="style" fetchpriority="low" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script defer fetchpriority="low" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        .text-limit-3-line {
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .hidden {
-            display: none;
-        }
-
-        .product-attributes {
-            margin-bottom: 0 !important;
-        }
-        .product-attributes label {
-            font-weight: 600;
-            margin-bottom: 0 !important;
-        }
-        .product-attribute-values {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .product-attribute-values .badge, .product-attribute-values .badge+ .badge {
-            width: auto;
-            border: 1px solid #0974ba;
-            padding: 2px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            color: #0974ba;
-            height: 30px;
-            cursor: pointer;
-            pointer-events: auto;
-        }
-        .product-attribute-values .badge:hover {
-            background-color: #0974ba;
-            color: #fff;
-        }
-        .product-attribute-values .badge.active {
-            background-color: #0974ba;
-            color: #fff;
-        }
-    </style>
 @endsection
 
 @section('content')
-    <div ng-controller="ProductDetailController">
-        <section class="bread-crumb"
-            style="background: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0)),  url(/site/images/bg_footer.jpg?1721988795194) center no-repeat;">
-            <div class="container">
-                <div class="title-bread-crumb">Sản phẩm
+    <!-- main start -->
+    <main>
+        <!-- game details hero start -->
+        <section class="pt-30p">
+            <div class="section-pt">
+                <div
+                    class="relative bg-cover bg-no-repeat rounded-24 overflow-hidden" style="background-image: url('{{$product->product_image}}');">
+                    <div
+                        class="container relative 3xl:px-[140px] max-3xl:px-80p xl:py-[130px] md:py-30 sm:py-25 py-20 z-[2]">
+                        <div class="max-w-[670px]">
+                            <h1 class="heading-1 text-w-neutral-1 mb-3 text-left">
+                                {{$product->name}}
+                            </h1>
+                            <p class="text-m-medium text-w-neutral-1 mb-24p">
+                                {{$product->intro}}
+                            </p>
+                            <div class="flex items-center flex-wrap gap-3">
+                                <a href="{{$product->origin_link}}" class="btn btn-md btn-primary rounded-12">
+                                    <i class="fa fa-play"></i>
+                                    Chơi ngay
+                                </a>
+                                <a href="{{$product->short_link}}" class="btn btn-md btn-facebook rounded-12">
+                                    <i class="fab fa-facebook-f"></i>
+                                    Fanpage
+                                </a>
+                                <a href="{{$product->aff_link}}" class="btn btn-md btn-zalo rounded-12">
+                                    <i class="fas fa-comments"></i>
+                                    Box Zalo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay-1"></div>
                 </div>
-                <ul class="breadcrumb">
-                    <li class="home">
-                        <a href="{{route('front.home-page')}}"><span>Trang chủ</span></a>
-                        <span class="mr_lr">/</span>
-                    </li>
-                    <li><strong><span>{{ $product->name }}</span></strong>
-                    <li>
-                </ul>
             </div>
         </section>
-        <section class="product layout-product" itemscope itemtype="https://schema.org/Product">
+        <!-- game details hero end -->
+        <!-- game details section start -->
+        <section class="pt-60p overflow-visible">
             <div class="container">
-                <div class="details-product">
-                    <div class="row">
-                        <div class="col-lg-9 col-col-md-9 col-sm-12 col-xs-12">
-                            <div class="row">
-                                <div class="product-detail-left product-images col-12 col-md-5 col-lg-5">
-                                    <div class="product-image-block relative">
-                                        <div class="swiper-container gallery-top">
-                                            <div class="swiper-wrapper" id="lightgallery">
-                                                @foreach ($product->galleries as $item)
-                                                <a class="swiper-slide" data-hash="0"
-                                                    href="{{ $item->image->path }}"
-                                                    title="Click để xem">
-                                                    <img height="480" width="480"
-                                                        src="{{ $item->image->path }}"
-                                                        alt="{{ $product->name }}"
-                                                        data-image="{{ $item->image->path }}"
-                                                        class="img-responsive mx-auto d-block swiper-lazy" />
-                                                </a>
-                                                @endforeach
-                                                <a class="swiper-slide" data-hash="0"
-                                                    href="{{ $product->image->path }}"
-                                                    title="Click để xem">
-                                                    <img height="480" width="480"
-                                                        src="{{ $product->image->path }}"
-                                                        alt="{{ $product->name }}"
-                                                        data-image="{{ $product->image->path }}"
-                                                        class="img-responsive mx-auto d-block swiper-lazy" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="product-wish">
-                                            <a href="javascript:void(0)" class="setWishlist btn-anima"
-                                                data-wish="{{ $product->slug }}" tabindex="0"
-                                                title="Thêm vào yêu thích">
-                                                <img class="lazyload" width="24" height="24"
-                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                                    data-src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/heart.png?1729657650563"
-                                                    alt="Thêm vào yêu thích" />
-                                            </a>
-                                        </div> --}}
-                                        <div class="swiper-container gallery-thumbs">
-                                            <div class="swiper-wrapper">
-                                                @foreach ($product->galleries as $item)
-                                                <div class="swiper-slide" data-hash="0">
-                                                    <div class="p-100">
-                                                        <img height="80" width="80"
-                                                            src="{{ $item->image->path }}"
-                                                            alt="{{ $product->name }}"
-                                                            data-image="{{ $item->image->path }}"
-                                                            class="swiper-lazy" />
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                                <div class="swiper-slide" data-hash="0">
-                                                    <div class="p-100">
-                                                        <img height="80" width="80"
-                                                            src="{{ $product->image->path }}"
-                                                            alt="{{ $product->name }}"
-                                                            data-image="{{ $product->image->path }}"
-                                                            class="swiper-lazy" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
+                <h3 class="heading-3 text-w-neutral-1 mb-30p">
+                    Overview
+                </h3>
+                <div class="grid grid-cols-12 gap-x-24p gap-y-10">
+                    <div class="xxl:col-span-8 col-span-12">
+                        <div class="swiper thumbs-carousel-container mb-30p" data-carousel-name="home-hero-slider"
+                            data-slides-per-view="4">
+                            <div class="swiper thumbs-gallery-main">
+                                <div class="swiper-wrapper">
+                                    @foreach ($product->galleries as $gallery)
+                                    <div class="swiper-slide rounded-12 overflow-hidden">
+                                        <img class="w-full xxl:h-[480px] xl:h-[400px] md:h-[380px] sm:h-[320px] h-[280px] object-cover"
+                                            src="{{$gallery->image->path}}" alt="{{$product->name}}" />
                                     </div>
-                                </div>
-                                <div class="details-pro col-12 col-md-7 col-lg-7">
-                                    <h1 class="title-product">{{ $product->name }}</h1>
-                                    {{-- <div class="product-top clearfix">
-                                        <div class="sku-product clearfix">
-                                            <span class="d-none" itemprop="brand" itemtype="http://schema.org/Brand"
-                                                itemscope>
-                                                <meta itemprop="name" content="{{ $product->brand->name }}" />
-                                                Thương hiệu: <strong>{{ $product->brand->name }}</strong>
-                                            </span>
-                                            <span class="variant-sku" itemprop="sku" content="Đang cập nhật">Mã: <span
-                                                    class="a-sku">Đang cập nhật</span></span><br>
-                                            <span class="d-none" itemprop="type" itemtype="http://schema.org/Type"
-                                                itemscope>
-                                                <meta itemprop="name" content="{{ $product->category->name }}" />
-                                                Chất liệu: <strong>{{ $product->category->name }}</strong>
-                                            </span>
-                                        </div>
-                                    </div> --}}
-                                    <form class="form-inline">
-                                        <div class="inventory_quantity">
-                                            <span class="mb-break">
-                                                <span class="stock-brand-title">Danh mục:</span>
-                                                <span class="a-vendor" style="cursor: pointer;" onclick="window.location.href='{{ route('front.show-product-category', $product->category->slug) }}'">{{ $product->category->name }}
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="price-box clearfix">
-                                            <span class="special-price">
-                                                <span class="price product-price">{{ formatCurrency($product->price) }}₫</span>
-                                                <meta itemprop="price" content="{{ formatCurrency($product->price) }}">
-                                                <meta itemprop="priceCurrency" content="VND">
-                                            </span>
-                                            @if ($product->base_price > 0)
-                                            <!-- Giá Khuyến mại -->
-                                            <span class="old-price" itemprop="priceSpecification" itemscope=""
-                                                itemtype="http://schema.org/priceSpecification">
-                                                <del class="price product-price-old">
-                                                    {{ formatCurrency($product->base_price) }}₫
-                                                </del>
-                                                <meta itemprop="price" content="{{ formatCurrency($product->base_price) }}">
-                                                <meta itemprop="priceCurrency" content="VND">
-                                            </span>
-                                            <!-- Giás gốc -->
-                                            <span class="label_product">-
-                                                {{round(($product->base_price - $product->price) / $product->base_price * 100, 0)}}%
-                                            </span>
-                                            @endif
-                                        </div>
-                                        <div class="product-summary">
-                                            <div class="title_summary">Mô tả sản phẩm</div>
-                                            <div class="rte">
-                                                {!! $product->intro !!}
-                                            </div>
-                                        </div>
-                                        @if(isset($product->attributes) && count($product->attributes) > 0)
-                                        @foreach ($product->attributes as $index => $attribute)
-                                            <div class="mt-2 product-attributes">
-                                                <label>{{ $attribute['name'] }}</label>
-                                                <div class="product-attribute-values">
-                                                    @foreach ($attribute['values'] as $value)
-                                                        <div class="badge badge-primary" data-value="{{ $value }}" data-name="{{ $attribute['name'] }}" data-index="{{ $index }}">{{ $value }}</div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @endif
-                                        <div class="form-product  ">
-                                            <div class="clearfix form-group ">
-                                                <div class="flex-quantity">
-                                                    <div class="custom custom-btn-number show">
-                                                        <div class="input_number_product">
-                                                            <button class="btn_num num_1 button button_qty"
-                                                                onclick="minusQuantity()"
-                                                                type="button">&minus;</button>
-                                                            <input type="text" id="qtym" name="quantity"
-                                                                value="1" maxlength="3"
-                                                                class="form-control prd_quantity"
-                                                                ng-model="form.quantity">
-                                                            <button class="btn_num num_2 button button_qty"
-                                                                onclick="plusQuantity()"
-                                                                type="button"><span>&plus;</span></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-break">
-                                                        <div style="font-size: 18px">
-                                                            <span><i class="fa fa-tag" style="color: #f69326"></i><i style="font-size: 16px">Thưởng hoa hồng lên đến</i> <span style="color: #0974ba; font-weight:bold;">{{ formatCurrency($product->revenue_price) }}₫</span></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="btn-mua button_actions clearfix">
-                                                        <button type="submit" ng-click="addToCartFromProductDetail()"
-                                                            class="btn btn_base normal_button btn_add_cart btn-cart">
-                                                            <span class="txt-main text_1"><i></i>Thêm vào giỏ hàng</span>
-                                                        </button>
-                                                        <a href="javascript:void(0)" class="btn btn-buy-now" ng-click="addToCartCheckoutFromProductDetail()">
-                                                            <span class="txt-main text_1">Mua trực tiếp</span></a>
-                                                        @if ($product->type == 1)
-                                                            <a href="{{ $product->short_link ?? $product->aff_link }}" class="btn btn-buy-now" target="_blank" style="margin-top: 15px; margin-left: 0; width: 100%; background-color: #f69326;">
-                                                                <span class="txt-main text_1">Mua qua sàn thương mại</span></a>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="clearfix"></div>
+                                    @endforeach
+                                    <div class="swiper-slide rounded-12 overflow-hidden">
+                                        <img class="w-full xxl:h-[480px] xl:h-[400px] md:h-[380px] sm:h-[320px] h-[280px] object-cover"
+                                            src="{{$product->product_image}}" alt="{{$product->name}}" />
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="title_section_coupon">Mua nhiều giảm giá</div>
-                            <section class="section_coupon">
-                                <div class="coupon-swiper swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <div class="item_coupon swiper-slide">
-                                            <div class="image">
-                                                <img width="88" height="88"
-                                                    src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/icon_coupon.png?1729657650563"
-                                                    alt="10%">
-                                                <span>10%</span>
-                                            </div>
-                                            <div class="content_wrap">
-                                                <div class="content-top">
-                                                    NHẬP MÃ:DINOS10
-                                                    <span>Mã giảm 10% cho đơn hàng tối thiểu 500k.</span>
-                                                </div>
-                                                <div class="content-bottom">
-                                                    <div class="coupon-code js-copy" data-copy="DINOS10"
-                                                        title="Sao chép">Sao chép mã</div>
-                                                    <a title="Chi tiết" href="javascript:void(0)" class="info-button"
-                                                        data-coupon="DINOS10"
-                                                        data-content="Áp dụng cho đơn hàng từ 500k trở lên. Không đi kèm với chương trình khác">Điều
-                                                        kiện</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item_coupon swiper-slide">
-                                            <div class="image">
-                                                <img width="88" height="88"
-                                                    src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/icon_coupon.png?1729657650563"
-                                                    alt="15%">
-                                                <span>15%</span>
-                                            </div>
-                                            <div class="content_wrap">
-                                                <div class="content-top">
-                                                    NHẬP MÃ:DINOS15
-                                                    <span>Mã giảm 15% cho đơn hàng tối thiểu 800k.</span>
-                                                </div>
-                                                <div class="content-bottom">
-                                                    <div class="coupon-code js-copy" data-copy="DINOS15"
-                                                        title="Sao chép">Sao chép mã</div>
-                                                    <a title="Chi tiết" href="javascript:void(0)" class="info-button"
-                                                        data-coupon="DINOS15"
-                                                        data-content="Áp dụng cho đơn hàng từ 800k trở lên<br>
-                                        Không đi kèm với chương trình khác">Điều
-                                                        kiện</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item_coupon swiper-slide">
-                                            <div class="image">
-                                                <img width="88" height="88"
-                                                    src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/icon_coupon.png?1729657650563"
-                                                    alt="20%">
-                                                <span>20%</span>
-                                            </div>
-                                            <div class="content_wrap">
-                                                <div class="content-top">
-                                                    NHẬP MÃ:DINOS20
-                                                    <span>Mã giảm 20% cho đơn hàng tối thiểu 1000k.</span>
-                                                </div>
-                                                <div class="content-bottom">
-                                                    <div class="coupon-code js-copy" data-copy="DINOS20"
-                                                        title="Sao chép">Sao chép mã</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item_coupon swiper-slide">
-                                            <div class="image">
-                                                <img width="88" height="88"
-                                                    src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/icon_coupon.png?1729657650563"
-                                                    alt="0K">
-                                                <span>0K</span>
-                                            </div>
-                                            <div class="content_wrap">
-                                                <div class="content-top">
-                                                    NHẬP MÃ:FREESHIP
-                                                    <span>Miễn phí vận chuyển cho đơn hàng trên 300k.</span>
-                                                </div>
-                                                <div class="content-bottom">
-                                                    <div class="coupon-code js-copy" data-copy="FREESHIP"
-                                                        title="Sao chép">Sao chép mã</div>
-                                                    <a title="Chi tiết" href="javascript:void(0)" class="info-button"
-                                                        data-coupon="FREESHIP"
-                                                        data-content="Áp dụng cho đơn hàng từ 300k trở lên">Điều kiện</a>
-                                                </div>
-                                            </div>
+                            <div class="thumbs-gallery pt-30p">
+                                <div class="swiper-wrapper">
+                                    @foreach ($product->galleries as $gallery)
+                                    <div class="swiper-slide">
+                                        <div class="overflow-hidden cursor-pointer rounded-16">
+                                            <img class="w-full xxl:h-[200px] lg:h-[160px] md:h-[140px] sm:h-25 h-18 object-cover hover:scale-110 transition-1"
+                                                src="./assets/images/games/gameDetails1.1.png" alt="game">
                                         </div>
                                     </div>
-                                </div>
-                            </section>
-                            <div class="popup-coupon">
-                                <div class="content">
-                                    <div class="title">Thông tin voucher</div>
-                                    <a href="javascript:void(0)" class="close-pop">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            version="1.1" x="0px" y="0px" viewBox="0 0 512.001 512.001"
-                                            style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path
-                                                        d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717    L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859    c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287    l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285    L284.286,256.002z">
-                                                    </path>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <span>Mã khuyến mãi:</span>
-                                            <span class="code"></span>
-                                        </li>
-                                        <li>
-                                            <span>Điều kiện:</span>
-                                            <span class="dieukien"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <script>
-                                var coupon = new Swiper('.coupon-swiper', {
-                                    slidesPerView: 4,
-                                    loop: false,
-                                    grabCursor: true,
-                                    spaceBetween: 10,
-                                    roundLengths: true,
-                                    slideToClickedSlide: false,
-                                    autoplay: false,
-                                    breakpoints: {
-                                        300: {
-                                            slidesPerView: 1.2,
-                                            spaceBetween: 10
-                                        },
-                                        500: {
-                                            slidesPerView: 1.2,
-                                            spaceBetween: 10
-                                        },
-                                        640: {
-                                            slidesPerView: 1.8,
-                                            spaceBetween: 10
-                                        },
-                                        767: {
-                                            slidesPerView: 2.5,
-                                            spaceBetween: 10
-                                        },
-                                        1260: {
-                                            slidesPerView: 2.5,
-                                            spaceBetween: 10
-                                        },
-                                        1367: {
-                                            slidesPerView: 2.6,
-                                            spaceBetween: 10
-                                        },
-                                        1440: {
-                                            slidesPerView: 2.8,
-                                            spaceBetween: 10
-                                        },
-                                        1560: {
-                                            slidesPerView: 3.2,
-                                            spaceBetween: 10
-                                        },
-                                        1750: {
-                                            slidesPerView: 4,
-                                            spaceBetween: 10
-                                        }
-                                    }
-                                });
-                                $(document).on('click', '.js-copy', function(e) {
-                                    e.preventDefault();
-                                    var copyText = $(this).attr('data-copy');
-                                    var copyTextarea = document.createElement("textarea");
-                                    copyTextarea.textContent = copyText;
-                                    copyTextarea.style.position = "fixed";
-                                    document.body.appendChild(copyTextarea);
-                                    copyTextarea.select();
-                                    document.execCommand("copy");
-                                    document.body.removeChild(copyTextarea);
-                                    var cur_text = $(this).text();
-                                    var $cur_btn = $(this);
-                                    $(this).addClass("iscopied");
-                                    $(this).text("Đã lưu");
-                                    setTimeout(function() {
-                                        $cur_btn.removeClass("iscopied");
-                                        $cur_btn.text(cur_text);
-                                    }, 1500)
-                                })
-                                $('.info-button').click(function() {
-                                    var code = $(this).attr('data-coupon'),
-                                        dieukien = $(this).attr('data-content');
-                                    $('.popup-coupon .code').html(code);
-                                    $('.popup-coupon .dieukien').html(dieukien);
-                                    $('.popup-coupon, .backdrop__body-backdrop___1rvky').addClass('active');
-                                });
-                                $('.close-pop').click(function() {
-                                    $('.popup-coupon, .backdrop__body-backdrop___1rvky').removeClass('active');
-                                });
-                            </script> --}}
-                            <div class="product-tab e-tabs not-dqtab">
-                                <ul class="tabs tabs-title clearfix">
-                                    <li class="tab-link active" data-tab="#tab-1">
-                                        <h3>Chi tiết sản phẩm</h3>
-                                    </li>
-                                    <li class="tab-link" data-tab="#tab-2" >
-                                        <h3>Đánh giá sản phẩm</h3>
-                                    </li>
-                                </ul>
-                                <div class="tab-float">
-                                    <div id="tab-1" class="tab-content active content_extab">
-                                        <div class="rte product_getcontent">
-                                            {!! $product->body !!}
-                                        </div>
-                                    </div>
-                                    <div id="tab-2" class="tab-content content_extab">
-                                        <div class="rte product_getcontent" id="onireviewapp">
-                                            @include('site.partials.onireview')
+                                    @endforeach
+                                    <div class="swiper-slide">
+                                        <div class="overflow-hidden cursor-pointer rounded-16">
+                                            <img class="w-full xxl:h-[200px] lg:h-[160px] md:h-[140px] sm:h-25 h-18 object-cover hover:scale-110 transition-1"
+                                                src="{{$product->product_image}}" alt="{{$product->name}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="details-pro-3 col-12 col-md-12 col-lg-3">
-                            <div class="row">
-                                <div class="col-lg-12 col-col-md-12 col-sm-6 col-xs-12">
-                                    <div class="product-favi">
-                                        <a href="banh-keo" title="Có thể bạn thích">
-                                            <div class="title-head">
-                                                Có thể bạn thích
-                                            </div>
-                                        </a>
-                                        <div class="product-favi-content">
-                                            @foreach ($bestSellerProducts as $item)
-                                            <div class="product-view">
-                                                <a class="image_thumb" href="{{ route('front.show-product-detail', $item->slug) }}"
-                                                    title="{{ $item->name }}">
-                                                    <img width="370" height="480" class="lazyload"
-                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                                        data-src="{{ $item->image->path }}"
-                                                        alt="{{ $item->name }}">
-                                                </a>
-                                                <div class="product-info">
-                                                    <h3 class="product-name"><a href="{{ route('front.show-product-detail', $item->slug) }}"
-                                                            title="{{ $item->name }}">{{ $item->name }}</a></h3>
-                                                    <div class="price-box">
-                                                        <span class="price">{{ formatCurrency($item->price) }}₫</span>
-                                                        @if ($item->base_price > 0)
-                                                        <span class="compare-price">{{ formatCurrency($item->base_price) }}₫</span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-col-md-12 col-sm-6 col-xs-12">
-                                    <a class="banner_right_pro" href="javascript:void(0);" title="Banner">
-                                        <img width="375" height="525"
-                                            src="{{$product->image->path}}"
-                                            alt="Banner" />
-                                    </a>
-                                </div>
+                        <div x-data="{ open: false }" class="pt-30p ">
+                            <h4 class="heading-4 text-w-neutral-1 mb-16p">Giới thiệu game</h4>
+                            <div class="grid grid-cols-1 gap-16p">
+                                {!!$product->body!!}
                             </div>
                         </div>
-                        <div class="col-lg-12 col-col-md-12 col-sm-12 col-xs-12">
-                            <div class="productRelate">
-                                <div class="title_index">
-                                    <h2 class="h2_title">
-                                        <a class="main-title" href="{{ route('front.show-product-category', $product->category->slug) }}" title="Sản phẩm liên quan">Sản phẩm liên
-                                            quan</a>
-                                        <span class="icon_title">
-                                            <img width="134" height="24"
-                                                src="//bizweb.dktcdn.net/100/489/005/themes/912542/assets/icon_lienquan_sport.png?1729657650563"
-                                                alt="Sản phẩm liên quan" />
+                    </div>
+                    <div class="xxl:col-span-4 col-span-12 relative">
+                        <div class="xxl:sticky xxl:top-30">
+                            <div class="p-40p rounded-12 bg-b-neutral-3">
+                                <div class="flex items-center gap-3 flex-wrap">
+                                    <img class="avatar size-60p" src="{{$product->user_create->avatar}}"
+                                        alt="{{$product->user_create->name}}" />
+                                    <div>
+                                        <span class="text-xl-medium text-w-neutral-1 mb-1">
+                                            {{$product->user_create->name}}
                                         </span>
-                                    </h2>
-                                </div>
-                                <div class="product-relate-swiper swiper-container">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($productsRelated as $item)
-                                        <div class="swiper-slide">
-                                            <div class=" item_product_main">
-                                                @include('site.products.product_item', ['product' => $item])
-                                            </div>
-                                        </div>
-                                        @endforeach
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Trạng thái: {{$product->status ? 'Đang hoạt động' : 'Đã khóa'}}
+                                        </span>
                                     </div>
-                                    <div class="swiper-button-prev"></div>
-                                    <div class="swiper-button-next"></div>
+                                </div>
+                                <div
+                                    class="grid grid-cols-1 gap-16p py-24p *:flex *:items-center *:justify-between *:flex-wrap *:gap-16p">
+                                    <div>
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Lượt xem:
+                                        </span>
+                                        <span class="text-m-medium text-w-neutral-1">
+                                            {{ formatCurrency($product->base_price) }} view
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Ngày đăng:
+                                        </span>
+                                        <span class="text-m-medium text-w-neutral-1">
+                                            {{Carbon\Carbon::parse($product->created_at)->format('H:i d/m/Y')}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Nền tảng:
+                                        </span>
+                                        <span class="text-m-medium text-w-neutral-1">
+                                            {{$product->platform}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Danh mục:
+                                        </span>
+                                        <span class="text-m-medium text-w-neutral-1">
+                                            @php
+                                                $category = $product->category;
+                                                $parent = $category->category_parent;
+                                                $parent_name = $parent ? '<a href="'.route('front.show-product-category', $parent->slug).'" class="text-m-medium text-w-neutral-1 hover:text-primary" style="display: inline-block;">'.$parent->name.'</a>, ' : '';
+                                                $category_name = $category ? '<a href="'.route('front.show-product-category', $category->slug).'" class="text-m-medium text-w-neutral-1 hover:text-primary" style="display: inline-block;">'.$category->name.'</a>' : '';
+                                            @endphp
+                                            {!!$parent_name!!}{!!$category_name!!}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-m-regular text-w-neutral-4">
+                                            Thẻ tag:
+                                        </span>
+                                        @php
+                                            $tags = $product->tags;
+                                            $tag_names = $tags->pluck('name')->toArray();
+                                            $tag_names = array_map(function($tag) {
+                                                return '<a href="'.route('front.search').'?tag='.$tag.'" class="text-m-medium text-w-neutral-1 hover:text-primary" style="display: inline-block;">'.$tag.'</a>, ';
+                                            }, $tag_names);
+                                        @endphp
+                                        <span class="text-m-medium text-w-neutral-1">
+                                            {!!implode(', ', $tag_names)!!}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center flex-wrap gap-3">
+                                    <a href="{{$product->origin_link}}" class="btn btn-md btn-primary rounded-12">
+                                        <i class="fa fa-play"></i>
+                                        Chơi ngay
+                                    </a>
+                                    <a href="{{$product->short_link}}" class="btn btn-md btn-facebook rounded-12">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Fanpage
+                                    </a>
+                                    <a href="{{$product->aff_link}}" class="btn btn-md btn-zalo rounded-12">
+                                        <i class="fas fa-comments"></i>
+                                        Box Zalo
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -550,291 +188,208 @@
                 </div>
             </div>
         </section>
-        <script>
-            var variantsize = false;
-            var ww = $(window).width();
-
-            function validate(evt) {
-                var theEvent = evt || window.event;
-                var key = theEvent.keyCode || theEvent.which;
-                key = String.fromCharCode(key);
-                var regex = /[0-9]|\./;
-                if (!regex.test(key)) {
-                    theEvent.returnValue = false;
-                    if (theEvent.preventDefault) theEvent.preventDefault();
-                }
-            }
-            jQuery(function($) {
-                $('.selector-wrapper').hide();
-
-                $('.selector-wrapper').css({
-                    'text-align': 'left',
-                    'margin-bottom': '15px'
-                });
-            });
-
-            jQuery('.swatch :radio').change(function() {
-                var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
-                var optionValue = jQuery(this).val();
-                jQuery(this)
-                    .closest('form')
-                    .find('.single-option-selector')
-                    .eq(optionIndex)
-                    .val(optionValue)
-                    .trigger('change');
-                $(this).closest('.swatch').find('.header .value-roperties').html(optionValue);
-            });
-            setTimeout(function() {
-                $('.swatch .swatch-element').each(function() {
-                    $(this).closest('.swatch').find('.header .value-roperties').html($(this).closest('.swatch')
-                        .find('input:checked').val());
-                });
-            }, 500);
-        </script>
-        <script>
-            function activeTab(obj) {
-                $('.product-tab ul li').removeClass('active');
-                $(obj).addClass('active');
-                var id = $(obj).attr('data-tab');
-                $('.tab-content').removeClass('active');
-                $(id).addClass('active');
-            }
-            $('.product-tab ul li').click(function() {
-                activeTab(this);
-                return false;
-            });
-            var galleryThumbs = new Swiper('.gallery-thumbs', {
-                spaceBetween: 4,
-                slidesPerView: 10,
-                freeMode: true,
-                lazy: true,
-                watchSlidesVisibility: true,
-                watchSlidesProgress: true,
-                hashNavigation: true,
-                slideToClickedSlide: true,
-                breakpoints: {
-                    260: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                    },
-                    300: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                    },
-                    500: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                    },
-                    640: {
-                        slidesPerView: 4,
-                        spaceBetween: 10,
-                    },
-                    768: {
-                        slidesPerView: 4,
-                        spaceBetween: 10,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 10,
-                    },
-                    1199: {
-                        slidesPerView: 4,
-                        spaceBetween: 10,
-                    },
-                },
-                navigation: {
-                    nextEl: '.gallery-thumbs .swiper-button-next',
-                    prevEl: '.gallery-thumbs .swiper-button-prev',
-                },
-            });
-            var galleryTop = new Swiper('.gallery-top', {
-                spaceBetween: 0,
-                lazy: true,
-                hashNavigation: true,
-                thumbs: {
-                    swiper: galleryThumbs
-                }
-            });
-            var swiperrela = new Swiper('.product-relate-swiper', {
-                slidesPerView: 5,
-                spaceBetween: 20,
-                slidesPerGroup: 1,
-                navigation: {
-                    nextEl: '.product-relate-swiper .swiper-button-next',
-                    prevEl: '.product-relate-swiper .swiper-button-prev',
-                },
-                breakpoints: {
-                    280: {
-                        slidesPerView: 2,
-                        spaceBetween: 10
-                    },
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 10
-                    },
-                    768: {
-                        slidesPerView: 3,
-                        spaceBetween: 15
-                    },
-                    992: {
-                        slidesPerView: 4,
-                        spaceBetween: 15
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 15
-                    },
-                    1700: {
-                        slidesPerView: 5,
-                        spaceBetween: 15
-                    }
-                }
-            });
-            $(document).ready(function() {
-                $("#lightgallery").lightGallery({
-                    thumbnail: false
-                });
-            });
-        </script>
-    </div>
+        <!-- game details section end -->
+        <!-- related games start -->
+        @if ($productsRelated->count() > 0)
+        <section class="section-py">
+            <div class="container">
+                <div class="flex items-center justify-between flex-wrap gap-24p mb-40p">
+                    <h2 class="heading-2 text-w-neutral-1 text-split-left">
+                        Sản phẩm liên quan
+                    </h2>
+                    <a href="{{route('front.show-product-category', $product->category->slug)}}" class="btn btn-md btn-primary rounded-12">
+                        <i class="fa fa-eye"></i>
+                        Xem tất cả
+                    </a>
+                </div>
+                <div class="swiper four-card-carousel" data-carousel-name="related-games" data-aos="fade-up">
+                    <div class="swiper-wrapper pb-15">
+                        @foreach ($productsRelated as $item)
+                        <div class="swiper-slide">
+                            <div class="w-full bg-b-neutral-3 px-20p pt-20p pb-32p rounded-12">
+                                <div class="glitch-effect rounded-12 overflow-hidden mb-24p">
+                                    <div class="glitch-thumb">
+                                        <img class="w-full md:h-[228px] h-[200px] object-cover"
+                                            src="{{$item->product_image}}" alt="{{$item->name}}" />
+                                    </div>
+                                    <div class="glitch-thumb">
+                                        <img class="w-full md:h-[228px] h-[200px] object-cover"
+                                            src="{{$item->product_image}}" alt="{{$item->name}}" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="{{route('front.show-product-detail', $item->slug)}}" class="heading-4 text-w-neutral-1 link-1 line-clamp-1">
+                                        {{$item->title_seo}}
+                                    </a>
+                                </div>
+                                <div class="flex items-center justify-center flex-wrap gap-1 mt-24p">
+                                    <a href="{{$item->origin_link}}" class="btn btn-md btn-primary rounded-12">
+                                        {{-- <i class="fa fa-play"></i> --}}
+                                        Chơi ngay
+                                    </a>
+                                    <a href="{{$item->short_link}}" class="btn btn-md btn-facebook rounded-12">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Fanpage
+                                    </a>
+                                    <a href="{{$item->aff_link}}" class="btn btn-md btn-zalo rounded-12">
+                                        <i class="fas fa-comments"></i>
+                                        Box Zalo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination pagination-one related-games-carousel-pagination flex-c gap-2.5">
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
+        <!-- related trending end -->
+    </main>
+    <!-- main end -->
 @endsection
 
 @push('script')
-<script>
-    // Plus number quantiy product detail
-    var plusQuantity = function() {
-        if ( jQuery('input[name="quantity"]').val() != undefined ) {
-            var currentVal = parseInt(jQuery('input[name="quantity"]').val());
-            if (!isNaN(currentVal)) {
-                jQuery('input[name="quantity"]').val(currentVal + 1);
-            } else {
-                jQuery('input[name="quantity"]').val(1);
-            }
-        }else {
-            console.log('error: Not see elemnt ' + jQuery('input[name="quantity"]').val());
-        }
-    }
-    // Minus number quantiy product detail
-    var minusQuantity = function() {
-        if ( jQuery('input[name="quantity"]').val() != undefined ) {
-            var currentVal = parseInt(jQuery('input[name="quantity"]').val());
-            if (!isNaN(currentVal) && currentVal > 1) {
-                jQuery('input[name="quantity"]').val(currentVal - 1);
-            }
-        }else {
-            console.log('error: Not see elemnt ' + jQuery('input[name="quantity"]').val());
-        }
-    }
-    app.controller('ProductDetailController', function($scope, $http, $interval, cartItemSync, $rootScope, $compile) {
-        $scope.product = @json($product);
-        $scope.form = {
-            quantity: 1
-        };
-
-        $scope.selectedAttributes = [];
-        jQuery('.product-attribute-values .badge').click(function() {
-            if(!jQuery(this).hasClass('active')) {
-                jQuery(this).parent().find('.badge').removeClass('active');
-                jQuery(this).addClass('active');
-                if ($scope.selectedAttributes.length > 0 && $scope.selectedAttributes.find(item => item.index == jQuery(this).data('index'))) {
-                    $scope.selectedAttributes.find(item => item.index == jQuery(this).data('index')).value = jQuery(this).data('value');
+    {{-- <script>
+        // Plus number quantiy product detail
+        var plusQuantity = function() {
+            if (jQuery('input[name="quantity"]').val() != undefined) {
+                var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+                if (!isNaN(currentVal)) {
+                    jQuery('input[name="quantity"]').val(currentVal + 1);
                 } else {
-                    let index = jQuery(this).data('index');
-                    $scope.selectedAttributes.push({
-                        index: index,
-                        name: jQuery(this).data('name'),
-                        value: jQuery(this).data('value'),
-                    });
+                    jQuery('input[name="quantity"]').val(1);
                 }
             } else {
-                jQuery(this).parent().find('.badge').removeClass('active');
-                jQuery(this).removeClass('active');
-                $scope.selectedAttributes = $scope.selectedAttributes.filter(item => item.index != jQuery(this).data('index'));
+                console.log('error: Not see elemnt ' + jQuery('input[name="quantity"]').val());
             }
-            $scope.$apply();
-            console.log($scope.selectedAttributes);
+        }
+        // Minus number quantiy product detail
+        var minusQuantity = function() {
+            if (jQuery('input[name="quantity"]').val() != undefined) {
+                var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    jQuery('input[name="quantity"]').val(currentVal - 1);
+                }
+            } else {
+                console.log('error: Not see elemnt ' + jQuery('input[name="quantity"]').val());
+            }
+        }
+        app.controller('ProductDetailController', function($scope, $http, $interval, cartItemSync, $rootScope, $compile) {
+            $scope.product = @json($product);
+            $scope.form = {
+                quantity: 1
+            };
+
+            $scope.selectedAttributes = [];
+            jQuery('.product-attribute-values .badge').click(function() {
+                if (!jQuery(this).hasClass('active')) {
+                    jQuery(this).parent().find('.badge').removeClass('active');
+                    jQuery(this).addClass('active');
+                    if ($scope.selectedAttributes.length > 0 && $scope.selectedAttributes.find(item => item
+                            .index == jQuery(this).data('index'))) {
+                        $scope.selectedAttributes.find(item => item.index == jQuery(this).data('index'))
+                            .value = jQuery(this).data('value');
+                    } else {
+                        let index = jQuery(this).data('index');
+                        $scope.selectedAttributes.push({
+                            index: index,
+                            name: jQuery(this).data('name'),
+                            value: jQuery(this).data('value'),
+                        });
+                    }
+                } else {
+                    jQuery(this).parent().find('.badge').removeClass('active');
+                    jQuery(this).removeClass('active');
+                    $scope.selectedAttributes = $scope.selectedAttributes.filter(item => item.index !=
+                        jQuery(this).data('index'));
+                }
+                $scope.$apply();
+                console.log($scope.selectedAttributes);
+            });
+
+            $scope.addToCartFromProductDetail = function() {
+                let quantity = $('form input[name="quantity"]').val();
+                url = "{{ route('cart.add.item', ['productId' => 'productId']) }}";
+                url = url.replace('productId', $scope.product.id);
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    data: {
+                        'qty': parseInt(quantity),
+                        'attributes': $scope.selectedAttributes
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            if (response.count > 0) {
+                                $scope.hasItemInCart = true;
+                            }
+
+                            $interval.cancel($rootScope.promise);
+
+                            $rootScope.promise = $interval(function() {
+                                cartItemSync.items = response.items;
+                                cartItemSync.total = response.total;
+                                cartItemSync.count = response.count;
+                            }, 1000);
+                            toastr.success('Thao tác thành công !')
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Thao tác thất bại !')
+                    },
+                    complete: function() {
+                        $scope.$applyAsync();
+                    }
+                });
+            }
+
+            $scope.addToCartCheckoutFromProductDetail = function() {
+                let quantity = $('form input[name="quantity"]').val();
+                url = "{{ route('cart.add.item', ['productId' => 'productId']) }}";
+                url = url.replace('productId', $scope.product.id);
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    data: {
+                        'qty': parseInt(quantity),
+                        'attributes': $scope.selectedAttributes
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            if (response.count > 0) {
+                                $scope.hasItemInCart = true;
+                            }
+
+                            $interval.cancel($rootScope.promise);
+
+                            $rootScope.promise = $interval(function() {
+                                cartItemSync.items = response.items;
+                                cartItemSync.total = response.total;
+                                cartItemSync.count = response.count;
+                            }, 1000);
+                            toastr.success('Thao tác thành công !')
+                            window.location.href = "{{ route('cart.index') }}";
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Thao tác thất bại !')
+                    },
+                    complete: function() {
+                        $scope.$applyAsync();
+                    }
+                });
+            }
         });
-
-        $scope.addToCartFromProductDetail = function() {
-            let quantity = $('form input[name="quantity"]').val();
-            url = "{{route('cart.add.item', ['productId' => 'productId'])}}";
-            url = url.replace('productId', $scope.product.id);
-
-            jQuery.ajax({
-                type: 'POST',
-                url: url,
-                headers: {
-                    'X-CSRF-TOKEN': "{{csrf_token()}}"
-                },
-                data: {
-                    'qty': parseInt(quantity),
-                    'attributes': $scope.selectedAttributes
-                },
-                success: function (response) {
-                    if (response.success) {
-                        if (response.count > 0) {
-                            $scope.hasItemInCart = true;
-                        }
-
-                        $interval.cancel($rootScope.promise);
-
-                        $rootScope.promise = $interval(function () {
-                            cartItemSync.items = response.items;
-                            cartItemSync.total = response.total;
-                            cartItemSync.count = response.count;
-                        }, 1000);
-                        toastr.success('Thao tác thành công !')
-                    }
-                },
-                error: function () {
-                    toastr.error('Thao tác thất bại !')
-                },
-                complete: function () {
-                    $scope.$applyAsync();
-                }
-            });
-        }
-
-        $scope.addToCartCheckoutFromProductDetail = function() {
-            let quantity = $('form input[name="quantity"]').val();
-            url = "{{route('cart.add.item', ['productId' => 'productId'])}}";
-            url = url.replace('productId', $scope.product.id);
-
-            jQuery.ajax({
-                type: 'POST',
-                url: url,
-                headers: {
-                    'X-CSRF-TOKEN': "{{csrf_token()}}"
-                },
-                data: {
-                    'qty': parseInt(quantity),
-                    'attributes': $scope.selectedAttributes
-                },
-                success: function (response) {
-                    if (response.success) {
-                        if (response.count > 0) {
-                            $scope.hasItemInCart = true;
-                        }
-
-                        $interval.cancel($rootScope.promise);
-
-                        $rootScope.promise = $interval(function () {
-                            cartItemSync.items = response.items;
-                            cartItemSync.total = response.total;
-                            cartItemSync.count = response.count;
-                        }, 1000);
-                        toastr.success('Thao tác thành công !')
-                        window.location.href = "{{route('cart.index')}}";
-                    }
-                },
-                error: function () {
-                    toastr.error('Thao tác thất bại !')
-                },
-                complete: function () {
-                    $scope.$applyAsync();
-                }
-            });
-        }
-    });
-</script>
+    </script> --}}
 @endpush

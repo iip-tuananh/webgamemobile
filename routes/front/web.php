@@ -74,6 +74,9 @@ Route::group(['namespace' => 'Front'], function () {
     // review
     Route::post('/review/submit','FrontController@submitReview')->name('front.submit-review');
 
+    // chính sách
+    Route::get('/chinh-sach/{slug}.html','FrontController@showPolicy')->name('front.show-policy');
+
 });
 
 

@@ -80,20 +80,23 @@ class ConfigController extends Controller
 
 			if($request->image) {
 				if($object->image) {
-					// FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
-                    FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
+					FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
 				}
-				// FileHelper::uploadFile($request->image, 'configs', $object->id, ThisModel::class, 'image',99);
-                FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+				FileHelper::uploadFile($request->image, 'configs', $object->id, ThisModel::class, 'image',99);
 			}
 
             if($request->favicon) {
                 if($object->favicon) {
-                    // FileHelper::forceDeleteFiles($object->favicon->id, $object->id, ThisModel::class, 'favicon');
-                    FileHelper::deleteFileFromCloudflare($object->favicon, $object->id, ThisModel::class, 'favicon');
+                    FileHelper::forceDeleteFiles($object->favicon->id, $object->id, ThisModel::class, 'favicon');
                 }
-                // FileHelper::uploadFile($request->favicon, 'configs', $object->id, ThisModel::class, 'favicon',7);
-                FileHelper::uploadFileToCloudflare($request->favicon, $object->id, ThisModel::class, 'favicon');
+                FileHelper::uploadFile($request->favicon, 'configs', $object->id, ThisModel::class, 'favicon',7);
+            }
+
+            if($request->background_website) {
+                if($object->background_website) {
+                    FileHelper::forceDeleteFiles($object->background_website->id, $object->id, ThisModel::class, 'background_website');
+                }
+                FileHelper::uploadFile($request->background_website, 'configs', $object->id, ThisModel::class, 'background_website',99);
             }
 
             $object->syncGalleries($request->galleries);

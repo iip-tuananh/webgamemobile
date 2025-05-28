@@ -9,179 +9,128 @@
 @endsection
 
 @section('content')
+    <!-- main start -->
     <main>
-        <!--page-title-area start-->
-        {{-- <div class="page-title-area pt-100 pb-md-60"
-            data-background="/site/images/page-title-shadow-bg-1a.png">
-            <img class="shape__p1" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <img class="shape__p2" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <img class="shape__p3" src="/site/images/ht-star-2b.svg" alt="Shape" loading="lazy">
-            <div class="blur__p4"></div>
-            <div class="blur__p5"></div>
-            <div class="blur__p6"></div>
-            <div class="blur__p7"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="page-title-wrapper text-lg-start text-center mb-40">
-                            <h2 class="page-title mb-10">{{ $title }}</h2>
-                            <div class="page-title-border mt-1 mb-10"></div>
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb list-none justify-content-center justify-content-md-start">
-                                    <li><a href="{{route('front.home-page')}}">Trang chủ</a></li>
-                                    <li><a href="#">Pages</a></li>
-                                    <li class="active" aria-current="page">{{ $title }}</li>
+        <!-- breadcrumb start -->
+        <section class="pt-30p">
+            <div class="section-pt">
+                <div class="relative bg-cover bg-no-repeat rounded-24 overflow-hidden"
+                    style="background-image: url('/site/images/breadcrumbImg.png');">
+                    <div class="container">
+                        <div class="grid grid-cols-12 gap-30p relative xl:py-[130px] md:py-30 sm:py-25 py-20 z-[2]">
+                            <div class="lg:col-start-2 lg:col-end-12 col-span-12">
+                                <h2 class="heading-2 text-w-neutral-1 mb-3">
+                                    {{ $title }}
+                                </h2>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('front.home-page') }}" class="breadcrumb-link">
+                                            Trang chủ
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-icon">
+                                            <i class="ti ti-chevrons-right"></i>
+                                        </span>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <span class="breadcrumb-current">{{ $title }}</span>
+                                    </li>
                                 </ul>
-                            </nav>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="page__title__img__wrapper text-xl-end text-center mb-40">
-                            <img class="main__1 img-fluid" src="/site/images/ilustration-2a.svg"
-                                alt="ilustration" loading="lazy">
-                            <img class="main__2" src="/site/images/ilustration-1a.svg" alt="ilustration" loading="lazy">
-                        </div>
-                    </div>
+                    <div class="overlay-11"></div>
                 </div>
             </div>
-        </div> --}}
-        <!--page-title-area end-->
-
-        <!-- services__area-two start -->
-        <section class="services__area-two pt-50 pb-50 pt-lg-60 pb-lg-80">
+        </section>
+        <!-- breadcrumb end -->
+        <!-- trending section start -->
+        <section class="section-pb pt-60p">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-                        <div class="section__title text-center mb-50">
-                            <h4 class="section__title-sub-two mb-20">Services</h4>
-                            <h2 class="section__title-main">{{ $title }}</h2>
-                            <div>{!! $short_des !!}</div>
-                        </div>
-                    </div>
-                </div>
-                @foreach ($products as $product)
-                    <div class="row ht-services-three text-center text-md-start mb-30" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="col-lg-12 mb-lg-0 mb-3">
-                            <div class="d-md-flex align-items-center justify-content-between">
-                                <div class=" number">{{ $product->name }}</div>
-                                <div>vCPU <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->cpu }}</span> </div>
-                                <div>RAM <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->ram }}</span> </div>
-                                <div>Disk space <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->storage }}</span> </div>
-                                <div>Traffic <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->band_width }}</span> </div>
-                                <div>IP-VPS <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->stream }}</span> </div>
-                                {{-- <div>Location <br> {{ $product->origin }} </div> --}}
-                                @if ($product->os)
-                                    <div>OS <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ $product->os }}</span> </div>
-                                @endif
-                                <div>Price <br> <span class="text-dark" style="font-weight: 600; font-size: 20px">{{ formatCurrency($product->sell_price) }}đ/tháng </span> </div>
-                                <div class="services-bottom-content">
-                                    <a class="ht_btn" href="javascript:void(0)" ng-click="addToCart({{$product->id}})">Đăng ký</a>
+                <div class="grid 4xl:grid-cols-2 xxl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-24p">
+                    @foreach ($products as $product)
+                        <div class="w-full bg-b-neutral-3 p-24p rounded-24 grid 4xl:grid-cols-2 grid-cols-1 items-center gap-24p group"
+                            data-aos="zoom-in">
+                            <div class="overflow-hidden rounded-24">
+                                <img class="w-full xxl:h-[304px] xl:h-[280px] md:h-[260px] h-[240px] object-cover group-hover:scale-110 transition-1"
+                                    src="{{ $product->product_image }}" alt="{{ $product->name }}" />
+                            </div>
+                            <div>
+                                <div class="flex-y flex-wrap gap-2">
+                                    @foreach ($product->tags as $tag)
+                                        <span class="badge badge-neutral-2 badge-smm">{{ $tag->name }}</span>
+                                    @endforeach
+                                </div>
+                                <a href="{{ route('front.show-product-detail', $product->slug) }}"
+                                    class="heading-3 text-w-neutral-1 4xl:line-clamp-2 line-clamp-1 link-1 my-16p text-split-left">
+                                    {{ $product->title_seo }}
+                                </a>
+                                <div class="flex-y flex-wrap *:py-2 *:px-3 mb-20p">
+                                    <div class="flex-y gap-2.5">
+                                        <span class="badge badge-secondary size-3 badge-circle"></span>
+                                        <p class="text-base text-neutral-100">
+                                            <span class="span">{{ formatCurrency($product->base_price) }}</span> Lượt xem
+                                        </p>
+                                    </div>
+                                    <div class="flex-y gap-2.5">
+                                        <span class="badge badge-primary size-3 badge-circle"></span>
+                                        @php
+                                            $diffInHours = now()->diffInHours($product->created_at);
+                                            $diffInDays = now()->diffInDays($product->created_at);
+                                            $diffInWeeks = now()->diffInWeeks($product->created_at);
+                                        @endphp
+                                        <p class="text-base text-neutral-100">
+                                            <span class="span">
+                                                @if($diffInHours < 24)
+                                                    {{ $diffInHours }} giờ trước
+                                                @elseif($diffInDays < 7)
+                                                    {{ $diffInDays }} ngày trước
+                                                @else
+                                                    {{ $diffInWeeks }} tuần trước
+                                                @endif
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-y flex-wrap gap-3">
+                                    <img class="size-60p rounded-full shrink-0"
+                                        src="{{ $product->user_create ? $product->user_create->avatar : '' }}"
+                                        alt="{{ $product->user_create->name }}" />
+                                    <div>
+                                        <a href="javascript:void(0)" class="text-l-medium link-1 text-w-neutral-1 mb-1">
+                                            {{ $product->user_create->name }}
+                                            <i class="ti ti-circle-check-filled text-secondary icon-24"></i>
+                                        </a>
+                                        <span class="text-s-medium text-w-neutral-4">Leader</span>
+                                    </div>
+                                </div>
+                                <div class="flex-y flex-wrap gap-1" style="margin-top: 20px;">
+                                    <a href="{{ $product->origin_link }}" class="btn btn-xs btn-primary rounded-12">
+                                        {{-- <i class="fas fa-play"></i> --}}
+                                        Chơi ngay
+                                    </a>
+                                    <a href="{{ $product->short_link }}" class="btn btn-xs rounded-12 btn-facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Fanpage
+                                    </a>
+                                    <a href="{{ $product->aff_link }}" class="btn btn-xs rounded-12 btn-zalo">
+                                        <i class="fas fa-comments"></i>
+                                        Box Zalo
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <div class="flex-c mt-48p">
+                    {{ $products->links() }}
+                </div>
             </div>
         </section>
-        <!-- services__area-two end -->
-        <!--feature__section start-->
-        {{-- <div class="feature__section pt-150 pt-lg-100 pb-50 pb-lg-30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="ht__feature__two text-center mb-30 mt-35"
-                            data-background="/site/images/feature-bg-shape-1a.png">
-                            <div class="ht__feature-icon">
-                                <img src="/site/images/seo.svg" alt="chose" loading="lazy">
-                            </div>
-                            <h4 class="ht-feature-title mb-20">Hiệu suất mạnh mẽ</h4>
-                            <p class="text-dark">Chúng tôi sử dụng CPU Intel Xeon dòng E3 và E5 trên các máy chủ của mình, cùng với ổ SSD trong RAID để mang đến cho bạn những máy ảo nhanh vượt trội</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
-                        <div class="ht__feature__two text-center mb-30 mt-35"
-                            data-background="/site/images/feature-bg-shape-1a.png">
-                            <div class="ht__feature-icon">
-                                <img src="/site/images/seo.svg" alt="chose" loading="lazy">
-                            </div>
-                            <h4 class="ht-feature-title mb-20">Hệ điều hành đa dạng</h4>
-                            <p class="text-dark">Chúng tôi hỗ trợ nhiều hệ điều hành khác nhau bao gồm Windows Server, Windows Desktop và Linux</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="ht__feature__two text-center mb-30 mt-35"
-                            data-background="/site/images/feature-bg-shape-1a.png">
-                            <div class="ht__feature-icon">
-                                <img src="/site/images/discount-label.svg" alt="chose" loading="lazy">
-                            </div>
-                            <h4 class="ht-feature-title mb-20">An toàn thông tin</h4>
-                            <p class="text-dark">Kiểm soát, ngăn chặn xâm nhập, hạn chế rủi ro hệ thống. Bảo đảm dữ liệu bảo mật và an toàn</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
-                        <div class="ht__feature__two text-center mb-30 mt-35"
-                            data-background="/site/images/feature-bg-shape-1a.png">
-                            <div class="ht__feature-icon">
-                                <img src="/site/images/monitor.svg" alt="chose" loading="lazy">
-                            </div>
-                            <h4 class="ht-feature-title mb-20">Hỗ trợ 24/7</h4>
-                            <p class="text-dark">Đội ngũ IT, Chăm sóc khách hàng chuyên nghiệp, sẵn sàng cho mọi tình huống, hỗ trợ nhanh chóng</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!--feature__section end-->
-        <div class="feature__section pt-150 pt-lg-100 pb-120 pb-lg-30">
-            <div class="container">
-            <div class="row justify-content-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                <div class="section__title text-center mb-50">
-                    <h4 class="section__title-sub-two">What We Are</h4>
-                    <h2 class="section__title-main">Lý do nên chọn {{ $title }}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                    <div class="ht__feature__three text-center mb-30 pt-70 mt-70">
-                        <div class="ht__feature-icon mb-30">
-                        <img src="/site/images/speed_icon.png" alt="chose" loading="lazy" width="100" height="100">
-                        </div>
-                        <h4 class="ht-feature-title mb-20">Hiệu suất mạnh mẽ</h4>
-                        <p class="text-dark">Chúng tôi sử dụng CPU Intel Xeon dòng E3 và E5 trên các máy chủ của mình, cùng với ổ SSD trong RAID để mang đến cho bạn những máy ảo nhanh vượt trội</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="150">
-                    <div class="ht__feature__three text-center mb-30 pt-70 mt-70">
-                        <div class="ht__feature-icon mb-30">
-                        <img src="/site/images/mac_os_window_icon.png" alt="chose" loading="lazy" width="80" height="80">
-                        </div>
-                        <h4 class="ht-feature-title mb-20">Hệ điều hành đa dạng</h4>
-                        <p class="text-dark">Chúng tôi hỗ trợ nhiều hệ điều hành khác nhau bao gồm Windows Server, Windows Desktop và Linux</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                    <div class="ht__feature__three text-center mb-30 pt-70 mt-70">
-                        <div class="ht__feature-icon mb-30">
-                        <img src="/site/images/cloud_icon.png" alt="chose" loading="lazy" width="80" height="80">
-                        </div>
-                        <h4 class="ht-feature-title mb-20">An toàn thông tin</h4>
-                        <p class="text-dark">Kiểm soát, ngăn chặn xâm nhập, hạn chế rủi ro hệ thống. Bảo đảm dữ liệu bảo mật và an toàn</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="250">
-                    <div class="ht__feature__three text-center mb-30 pt-70 mt-70">
-                        <div class="ht__feature-icon mb-30">
-                        <img src="/site/images/support_time_icon.png" alt="chose" loading="lazy" width="80" height="80">
-                        </div>
-                        <h4 class="ht-feature-title mb-20">Hỗ trợ 24/7</h4>
-                        <p class="text-dark">Đội ngũ IT, Chăm sóc khách hàng chuyên nghiệp, sẵn sàng cho mọi tình huống, hỗ trợ nhanh chóng</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
+        <!-- trending section end -->
     </main>
+    <!-- main end -->
 @endsection
 
 @push('script')

@@ -19,6 +19,7 @@ use App\Helpers\FileHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Common\Customer;
+use Illuminate\Support\Str;
 
 class PolicyController extends Controller
 {
@@ -90,6 +91,7 @@ class PolicyController extends Controller
             $object->title = $request->title;
             $object->content = $request->content;
             $object->status = $request->status;
+            $object->slug = Str::slug($request->title);
             $object->save();
 
             DB::commit();
@@ -143,7 +145,7 @@ class PolicyController extends Controller
             $object->title = $request->title;
             $object->content = $request->content;
             $object->status = $request->status;
-
+            $object->slug = Str::slug($request->title);
             $object->save();
 
             DB::commit();

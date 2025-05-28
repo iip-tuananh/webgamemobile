@@ -14,7 +14,7 @@ class CategoryService {
         return $child_categories;
     }
 
-    private function getAllChildCategory($category, array &$category_child_ids = [], $level = null) {
+    public function getAllChildCategory($category, array &$category_child_ids = [], $level = null) {
         $child_categories = Category::query()->where('parent_id', $category->id)->get();
 
         if($child_categories->isNotEmpty()) {

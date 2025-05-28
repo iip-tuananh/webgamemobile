@@ -111,17 +111,12 @@ class ProductController extends Controller
 			$object = new ThisModel();
             $object->type = $request->type;
 			$object->name = $request->name;
+            $object->title_seo = $request->title_seo;
 			$object->cate_id = $request->cate_id;
 			$object->intro = $request->intro;
 			$object->short_des = $request->short_des;
 			$object->body = $request->body;
 			$object->base_price = $request->base_price;
-			$object->os = $request->os;
-            $object->cpu = $request->cpu;
-            $object->ram = $request->ram;
-            $object->storage = $request->storage;
-            $object->band_width = $request->band_width;
-            $object->stream = $request->stream;
             $object->origin = $request->origin;
 			$object->price = $request->price;
 			$object->status = $request->status;
@@ -130,11 +125,15 @@ class ProductController extends Controller
             $object->url_custom = $request->url_custom;
             $object->state = $request->state ?? Product::CON_HANG;
             $object->is_pin = $request->is_pin ?? Product::NOT_PIN;
+            $object->origin_link = $request->origin_link;
+            $object->aff_link = $request->aff_link;
+            $object->short_link = $request->short_link;
 
 			$object->save();
 
-			// FileHelper::uploadFile($request->image, 'products', $object->id, ThisModel::class, 'image',99);
-            FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+            if($request->image) {
+                FileHelper::uploadFile($request->image, 'products', $object->id, ThisModel::class, 'image',99);
+            }
 
 			$object->syncGalleries($request->galleries);
 			$object->syncDocuments($request->attachments, 'products/attachments/');
@@ -190,18 +189,13 @@ class ProductController extends Controller
 
             $object->type = $request->type;
 			$object->name = $request->name;
+            $object->title_seo = $request->title_seo;
 			$object->cate_id = $request->cate_id;
 			$object->intro = $request->intro;
 			$object->short_des = $request->short_des;
 			$object->body = $request->body;
 			$object->base_price = $request->base_price;
 			$object->price = $request->price;
-			$object->os = $request->os;
-            $object->cpu = $request->cpu;
-            $object->ram = $request->ram;
-            $object->storage = $request->storage;
-            $object->band_width = $request->band_width;
-            $object->stream = $request->stream;
             $object->origin = $request->origin;
 			$object->status = $request->status;
 			$object->manufacturer_id = $request->manufacturer_id;
@@ -209,16 +203,17 @@ class ProductController extends Controller
             $object->url_custom = $request->url_custom;
             $object->state = $request->state ?? Product::CON_HANG;
             $object->is_pin = $request->is_pin ?? Product::NOT_PIN;
+            $object->origin_link = $request->origin_link;
+            $object->aff_link = $request->aff_link;
+            $object->short_link = $request->short_link;
 
 			$object->save();
 
 			if($request->image) {
 				if($object->image) {
-					// FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
-                    FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
+					FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
 				}
-				// FileHelper::uploadFile($request->image, 'products', $object->id, ThisModel::class, 'image',99);
-				FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
+				FileHelper::uploadFile($request->image, 'products', $object->id, ThisModel::class, 'image',99);
 			}
 
 			$object->syncGalleries($request->galleries);
@@ -263,7 +258,7 @@ class ProductController extends Controller
 			);
 		} else {
             if($object->image) {
-                FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
+                FileHelper::forceDeleteFiles($object->image->id, $object->id, ThisModel::class, 'image');
             }
 			$object->delete();
 			$message = array(
@@ -333,7 +328,7 @@ class ProductController extends Controller
         foreach ($product_ids as $product_id) {
             $product = ThisModel::findOrFail($product_id);
             if($product->image) {
-                FileHelper::deleteFileFromCloudflare($product->image, $product->id, ThisModel::class, 'image');
+                FileHelper::forceDeleteFiles($product->image->id, $product->id, ThisModel::class, 'image');
             }
         }
 

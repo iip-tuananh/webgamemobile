@@ -115,6 +115,7 @@ class ClientRegisterController extends Controller
 			$object->type = 10;
 			$object->save();
 
+            $object->roles()->sync([5]);
 			DB::commit();
             $data = [
                 'account_name' => $request->account_name,

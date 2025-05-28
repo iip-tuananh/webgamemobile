@@ -38,26 +38,26 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
         // Menu Catalog
         Route::group(['prefix' => 'categories', 'middleware' => 'checkType:'.User::SUPER_ADMIN.','.User::QUAN_TRI_VIEN], function() {
-            Route::get('/create', 'Admin\CategoryController@create')->name('Category.create')->middleware('checkPermission:Thêm danh mục hàng hóa');
-            Route::post('/', 'Admin\CategoryController@store')->name('Category.store')->middleware('checkPermission:Thêm danh mục hàng hóa');
-            Route::post('/{id}/update', 'Admin\CategoryController@update')->name('Category.update')->middleware('checkPermission:Sửa danh mục hàng hóa');
-            Route::get('/{id}/edit', 'Admin\CategoryController@edit')->name('Category.edit')->middleware('checkPermission:Sửa danh mục hàng hóa');
-            Route::get('/{id}/delete', 'Admin\CategoryController@delete')->name('Category.delete')->middleware('checkPermission:Xóa danh mục hàng hóa');
-            Route::get('/', 'Admin\CategoryController@index')->name('Category.index')->middleware('checkPermission:Quản lý danh mục hàng hóa');
-            Route::get('/searchData', 'Admin\CategoryController@searchData')->name('Category.searchData')->middleware('checkPermission:Quản lý danh mục hàng hóa');
-            Route::post('/nested-sort', 'Admin\CategoryController@nestedSort')->name('Category.nestedSort')->middleware('checkPermission:Quản lý danh mục hàng hóa');
+            Route::get('/create', 'Admin\CategoryController@create')->name('Category.create')->middleware('checkPermission:Thêm danh mục sản phẩm');
+            Route::post('/', 'Admin\CategoryController@store')->name('Category.store')->middleware('checkPermission:Thêm danh mục sản phẩm');
+            Route::post('/{id}/update', 'Admin\CategoryController@update')->name('Category.update')->middleware('checkPermission:Sửa danh mục sản phẩm');
+            Route::get('/{id}/edit', 'Admin\CategoryController@edit')->name('Category.edit')->middleware('checkPermission:Sửa danh mục sản phẩm');
+            Route::get('/{id}/delete', 'Admin\CategoryController@delete')->name('Category.delete')->middleware('checkPermission:Xóa danh mục sản phẩm');
+            Route::get('/', 'Admin\CategoryController@index')->name('Category.index')->middleware('checkPermission:Quản lý danh mục sản phẩm');
+            Route::get('/searchData', 'Admin\CategoryController@searchData')->name('Category.searchData')->middleware('checkPermission:Quản lý danh mục sản phẩm');
+            Route::post('/nested-sort', 'Admin\CategoryController@nestedSort')->name('Category.nestedSort')->middleware('checkPermission:Quản lý danh mục sản phẩm');
             Route::get('/{id}/getDataForEdit', 'Admin\CategoryController@getDataForEdit')->name('Category.get.data.edit');
             Route::post('add-to-home-page', 'Admin\CategoryController@addToHomePage')->name('Category.add.homepage');
             Route::get('/get-parent', 'Admin\CategoryController@getParentCategory')->name('Category.get.parent');
         });
 
-        Route::group(['prefix' => 'products', 'middleware' => 'checkType:'.User::SUPER_ADMIN.','.User::QUAN_TRI_VIEN], function () {
+        Route::group(['prefix' => 'products', 'middleware' => 'checkType:'.User::SUPER_ADMIN.','.User::QUAN_TRI_VIEN.','.User::KHACH_HANG], function () {
             Route::get('/', 'Admin\ProductController@index')->name('Product.index');
-            Route::get('/create', 'Admin\ProductController@create')->name('Product.create')->middleware('checkPermission:Thêm hàng hóa');
-            Route::post('/', 'Admin\ProductController@store')->name('Product.store')->middleware('checkPermission:Thêm hàng hóa');
-            Route::post('/{id}/update', 'Admin\ProductController@update')->name('Product.update')->middleware('checkPermission:Sửa hàng hóa');
-            Route::get('/{id}/edit', 'Admin\ProductController@edit')->name('Product.edit')->middleware('checkPermission:Sửa hàng hóa');
-            Route::get('/{id}/delete', 'Admin\ProductController@delete')->name('Product.delete')->middleware('checkPermission:Xóa hàng hóa');
+            Route::get('/create', 'Admin\ProductController@create')->name('Product.create')->middleware('checkPermission:Thêm sản phẩm');
+            Route::post('/', 'Admin\ProductController@store')->name('Product.store')->middleware('checkPermission:Thêm sản phẩm');
+            Route::post('/{id}/update', 'Admin\ProductController@update')->name('Product.update')->middleware('checkPermission:Sửa sản phẩm');
+            Route::get('/{id}/edit', 'Admin\ProductController@edit')->name('Product.edit')->middleware('checkPermission:Sửa sản phẩm');
+            Route::get('/{id}/delete', 'Admin\ProductController@delete')->name('Product.delete')->middleware('checkPermission:Xóa sản phẩm');
             Route::get('/searchData', 'Admin\ProductController@searchData')->name('Product.searchData');
             Route::get('/filterDataForBill', 'Admin\ProductController@filterDataForBill')->name('Product.filterDataForBill');
             Route::get('/{id}/getData', 'Admin\ProductController@getData')->name('Product.getData');

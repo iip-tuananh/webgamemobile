@@ -156,7 +156,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <ui-select remove-selected="false" multiple ng-model="form.roles" ng-disabled="form.type == 10">
+                            <ui-select remove-selected="false" multiple ng-model="form.roles">
                                 <ui-select-match placeholder="Chọn chức vụ">
                                     <% $item.name %>
                                 </ui-select-match>

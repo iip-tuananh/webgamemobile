@@ -4,10 +4,12 @@ namespace App\Http\View\Composers;
 
 use App\Model\Admin\Banner;
 use App\Model\Admin\Category;
+use App\Model\Admin\CategorySpecial;
 use App\Model\Admin\PostCategory;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Admin\OrderRevenueDetail;
+use App\Model\Common\User;
 
 class MenuHomePageComposer
 {
@@ -26,28 +28,20 @@ class MenuHomePageComposer
         ->orderBy('sort_order')
         ->get();
 
-        // $user = Auth::guard('client')->user();
-        // if ($user) {
-        //     $quyet_toan_amount = OrderRevenueDetail::where('user_id', $user->id)->where(function($q) {
-        //         $q->where('status', OrderRevenueDetail::STATUS_QUYET_TOAN)
-        //         ->orWhere(function($query) {
-        //             $query->where('status', OrderRevenueDetail::STATUS_WAIT_QUYET_TOAN)
-        //             ->where('settlement_amount', '>', 0);
-        //         });
-        //     })->sum('settlement_amount');
-        //     $waiting_quyet_toan_amount = OrderRevenueDetail::where('user_id', $user->id)->where(function($q) {
-        //         $q->where('status', OrderRevenueDetail::STATUS_WAIT_QUYET_TOAN)
-        //         ->orWhere(function($query) {
-        //             $query->where('status', OrderRevenueDetail::STATUS_QUYET_TOAN)
-        //             ->where('settlement_amount', '>', 0);
-        //         });
-        //     })->sum('revenue_amount') - $quyet_toan_amount;
-        // } else {
-        //     $waiting_quyet_toan_amount = 0;
-        // }
-
         $postCategories = PostCategory::query()->where(['parent_id' => 0, 'show_home_page' => 1])->latest()->get();
 
-        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories]);
+        $specialCategories = CategorySpecial::query()->with([
+            'products' => function($q) {
+                $q->where('status', 1);
+            }
+        ])
+        ->has('products')
+        ->where('type',10)
+        ->where('show_home_page', 1)
+        ->orderBy('order_number')->get();
+
+        $users = User::query()->where('status', 1)->where('type', '!=', 1)->latest()->get();
+
+        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories, 'specialCategories' => $specialCategories, 'users' => $users]);
     }
 }

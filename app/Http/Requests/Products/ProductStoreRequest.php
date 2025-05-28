@@ -25,7 +25,7 @@ class ProductStoreRequest extends BaseRequest
         $rules = [
             'type' => 'required|in:0,1',
             'name' => 'required|unique:products,name',
-            // 'cate_id' => 'required_if:type,0|exists:categories,id',
+            'cate_id' => 'required|exists:categories,id',
             'manufacturer_id' => 'nullable|exists:manufacturers,id',
             'origin_id' => 'nullable|exists:origins,id',
             'intro' => 'nullable',
@@ -33,12 +33,6 @@ class ProductStoreRequest extends BaseRequest
             'body' => 'nullable',
             'base_price' => 'nullable|integer',
             'price' => 'nullable|integer',
-            // 'revenue_price' => 'nullable|numeric|max:' . $this->input('price'),
-            'cpu' => 'required',
-            'ram' => 'required',
-            'band_width' => 'required',
-            'storage' => 'required',
-            'stream' => 'required',
             'status' =>'required|in:0,1',
             'image' => 'nullable|file|mimes:jpg,jpeg,png|max:3000',
             'galleries' => 'nullable|array|min:1|max:20',
@@ -46,9 +40,9 @@ class ProductStoreRequest extends BaseRequest
             'post_ids' => 'nullable|array|max:5',
             'videos' => 'nullable|array',
             // 'person_in_charge' => 'required_if:type,0|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-            // 'aff_link' => 'required_if:type,1|url',
-            // 'short_link' => 'required_if:type,1|url',
-            // 'origin_link' => 'required_if:type,1|url',
+            'aff_link' => 'required|url',
+            'short_link' => 'required|url',
+            'origin_link' => 'required|url',
         ];
 
         // if($this->input('type') == 0) {
@@ -86,10 +80,9 @@ class ProductStoreRequest extends BaseRequest
     public function messages()
     {
         return [
-            'aff_link.url' => 'Link affiliate không hợp lệ',
-            'short_link.url' => 'Link rút gọn không hợp lệ',
-            'origin_link.url' => 'Link gốc không hợp lệ',
-            'base_price.min' => 'Giá trước giảm không được nhỏ hơn giá bán',
+            'aff_link.url' => 'Link zalo không hợp lệ',
+            'short_link.url' => 'Link fanpage không hợp lệ',
+            'origin_link.url' => 'Link game không hợp lệ',
         ];
     }
 }

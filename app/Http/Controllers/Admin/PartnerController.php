@@ -98,8 +98,7 @@ class PartnerController extends Controller
             $object->save();
 
             if($request->image) {
-                // FileHelper::uploadFile($request->image, 'partners', $object->id, \App\Model\Admin\Partner::class, 'image',8);
-                FileHelper::uploadFileToCloudflare($request->image, $object->id, \App\Model\Admin\Partner::class, 'image');
+                FileHelper::uploadFile($request->image, 'partners', $object->id, \App\Model\Admin\Partner::class, 'image',8);
             }
 
             DB::commit();
@@ -153,11 +152,9 @@ class PartnerController extends Controller
 
             if($request->image) {
                 if($object->image) {
-                    // FileHelper::forceDeleteFiles($object->image->id, $object->id, \App\Model\Admin\Partner::class, 'image');
-                    FileHelper::deleteFileFromCloudflare($object->image, $object->id, \App\Model\Admin\Partner::class, 'image');
+                    FileHelper::forceDeleteFiles($object->image->id, $object->id, \App\Model\Admin\Partner::class, 'image');
                 }
-                // FileHelper::uploadFile($request->image, 'manufacturers', $object->id, ThisModel::class, 'image',8);
-                FileHelper::uploadFileToCloudflare($request->image, $object->id, \App\Model\Admin\Partner::class, 'image');
+                FileHelper::uploadFile($request->image, 'manufacturers', $object->id, ThisModel::class, 'image',8);
             }
 
             DB::commit();
@@ -181,7 +178,7 @@ class PartnerController extends Controller
             );
         } else {
             if($object->image) {
-                FileHelper::deleteFileFromCloudflare($object->image, $object->id, \App\Model\Admin\Partner::class, 'image');
+                FileHelper::forceDeleteFiles($object->image->id, $object->id, \App\Model\Admin\Partner::class, 'image');
             }
             $object->delete();
             $message = array(

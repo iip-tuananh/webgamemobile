@@ -6,11 +6,11 @@
 @endsection
 
 @section('page_title')
-    Quản lý Plan
+    Quản lý sản phẩm
 @endsection
 
 @section('title')
-    Quản lý Plan
+    Quản lý sản phẩm
 @endsection
 
 @section('buttons')
@@ -89,7 +89,7 @@
 
 
     @include('common.units.createUnit')
-    @include('partial.modal.importExcel')
+    {{-- @include('partial.modal.importExcel') --}}
 
 @endsection
 
@@ -99,6 +99,33 @@
 
     @include('admin.products.Product')
     <script>
+        let columns = [
+            {data: 'id', orderable: false},
+            {data: 'image', title: "Hình ảnh", orderable: false, className: "text-center",
+                render: function (data) {
+                    return `<img src="${data?.path ? data.path : '/site/images/top-game.png'}" style="max-width: 55px !important">`;
+                }
+            },
+            {data: 'name', title: 'Tên'},
+            {data: 'title_seo', title: 'Tiêu đề'},
+            {data: 'base_price', title: "Lượt xem"},
+            {data: 'cate_id', title: 'Danh mục'},
+            {data: 'category_special', title: 'Danh mục đặc biệt'},
+            {data: 'created_by', title: 'Người tạo'},
+            {data: 'status', title: "Trạng thái", className: "text-center",
+                render: function (data) {
+                    if (data == 0) {
+                        return `<span class="badge badge-danger">Nháp</span>`;
+                    } else {
+                        return `<span class="badge badge-success">Xuất bản</span>`;
+                    }
+                }
+            },
+            {data: 'action', orderable: false, title: "Hành động"}
+        ];
+        if ({{ Auth::user()->type }} == @json(\App\Model\Common\User::KHACH_HANG)) {
+            columns.splice(7, 1);
+        }
         let datatable = new DATATABLE('table-list', {
             ajax: {
                 url: '/admin/products/searchData',
@@ -117,46 +144,48 @@
             select: {
                 'style': 'multi'
             },
-            columns: [
-                {data: 'id', orderable: false},
-                {data: 'DT_RowIndex', orderable: false, title: "STT", className: "text-center"},
-                // {
-                //     data: 'image', title: "Hình ảnh", orderable: false, className: "text-center",
-                //     render: function (data) {
-                //         return `<img src="${data.path}" style="max-width: 55px !important">`;
-                //     }
-                // },
-                {data: 'name', title: 'Tên'},
-                {data: 'base_price', title: "Đơn giá VIP"},
-                {data: 'price', title: "Đơn giá thường"},
-                {data: 'cate_id', title: 'Danh mục'},
-                {data: 'category_special', title: 'Danh mục đặc biệt'},
-                {
-                    data: 'status',
-                    title: "Trạng thái",
-                    render: function (data) {
-                        if (data == 0) {
-                            return `<span class="badge badge-danger">Nháp</span>`;
-                        } else {
-                            return `<span class="badge badge-success">Xuất bản</span>`;
-                        }
-                    },
-                    className: "text-center"
-                },
-                {
-                    data: 'state',
-                    title: "Tình trạng",
-                    render: function (data) {
-                        if (data == 1) {
-                            return `<span class="badge badge-success">Còn hàng</span>`;
-                        } else {
-                            return `<span class="badge badge-warning">Hết hàng</span>`;
-                        }
-                    },
-                    className: "text-center"
-                },
-                {data: 'action', orderable: false, title: "Hành động"}
-            ],
+            columns: columns,
+            // columns: [
+            //     {data: 'id', orderable: false},
+            //     // {data: 'DT_RowIndex', orderable: false, title: "STT", className: "text-center"},
+            //     {
+            //         data: 'image', title: "Hình ảnh", orderable: false, className: "text-center",
+            //         render: function (data) {
+            //             return `<img src="${data?.path ? data.path : '/site/images/top-game.png'}" style="max-width: 55px !important">`;
+            //         }
+            //     },
+            //     {data: 'name', title: 'Tên'},
+            //     {data: 'title_seo', title: 'Tiêu đề'},
+            //     {data: 'base_price', title: "Lượt xem"},
+            //     // {data: 'price', title: "Lượt tải"},
+            //     {data: 'cate_id', title: 'Danh mục'},
+            //     {data: 'category_special', title: 'Danh mục đặc biệt'},
+            //     {
+            //         data: 'status',
+            //         title: "Trạng thái",
+            //         render: function (data) {
+            //             if (data == 0) {
+            //                 return `<span class="badge badge-danger">Nháp</span>`;
+            //             } else {
+            //                 return `<span class="badge badge-success">Xuất bản</span>`;
+            //             }
+            //         },
+            //         className: "text-center"
+            //     },
+            //     // {
+            //     //     data: 'state',
+            //     //     title: "Tình trạng",
+            //     //     render: function (data) {
+            //     //         if (data == 1) {
+            //     //             return `<span class="badge badge-success">Còn hàng</span>`;
+            //     //         } else {
+            //     //             return `<span class="badge badge-warning">Hết hàng</span>`;
+            //     //         }
+            //     //     },
+            //     //     className: "text-center"
+            //     // },
+            //     {data: 'action', orderable: false, title: "Hành động"}
+            // ],
             search_columns: [
                 {data: 'name', search_type: "text", placeholder: "Tên hàng hóa"},
                 {
@@ -180,7 +209,7 @@
                 remove: true
             },
             create_link: "{{route('Product.create')}}",
-            import_link_with_params: true,
+            // import_link_with_params: true,
         }).datatable;
 
         app.controller('Product', function ($scope, $rootScope, $http) {

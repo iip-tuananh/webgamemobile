@@ -81,7 +81,7 @@ class ClientRegisterController extends Controller
 			'password' => 'required|min:6|regex:/^[a-zA-Z0-9\@\$\!\%\*\#\?\&]+$/',
             'phone_number' => 'required|regex:/^(0)[0-9]{9,11}$/|unique:users,phone_number',
             'password_confirmation' => 'required|same:password',
-            'agree' => 'required',
+            // 'agree' => 'required',
 		];
 
 		$validate = Validator::make(
@@ -95,7 +95,7 @@ class ClientRegisterController extends Controller
                 'account_name.unique' => 'Tên đăng nhập đã được sử dụng',
                 'phone_number.unique' => 'Số điện thoại đã được sử dụng',
                 'password_confirmation.same' => 'Mật khẩu không khớp',
-                'agree.required' => 'Bạn phải đồng ý với điều khoản và điều kiện',
+                // 'agree.required' => 'Bạn phải đồng ý với điều khoản và điều kiện',
             ]
 		);
 

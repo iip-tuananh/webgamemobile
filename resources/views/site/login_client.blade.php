@@ -228,7 +228,7 @@
                     success: function(response) {
                         if (response.success) {
                             toastr.success(response.message);
-                            window.location.href = '{{ route('Product.index') }}';
+                            window.location.href = '{{ route('front.home-page') }}';
                         } else {
                             toastr.error(response.message);
                             $scope.errors = response.errors;

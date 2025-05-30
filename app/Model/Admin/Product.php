@@ -311,7 +311,7 @@ class Product extends BaseModel
                 if (isset($g['image'])) {
                     if ($gallery->image) $gallery->image->removeFromDB();
                     $file = $g['image'];
-                    FileHelper::uploadFile($file, 'product_gallery', $gallery->id, ProductGallery::class, null, 1);
+                    FileHelper::uploadFile($file, 'product_gallery', $gallery->id, ProductGallery::class, null, 99);
                 }
             }
         } else {

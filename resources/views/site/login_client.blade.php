@@ -8,6 +8,25 @@
 @section('image')
 @endsection
 @section('css')
+<style>
+    .error {
+        color: #e05555;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 5px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    .error strong {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 5px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+</style>
 @endsection
 @section('content')
     <main ng-controller="LoginClientController" ng-cloak>
@@ -106,6 +125,10 @@
                                     <button class="btn btn-md btn-primary rounded-12 mt-60p" ng-click="registerClient()">
                                         Đăng ký
                                     </button>
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormRecoverPassword()">
+                                        Quên mật khẩu?
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -140,6 +163,40 @@
                                     <button class="btn btn-md btn-primary rounded-12 mt-60p" ng-click="loginClient()">
                                         Đăng nhập
                                     </button>
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormRecoverPassword()">
+                                        Quên mật khẩu?
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="bg-b-neutral-3 rounded-12 p-40p" ng-if="formRecoverPassword">
+                            <h4 class="heading-4 text-w-neutral-1 mb-60p">
+                                <% title %>
+                            </h4>
+                            <form id="recover_password">
+                                <div class="grid grid-cols-8 gap-30p">
+                                    <div class="col-span-8">
+                                        <label for="recover_email" class="label label-lg mb-3">Email</label>
+                                        <input type="text" name="recover_email" id="recover_email" class="box-input-3" />
+                                        <span class="invalid-feedback d-block error" style="text-align: left;"
+                                            role="alert" ng-if="errors && errors['recover_email']">
+                                            <strong><% errors['recover_email'][0] %></strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center md:justify-between justify-center">
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormRegister()">
+                                        Đăng ký tài khoản?
+                                    </a>
+                                    <button class="btn btn-md btn-primary rounded-12 mt-60p" ng-click="recoverPassword()">
+                                        Lấy mật khẩu
+                                    </button>
+                                    <a href="javascript:void(0)" class="text-m-regular text-w-neutral-1 hover:text-primary mt-60p"
+                                        ng-click="showFormLogin()">
+                                        Đăng nhập?
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -168,6 +225,12 @@
                 $scope.formRegister = true;
                 $scope.formRecoverPassword = false;
                 $scope.title = 'Đăng ký tài khoản';
+            }
+            $scope.showFormRecoverPassword = function() {
+                $scope.formLogin = false;
+                $scope.formRegister = false;
+                $scope.formRecoverPassword = true;
+                $scope.title = 'Quên mật khẩu';
             }
 
             if (window.location.href.includes('register')) {
@@ -244,19 +307,18 @@
             }
 
             $scope.recoverPassword = function() {
+                let data = $('#recover_password').serialize();
                 $.ajax({
                     url: '{{ route('front.recover-password-submit') }}',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    data: {
-                        recover_email: $scope.recover_email
-                    },
+                    data: data,
                     success: function(response) {
                         if (response.success) {
                             toastr.success(response.message);
-                            $('.h_recover').hide();
+                            $scope.showFormLogin();
                         } else {
                             $scope.errors = response.errors;
                             toastr.error(response.message);

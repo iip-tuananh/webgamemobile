@@ -36,6 +36,12 @@
 		<li class="nav-item mr-4">
 			<a class="nav-link icon-menu" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: #F58220 !important"></i></a>
 		</li>
+        <li class="nav-item">
+			<a class="nav-link btn btn-info" href="{{ route('front.home-page') }}" style="color: #fff !important; display: flex; align-items: center; gap: 4px; padding: 4px 12px; font-size: 14px;">
+				<i class="fas fa-home"></i>
+                Quay lại trang chủ
+			</a>
+		</li>
 		{{-- @if(Auth::user()->type == \App\Model\Common\User::G7 || Auth::user()->type == \App\Model\Common\User::NHAN_VIEN_G7)
 		<li class="nav-item d-none d-sm-inline-block mr-3">
 			<a href="{{ route('Bill.create') }}" class="btn btn-success btn-block btn-quick"><i class="fa fa-shopping-cart"></i> Lập hóa đơn</a>
@@ -87,7 +93,7 @@
 			</div>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="{{ route('logout') }}">
+			<a class="nav-link" href="{{ route('logout') }}" title="Đăng xuất">
 				<i class="fas fa-sign-out-alt"></i>
 			</a>
 		</li>

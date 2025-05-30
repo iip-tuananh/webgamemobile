@@ -39,7 +39,17 @@ class ProductController extends Controller
 
 	public function index()
 	{
-		return view($this->view.'.index');
+        $can_create = false;
+        if(Auth::user()->type == User::SUPER_ADMIN || Auth::user()->type == User::QUAN_TRI_VIEN) {
+            $can_create = true;
+        }
+        if(Auth::user()->type == User::KHACH_HANG) {
+            $products = ThisModel::query()->where('created_by', Auth::user()->id)->get();
+            if($products->count() < 1) {
+                $can_create = true;
+            }
+        }
+		return view($this->view.'.index', compact('can_create'));
 	}
 
 	// Hàm lấy data cho bảng list
@@ -85,8 +95,9 @@ class ProductController extends Controller
                     $result = $result . ' <a href="' . route($this->route.'.delete', $object->id) . '" title="xóa" class="dropdown-item confirm"><i class="fa fa-angle-right"></i>Xóa</a>';
 
                 }
-
-                $result = $result . ' <a href="" title="thêm vào danh mục đặc biệt" class="dropdown-item add-category-special"><i class="fa fa-angle-right"></i>Thêm vào danh mục đặc biệt</a>';
+                if(Auth::user()->type == User::SUPER_ADMIN || Auth::user()->type == User::QUAN_TRI_VIEN) {
+                    $result = $result . ' <a href="" title="thêm vào danh mục đặc biệt" class="dropdown-item add-category-special"><i class="fa fa-angle-right"></i>Thêm vào danh mục đặc biệt</a>';
+                }
                 $result = $result . '</div></div>';
                 return $result;
 			})
@@ -97,6 +108,10 @@ class ProductController extends Controller
 
 	public function create()
 	{
+        $products = ThisModel::query()->where('created_by', Auth::user()->id)->get();
+        if($products->count() >= 1 && Auth::user()->type == User::KHACH_HANG) {
+			return redirect()->route($this->route.'.index')->with('error', 'Bạn chỉ được phép đăng 1 game, vui lòng xóa game để tạo game mới');
+        }
         $tags = Tag::query()->where('type', Tag::TYPE_PRODUCT)->latest()->get();
         $config = Config::query()->first(['revenue_percent_1', 'revenue_percent_2', 'revenue_percent_3', 'revenue_percent_4', 'revenue_percent_5']);
 
@@ -106,6 +121,12 @@ class ProductController extends Controller
 	public function store(ProductStoreRequest $request)
 	{
 		$json = new stdClass();
+        $products = ThisModel::query()->where('created_by', Auth::user()->id)->get();
+        if($products->count() >= 1 && Auth::user()->type == User::KHACH_HANG) {
+			$json->success = false;
+			$json->message = "Bạn chỉ được phép đăng 1 game, vui lòng xóa game để tạo game mới";
+			return Response::json($json);
+        }
 		DB::beginTransaction();
 		try {
 			$object = new ThisModel();

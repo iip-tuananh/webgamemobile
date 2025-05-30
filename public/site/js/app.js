@@ -331,7 +331,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SwiperSliders)\n/* harmony export */ });\n/* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ \"./node_modules/swiper/swiper-bundle.mjs\");\n\r\n\r\nfunction SwiperSliders() {\r\n  // Infinity Slide start\r\n  let infinityCarousel = document.querySelector(\".infinity-slide-carousel\");\r\n  if (infinityCarousel) {\r\n    const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](infinityCarousel, {\r\n      loop: true,\r\n      slidesPerView: \"auto\",\r\n      spaceBetween: 24,\r\n      speed: 6000,\r\n      autoplay: {\r\n        delay: 100,\r\n        disableOnInteraction: false,\r\n        pauseOnMouseEnter: true,\r\n      },\r\n      centeredSlides: false,\r\n      breakpoints: {\r\n        0: {\r\n          spaceBetween: 40,\r\n        },\r\n        768: {\r\n          spaceBetween: 48,\r\n        },\r\n        992: {\r\n          spaceBetween: 60,\r\n        },\r\n      },\r\n    });\r\n  }\r\n  // Infinity Slide end\r\n\r\n  // Initialize the thumbs carousel\r\n  function initializeThumbsCarousel(container) {\r\n    // Check if the container exists\r\n    if (!container) return;\r\n\r\n    const thumbsGallery = container.querySelector(\".thumbs-gallery\");\r\n    const thumbsGalleryMain = container.querySelector(\".thumbs-gallery-main\");\r\n\r\n    if (thumbsGallery && thumbsGalleryMain) {\r\n      // Get custom attributes\r\n      const direction =\r\n        container.getAttribute(\"data-carousel-direction\") || \"horizontal\";\r\n\r\n      const slidesPerView =\r\n        parseInt(container.getAttribute(\"data-slides-per-view\")) || 3;\r\n\r\n      // Initialize the thumbs gallery\r\n      const galleryThumbs = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](thumbsGallery, {\r\n        spaceBetween: 10,\r\n        slidesPerView: slidesPerView,\r\n        loop: true,\r\n        speed: 500,\r\n        freeMode: true,\r\n        loopedSlides: 4,\r\n        watchSlidesVisibility: true,\r\n        watchSlidesProgress: true,\r\n        direction: direction, // Apply reverse direction if specified\r\n        breakpoints: {\r\n          768: {\r\n            spaceBetween: 20,\r\n          },\r\n          992: {\r\n            spaceBetween: 24,\r\n          },\r\n        },\r\n      });\r\n\r\n      // Initialize the main gallery\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](thumbsGalleryMain, {\r\n        spaceBetween: 10,\r\n        slidesPerView: 1,\r\n        loop: true,\r\n        speed: 800,\r\n        loopedSlides: 4,\r\n        navigation: {\r\n          nextEl: \".swiper-button-next\",\r\n          prevEl: \".swiper-button-prev\",\r\n        },\r\n        pagination: {\r\n          el: \".thumbs-gallery-pagination\",\r\n          clickable: true,\r\n        },\r\n        thumbs: {\r\n          swiper: galleryThumbs,\r\n        },\r\n      });\r\n    }\r\n  }\r\n\r\n  if (document.querySelectorAll(\".thumbs-carousel-container\")) {\r\n    document\r\n      .querySelectorAll(\".thumbs-carousel-container\")\r\n      .forEach(initializeThumbsCarousel);\r\n  }\r\n  // Thumbs slider end\r\n\r\n  // one cards Carousel start\r\n  let oneCardCarousels = document.querySelectorAll(\".one-card-carousel\");\r\n\r\n  if (oneCardCarousels.length > 0) {\r\n    oneCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 1,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        spaceBetween: 24,\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //one cards Carousel end\r\n\r\n  // two cards Carousel start\r\n  let twoCardCarousels = document.querySelectorAll(\".two-card-carousel\");\r\n\r\n  if (twoCardCarousels.length > 0) {\r\n    twoCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 4,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          992: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1280: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n          1800: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 30,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //two cards Carousel end\r\n\r\n  // three cards Carousel start\r\n  let threeCardCarousels = document.querySelectorAll(\".three-card-carousel\");\r\n\r\n  if (threeCardCarousels.length > 0) {\r\n    threeCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 3,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          992: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1400: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n\r\n  let storiesCarousels = document.querySelectorAll(\".stories-carousel\");\r\n\r\n  if (storiesCarousels.length > 0) {\r\n    storiesCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 3,\r\n        spaceBetween: 24,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //three cards Carousel end\r\n\r\n  // four cards Carousel start\r\n  let fourCardCarousels = document.querySelectorAll(\".four-card-carousel\");\r\n\r\n  if (fourCardCarousels.length > 0) {\r\n    fourCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 4,\r\n        speed: 500,\r\n        centeredSlides: false,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          1200: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1200: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n          1600: {\r\n            slidesPerView: 4,\r\n            spaceBetween: 30,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //four cards Carousel end\r\n\r\n  // Messenger Carousel start\r\n  const messengerCarousels = document.querySelectorAll(\".messenger-carousel\");\r\n  if (messengerCarousels) {\r\n    messengerCarousels.forEach((el) => {\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: \"auto\",\r\n        spaceBetween: 16,\r\n        centeredSlides: false,\r\n        direction: \"vertical\",\r\n        speed: 100,\r\n        mousewheel: true,\r\n      });\r\n    });\r\n  }\r\n\r\n  const activeMembersCarousels = document.querySelectorAll(\r\n    \".active-members-carousel\"\r\n  );\r\n  if (activeMembersCarousels) {\r\n    activeMembersCarousels.forEach((el) => {\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: \"auto\",\r\n        spaceBetween: 16,\r\n        centeredSlides: false,\r\n        direction: \"horizontal\",\r\n        speed: 1000,\r\n        autoplay: {\r\n          delay: 1000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: false,\r\n        },\r\n        mousewheel: true,\r\n      });\r\n    });\r\n  }\r\n  // Messenger Carousel end\r\n}\r\n\n\n//# sourceURL=webpack://webpack-starter-file/./src/assets/js/lib/swiperCustom.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SwiperSliders)\n/* harmony export */ });\n/* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ \"./node_modules/swiper/swiper-bundle.mjs\");\n\r\n\r\nfunction SwiperSliders() {\r\n  // Infinity Slide start\r\n  let infinityCarousel = document.querySelector(\".infinity-slide-carousel\");\r\n  if (infinityCarousel) {\r\n    const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](infinityCarousel, {\r\n      loop: true,\r\n      slidesPerView: \"auto\",\r\n      spaceBetween: 24,\r\n      speed: 6000,\r\n      autoplay: {\r\n        delay: 100,\r\n        disableOnInteraction: false,\r\n        pauseOnMouseEnter: true,\r\n      },\r\n      centeredSlides: false,\r\n      breakpoints: {\r\n        0: {\r\n          spaceBetween: 40,\r\n        },\r\n        768: {\r\n          spaceBetween: 48,\r\n        },\r\n        992: {\r\n          spaceBetween: 60,\r\n        },\r\n      },\r\n    });\r\n  }\r\n  // Infinity Slide end\r\n\r\n  // Initialize the thumbs carousel\r\n  function initializeThumbsCarousel(container) {\r\n    // Check if the container exists\r\n    if (!container) return;\r\n\r\n    const thumbsGallery = container.querySelector(\".thumbs-gallery\");\r\n    const thumbsGalleryMain = container.querySelector(\".thumbs-gallery-main\");\r\n\r\n    if (thumbsGallery && thumbsGalleryMain) {\r\n      // Get custom attributes\r\n      const direction =\r\n        container.getAttribute(\"data-carousel-direction\") || \"horizontal\";\r\n\r\n      const slidesPerView =\r\n        parseInt(container.getAttribute(\"data-slides-per-view\")) || 3;\r\n\r\n      // Initialize the thumbs gallery\r\n      const galleryThumbs = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](thumbsGallery, {\r\n        spaceBetween: 10,\r\n        slidesPerView: slidesPerView,\r\n        loop: true,\r\n        speed: 500,\r\n        freeMode: true,\r\n        loopedSlides: 4,\r\n        watchSlidesVisibility: true,\r\n        watchSlidesProgress: true,\r\n        direction: direction, // Apply reverse direction if specified\r\n        breakpoints: {\r\n          768: {\r\n            spaceBetween: 20,\r\n          },\r\n          992: {\r\n            spaceBetween: 24,\r\n          },\r\n        },\r\n      });\r\n\r\n      // Initialize the main gallery\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](thumbsGalleryMain, {\r\n        spaceBetween: 10,\r\n        slidesPerView: 1,\r\n        loop: true,\r\n        speed: 800,\r\n        loopedSlides: 4,\r\n        navigation: {\r\n          nextEl: \".swiper-button-next\",\r\n          prevEl: \".swiper-button-prev\",\r\n        },\r\n        pagination: {\r\n          el: \".thumbs-gallery-pagination\",\r\n          clickable: true,\r\n        },\r\n        thumbs: {\r\n          swiper: galleryThumbs,\r\n        },\r\n      });\r\n    }\r\n  }\r\n\r\n  if (document.querySelectorAll(\".thumbs-carousel-container\")) {\r\n    document\r\n      .querySelectorAll(\".thumbs-carousel-container\")\r\n      .forEach(initializeThumbsCarousel);\r\n  }\r\n  // Thumbs slider end\r\n\r\n  // one cards Carousel start\r\n  let oneCardCarousels = document.querySelectorAll(\".one-card-carousel\");\r\n\r\n  if (oneCardCarousels.length > 0) {\r\n    oneCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 1,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 3000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        spaceBetween: 24,\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //one cards Carousel end\r\n\r\n  // two cards Carousel start\r\n  let twoCardCarousels = document.querySelectorAll(\".two-card-carousel\");\r\n\r\n  if (twoCardCarousels.length > 0) {\r\n    twoCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 4,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 3000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          992: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1280: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n          1800: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 30,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //two cards Carousel end\r\n\r\n  // three cards Carousel start\r\n  let threeCardCarousels = document.querySelectorAll(\".three-card-carousel\");\r\n\r\n  if (threeCardCarousels.length > 0) {\r\n    threeCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 3,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 3000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          992: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1400: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n\r\n  let storiesCarousels = document.querySelectorAll(\".stories-carousel\");\r\n\r\n  if (storiesCarousels.length > 0) {\r\n    storiesCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 3,\r\n        spaceBetween: 24,\r\n        speed: 1000,\r\n        centeredSlides: false,\r\n        rtl: true,\r\n        autoplay: {\r\n          delay: 3000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //three cards Carousel end\r\n\r\n  // four cards Carousel start\r\n  let fourCardCarousels = document.querySelectorAll(\".four-card-carousel\");\r\n\r\n  if (fourCardCarousels.length > 0) {\r\n    fourCardCarousels.forEach((el, idx) => {\r\n      const carouselName = el.getAttribute(\"data-carousel-name\");\r\n      const reverseDir = el.getAttribute(\"data-carousel-reverse\");\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: 4,\r\n        speed: 500,\r\n        centeredSlides: false,\r\n        autoplay: {\r\n          delay: 4000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n          reverseDirection: reverseDir,\r\n        },\r\n        breakpoints: {\r\n          0: {\r\n            slidesPerView: 1,\r\n            spaceBetween: 14,\r\n          },\r\n          576: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          768: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 16,\r\n          },\r\n          1200: {\r\n            slidesPerView: 2,\r\n            spaceBetween: 20,\r\n          },\r\n          1200: {\r\n            slidesPerView: 3,\r\n            spaceBetween: 24,\r\n          },\r\n          1600: {\r\n            slidesPerView: 4,\r\n            spaceBetween: 30,\r\n          },\r\n        },\r\n        navigation: {\r\n          nextEl: `.${carouselName}-carousel-next`,\r\n          prevEl: `.${carouselName}-carousel-prev`,\r\n        },\r\n        pagination: {\r\n          el: `.${carouselName}-carousel-pagination`,\r\n          clickable: true,\r\n        },\r\n        scrollbar: {\r\n          el: `.swiper-scrollbar `,\r\n          draggable: true,\r\n        },\r\n      });\r\n    });\r\n  }\r\n  //four cards Carousel end\r\n\r\n  // Messenger Carousel start\r\n  const messengerCarousels = document.querySelectorAll(\".messenger-carousel\");\r\n  if (messengerCarousels) {\r\n    messengerCarousels.forEach((el) => {\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: \"auto\",\r\n        spaceBetween: 16,\r\n        centeredSlides: false,\r\n        direction: \"vertical\",\r\n        speed: 100,\r\n        mousewheel: true,\r\n      });\r\n    });\r\n  }\r\n\r\n  const activeMembersCarousels = document.querySelectorAll(\r\n    \".active-members-carousel\"\r\n  );\r\n  if (activeMembersCarousels) {\r\n    activeMembersCarousels.forEach((el) => {\r\n      new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__[\"default\"](el, {\r\n        loop: true,\r\n        slidesPerView: \"auto\",\r\n        spaceBetween: 16,\r\n        centeredSlides: false,\r\n        direction: \"horizontal\",\r\n        speed: 1000,\r\n        autoplay: {\r\n          delay: 4000,\r\n          disableOnInteraction: true,\r\n          pauseOnMouseEnter: true,\r\n        },\r\n        mousewheel: true,\r\n      });\r\n    });\r\n  }\r\n  // Messenger Carousel end\r\n}\r\n\n\n//# sourceURL=webpack://webpack-starter-file/./src/assets/js/lib/swiperCustom.js?");
 
 /***/ }),
 
@@ -724,7 +724,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -738,17 +738,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -761,7 +761,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -773,7 +773,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/ensure chunk */
 /******/ 	(() => {
 /******/ 		__webpack_require__.f = {};
@@ -786,7 +786,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}, []));
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/get javascript chunk filename */
 // /******/ 	(() => {
 // /******/ 		// This function allow to reference async chunks
@@ -795,7 +795,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 // /******/ 			return "assets/js/" + chunkId + ".app.js";
 // /******/ 		};
 // /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/get mini-css chunk filename */
 /******/ 	(() => {
 /******/ 		// This function allow to reference async chunks
@@ -804,7 +804,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return undefined;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -816,12 +816,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/load script */
 /******/ 	(() => {
 /******/ 		var inProgress = {};
@@ -840,14 +840,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			if(!script) {
 /******/ 				needAttach = true;
 /******/ 				script = document.createElement('script');
-/******/ 		
+/******/
 /******/ 				script.charset = 'utf-8';
 /******/ 				script.timeout = 120;
 /******/ 				if (__webpack_require__.nc) {
 /******/ 					script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 				}
 /******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
-/******/ 		
+/******/
 /******/ 				script.src = url;
 /******/ 			}
 /******/ 			inProgress[url] = [done];
@@ -867,7 +867,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			needAttach && document.head.appendChild(script);
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -878,7 +878,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
 /******/ 		var scriptUrl;
@@ -901,23 +901,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
 /******/ 		__webpack_require__.p = scriptUrl + "../../";
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/ 		
+/******/
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"main": 0
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
 /******/ 				// JSONP chunk loading for javascript
 /******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
 /******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
-/******/ 		
+/******/
 /******/ 					// a Promise means "currently loading".
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
@@ -926,7 +926,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);
-/******/ 		
+/******/
 /******/ 							// start chunk loading
 /******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
 /******/ 							// create error before stack unwound to get useful stacktrace later
@@ -951,17 +951,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 					}
 /******/ 				}
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		// no prefetching
-/******/ 		
+/******/
 /******/ 		// no preloaded
-/******/ 		
+/******/
 /******/ 		// no HMR
-/******/ 		
+/******/
 /******/ 		// no HMR manifest
-/******/ 		
+/******/
 /******/ 		// no on chunks loaded
-/******/ 		
+/******/
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -984,20 +984,20 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 				}
 /******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
-/******/ 		
+/******/
 /******/ 		}
-/******/ 		
+/******/
 /******/ 		var chunkLoadingGlobal = self["webpackChunkwebpack_starter_file"] = self["webpackChunkwebpack_starter_file"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/assets/js/app.js");
-/******/ 	
+/******/
 /******/ })()
 ;

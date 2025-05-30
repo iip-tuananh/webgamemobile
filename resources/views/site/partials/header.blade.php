@@ -330,6 +330,20 @@
                                     @endif
                                 </li>
                             @endforeach
+                            @foreach ($postCategories as $category)
+                                <li>
+                                    <a href="{{ route('front.list-blog', $category->slug) }}"
+                                        class="flex-y gap-3 px-2 py-16p hover:bg-primary text-m-regular text-w-neutral-1 hover:text-b-neutral-4 rounded-12 justify-normal w-full transition-1">
+                                        <span class="icon-28">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bookmark">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z"></path>
+                                            </svg>
+                                        </span>
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="pt-20p">

@@ -124,7 +124,8 @@
             {data: 'action', orderable: false, title: "Hành động"}
         ];
         if ({{ Auth::user()->type }} == @json(\App\Model\Common\User::KHACH_HANG)) {
-            columns.splice(7, 1);
+            columns.splice(6, 1);
+            columns.splice(6, 1);
         }
         let datatable = new DATATABLE('table-list', {
             ajax: {
@@ -208,7 +209,9 @@
             act: {
                 remove: true
             },
-            create_link: "{{route('Product.create')}}",
+            @if($can_create)
+                create_link: "{{route('Product.create')}}",
+            @endif
             // import_link_with_params: true,
         }).datatable;
 

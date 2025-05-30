@@ -6905,6 +6905,12 @@
   .w-full{
     width: 100%;
   }
+  .w-part-full{
+    width: 50%;
+  }
+  .w-40{
+    width: 40%;
+  }
   .w-screen{
     width: 100vw;
   }

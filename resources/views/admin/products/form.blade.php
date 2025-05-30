@@ -206,18 +206,18 @@
         </div>
     </div>
     <div class="col-sm-4">
-        {{-- <div class="form-group custom-group mb-4">
-            <label class="form-label">Nguồn gốc</label>
+        <div class="form-group custom-group mb-4">
+            <label class="form-label">Nền tảng</label>
             <input class="form-control " type="text" ng-model="form.origin">
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
                     <% errors.origin[0] %>
                 </strong>
             </span>
-        </div> --}}
+        </div>
         <div class="form-group custom-group mb-4">
             <label class="form-label">Lượt xem</label>
-            <input class="form-control " type="text" ng-model="form.base_price">
+            <input class="form-control " type="text" ng-model="form.base_price" disabled>
             <span class="invalid-feedback d-block" role="alert">
                 <strong>
                     <% errors.base_price[0] %>

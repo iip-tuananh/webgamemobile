@@ -52,10 +52,10 @@
                     @foreach ($products as $product)
                         <div class="w-full bg-b-neutral-3 p-24p rounded-24 grid 4xl:grid-cols-2 grid-cols-1 items-center gap-24p group"
                             data-aos="zoom-in">
-                            <div class="overflow-hidden rounded-24">
+                            <a href="{{ route('front.show-product-detail', $product->slug) }}" class="overflow-hidden rounded-24">
                                 <img class="w-full xxl:h-[304px] xl:h-[280px] md:h-[260px] h-[240px] object-cover group-hover:scale-110 transition-1"
                                     src="{{ $product->product_image }}" alt="{{ $product->name }}" />
-                            </div>
+                            </a>
                             <div>
                                 <div class="flex-y flex-wrap gap-2">
                                     @foreach ($product->tags as $tag)

@@ -379,10 +379,24 @@ class FrontController extends Controller
     public function listBlog(Request $request, $slug)
     {
         $category = PostCategory::where('slug', $slug)->first();
-        $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
-            ->orderBy('id', 'DESC')
-            ->select(['id', 'name', 'intro', 'created_at', 'slug', 'cate_id', 'created_by'])
-            ->paginate(20);
+        if (!$category) {
+            $category = CategorySpecial::findBySlug($slug);
+            if (!$category) {
+                return view('site.errors');
+            } else {
+                $post_ids = $category->posts->pluck('id')->toArray();
+                $data['blogs'] = Post::with(['image'])->where(['status' => 1])
+                    ->orderBy('id', 'DESC')
+                    ->select(['id', 'name', 'intro', 'created_at', 'slug', 'cate_id', 'created_by'])
+                    ->whereIn('id', $post_ids)
+                    ->paginate(20);
+            }
+        } else {
+            $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
+                ->orderBy('id', 'DESC')
+                ->select(['id', 'name', 'intro', 'created_at', 'slug', 'cate_id', 'created_by'])
+                ->paginate(20);
+        }
 
         $data['cate_title'] = $category->name;
         $data['categories'] = PostCategory::with([

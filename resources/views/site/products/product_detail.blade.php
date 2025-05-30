@@ -24,7 +24,7 @@
                                 {{$product->name}}
                             </h1>
                             <p class="text-m-medium text-w-neutral-1 mb-24p">
-                                {{$product->intro}}
+                                {!! $product->intro !!}
                             </p>
                             <div class="flex items-center flex-wrap gap-3">
                                 <a href="{{$product->origin_link}}" class="btn btn-md btn-primary rounded-12">
@@ -62,7 +62,7 @@
                                     @foreach ($product->galleries as $gallery)
                                     <div class="swiper-slide rounded-12 overflow-hidden">
                                         <img class="w-full xxl:h-[480px] xl:h-[400px] md:h-[380px] sm:h-[320px] h-[280px] object-cover"
-                                            src="{{$gallery->image->path}}" alt="{{$product->name}}" />
+                                            src="{{$gallery->image ? $gallery->image->path : ''}}" alt="{{$product->name}}" />
                                     </div>
                                     @endforeach
                                     <div class="swiper-slide rounded-12 overflow-hidden">
@@ -77,7 +77,7 @@
                                     <div class="swiper-slide">
                                         <div class="overflow-hidden cursor-pointer rounded-16">
                                             <img class="w-full xxl:h-[200px] lg:h-[160px] md:h-[140px] sm:h-25 h-18 object-cover hover:scale-110 transition-1"
-                                                src="./assets/images/games/gameDetails1.1.png" alt="game">
+                                                src="{{$gallery->image ? $gallery->image->path : ''}}" alt="game">
                                         </div>
                                     </div>
                                     @endforeach
@@ -135,7 +135,7 @@
                                             Nền tảng:
                                         </span>
                                         <span class="text-m-medium text-w-neutral-1">
-                                            {{$product->platform}}
+                                            {{$product->origin}}
                                         </span>
                                     </div>
                                     <div>
@@ -207,7 +207,7 @@
                         @foreach ($productsRelated as $item)
                         <div class="swiper-slide">
                             <div class="w-full bg-b-neutral-3 px-20p pt-20p pb-32p rounded-12">
-                                <div class="glitch-effect rounded-12 overflow-hidden mb-24p">
+                                <a href="{{route('front.show-product-detail', $item->slug)}}" class="glitch-effect rounded-12 overflow-hidden mb-24p">
                                     <div class="glitch-thumb">
                                         <img class="w-full md:h-[228px] h-[200px] object-cover"
                                             src="{{$item->product_image}}" alt="{{$item->name}}" />
@@ -216,24 +216,24 @@
                                         <img class="w-full md:h-[228px] h-[200px] object-cover"
                                             src="{{$item->product_image}}" alt="{{$item->name}}" />
                                     </div>
-                                </div>
+                                </a>
                                 <div>
                                     <a href="{{route('front.show-product-detail', $item->slug)}}" class="heading-4 text-w-neutral-1 link-1 line-clamp-1">
                                         {{$item->title_seo}}
                                     </a>
                                 </div>
-                                <div class="flex items-center justify-center flex-wrap gap-1 mt-24p">
-                                    <a href="{{$item->origin_link}}" class="btn btn-md btn-primary rounded-12">
-                                        {{-- <i class="fa fa-play"></i> --}}
-                                        Chơi ngay
-                                    </a>
-                                    <a href="{{$item->short_link}}" class="btn btn-md btn-facebook rounded-12">
+                                <div class="flex items-center justify-between flex-wrap gap-1 mt-24p">
+                                    <a href="{{$product->short_link}}" class="btn btn-xs rounded-12 btn-facebook w-40">
                                         <i class="fab fa-facebook-f"></i>
                                         Fanpage
                                     </a>
-                                    <a href="{{$item->aff_link}}" class="btn btn-md btn-zalo rounded-12">
+                                    <a href="{{$product->aff_link}}" class="btn btn-xs rounded-12 btn-zalo w-40">
                                         <i class="fas fa-comments"></i>
                                         Box Zalo
+                                    </a>
+                                    <a href="{{$product->origin_link}}" class="btn btn-xs btn-primary rounded-12 w-full">
+                                        <i class="fas fa-play"></i>
+                                        Chơi ngay
                                     </a>
                                 </div>
                             </div>

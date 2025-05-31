@@ -6,3 +6,9 @@ $(document).on("click", ".show-password", function() {
     if ($(input).attr("type") == "password") $(input).attr("type", "text");
     else $(input).attr("type", "password")
 })
+
+{{-- $scope.$watch('form.upgrade_type', function(newVal, oldVal) {
+    if (newVal == 1 && !$scope.form.upgrade_to_date instanceof Date) {
+        $scope.form.upgrade_to_date = moment($scope.form.upgrade_to_date).toDate();
+    }
+}); --}}

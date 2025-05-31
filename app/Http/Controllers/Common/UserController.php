@@ -116,7 +116,8 @@ class UserController extends Controller
 			'roles' => 'required_unless:type,10|array|min:1',
 			'roles.*' => 'required_unless:type,10|exists:roles,id',
 			'type' => 'required|in:'.implode(',', array_column(ThisModel::USER_TYPES, 'id')),
-            'upgrade_type' => 'required_if:type,10|in:0,1'
+            'upgrade_type' => 'required_if:type,10|in:0,1',
+            'upgrade_to_date' => 'required_if:upgrade_type,1|date'
 		];
 
 		$validate = Validator::make(
@@ -141,6 +142,7 @@ class UserController extends Controller
 			$object->phone_number = $request->phone_number;
 			$object->type = $request->type;
             $object->upgrade_type = $request->upgrade_type;
+            $object->upgrade_to_date = $request->upgrade_to_date;
 			$object->save();
 
             if ($request->roles) {
@@ -172,7 +174,8 @@ class UserController extends Controller
 			'roles' => 'required_unless:type,10|array|min:1',
 			'roles.*' => 'required_unless:type,10|exists:roles,id',
 			'type' => 'required|in:'.implode(',', array_column(ThisModel::USER_TYPES, 'id')),
-            'upgrade_type' => 'required_if:type,10|in:0,1'
+            'upgrade_type' => 'required_if:type,10|in:0,1',
+            'upgrade_to_date' => 'required_if:upgrade_type,1|date'
 		];
 
 		$validate = Validator::make(
@@ -195,6 +198,7 @@ class UserController extends Controller
 			$object->phone_number = $request->phone_number;
 			$object->type = $request->type;
 			$object->upgrade_type = $request->upgrade_type;
+			$object->upgrade_to_date = $request->upgrade_to_date;
 			$object->save();
 
             if ($request->roles) {

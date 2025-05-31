@@ -218,6 +218,13 @@
                             <strong><% errors.upgrade_type[0] %></strong>
                         </span>
                     </div>
+                    <div class="form-group" ng-if="form.upgrade_type == 1">
+                        <label class="form-label">Thời gian nâng cấp đến ngày</label>
+                        <input class="form-control" type="date" ng-model="form.upgrade_to_date">
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong><% errors.upgrade_to_date[0] %></strong>
+                        </span>
+                    </div>
                     <div class="form-group">
                         <label class="form-label">Trạng thái</label>
                         <span class="text-danger">(*)</span>

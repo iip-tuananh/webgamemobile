@@ -14,6 +14,14 @@
             }
         }
 
+        get upgrade_to_date() {
+            return this._upgrade_to_date ? moment(this._upgrade_to_date).toDate() : '';
+        }
+
+        set upgrade_to_date(value) {
+            this._upgrade_to_date = value ? moment(value).format('YYYY-MM-DD') : '';
+        }
+
         get image() {
             return this._image;
         }
@@ -38,6 +46,7 @@
                 bank_name: this.bank_name,
                 bank_account_number: this.bank_account_number,
                 bank_account_name: this.bank_account_name,
+                upgrade_to_date: this._upgrade_to_date,
             }
 
             data = jsonToFormData(data);

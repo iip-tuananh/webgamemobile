@@ -20,7 +20,7 @@
 app.controller('Common', function ($scope, $http) {
 	$scope.form = new User(@json($object), {scope: $scope});
 	$scope.form.roles = $scope.form.roles.map(val => val.id);
-	console.log($scope.form.roles);
+	console.log($scope.form);
 
 	@include('common.users.formJs')
 

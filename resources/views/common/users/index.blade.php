@@ -42,6 +42,7 @@ Danh sách người dùng
 			{data: 'email', title: "Email"},
 			{data: 'type', title: "Loại tài khoản"},
 			{data: 'roles', title: "Chức vụ"},
+			{data: 'upgrade_to_date', title: "Ngày hết hạn VIP"},
 			{
 				data: 'status',
 				title: "Trạng thái",

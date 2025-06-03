@@ -50,6 +50,12 @@ class UserController extends Controller
             ->editColumn('type', function ($object) {
                 return $object->getTypeUser($object->type);
             })
+            ->editColumn('upgrade_type', function ($object) {
+                return $object->upgrade_type == 1 ? 'VIP' : 'Thường';
+            })
+            ->editColumn('upgrade_to_date', function ($object) {
+                return $object->upgrade_to_date ? Carbon::parse($object->upgrade_to_date)->format("d/m/Y") : '';
+            })
             ->editColumn('name', function ($object) {
                 return '<div style="position: relative;">
                     '.$object->name.'

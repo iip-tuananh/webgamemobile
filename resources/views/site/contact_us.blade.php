@@ -4,6 +4,25 @@
 @endsection
 
 @section('css')
+<style>
+    .error {
+        color: #e05555;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 5px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    .error strong {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 5px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -98,8 +117,8 @@
                                         <input class="box-input-4" type="text" name="name" id="name"
                                             ng-model="your_name" placeholder="Name" />
                                         <div class="invalid-feedback d-block error" role="alert">
-                                            <span ng-if="errors && errors.your_email">
-                                                <% errors.your_email[0] %>
+                                            <span ng-if="errors && errors.your_name">
+                                                <% errors.your_name[0] %>
                                             </span>
                                         </div>
                                     </div>
@@ -119,7 +138,7 @@
                                         <label for="phone" class="label label-md font-normal text-white mb-3">
                                             Số điện thoại
                                         </label>
-                                        <input class="box-input-4" type="number" name="phone" id="phone"
+                                        <input class="box-input-4" type="text" name="phone" id="phone"
                                             ng-model="your_phone" placeholder="--- --- ---" />
                                         <div class="invalid-feedback d-block error" role="alert">
                                             <span ng-if="errors && errors.your_phone">

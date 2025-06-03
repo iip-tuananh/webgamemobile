@@ -82,7 +82,12 @@ class FrontController extends Controller
                             ELSE 1
                         END
                     ")
-                    ->orderByDesc('created_at')
+                    ->orderByRaw("
+                        CASE
+                            WHEN created_by IN (" . implode(',', $data_vip_account ?: [0]) . ") THEN top_up_at
+                            ELSE NULL
+                        END DESC
+                    ")
                     ->get();
                 $query->setRelation('products', $products);
                 return $query;
@@ -109,7 +114,12 @@ class FrontController extends Controller
                         ELSE 1
                     END
                 ")
-                ->orderByDesc('created_at')
+                ->orderByRaw("
+                    CASE
+                        WHEN created_by IN (" . implode(',', $data_vip_account ?: [0]) . ") THEN top_up_at
+                        ELSE NULL
+                    END DESC
+                ")
                 ->get();
             $query->setRelation('products', $products);
             return $query;
@@ -246,11 +256,29 @@ class FrontController extends Controller
             ])->where('status', 1)->whereIn('cate_id', $arr_category_id)->orderBy('created_at', 'desc')->paginate(20);
         } else {
             $category = CategorySpecial::findBySlug($categorySlug);
-            $products = $category->products()->with([
-                'product_rates' => function ($q) {
-                    $q->where('status', 2);
-                }
-            ])->where('status', 1)->orderBy('created_at', 'desc')->paginate(20);
+            $product_ids = $category->products->pluck('id')->toArray();
+            $data_vip_account = User::query()->where('upgrade_type', 1)->pluck('id')->toArray();
+
+            // Tạo câu lệnh SQL an toàn
+            $vipIdsSql = implode(',', $data_vip_account ?: [0]);
+
+            $products = Product::query()->where(function($q) use ($product_ids, $vipIdsSql, $data_vip_account) {
+                $q->whereIn('id', $product_ids);
+                $q->orWhereIn('created_by', $data_vip_account);
+            })->where('status', 1)
+            ->orderByRaw("
+                CASE
+                    WHEN created_by IN ($vipIdsSql) THEN 0
+                    ELSE 1
+                END
+            ")
+            ->orderByRaw("
+                CASE
+                    WHEN created_by IN ($vipIdsSql) THEN top_up_at
+                    ELSE NULL
+                END DESC
+            ")
+            ->paginate(20);
         }
 
         $title = $category->name;

@@ -251,6 +251,35 @@
                 $('#edit-modal').modal('show');
             });
 
+            // Top up
+            $('#table-list').on('click', '.top-up', function () {
+                $scope.data = datatable.row($(this).parents('tr')).data();
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/products/" + $scope.data.id + "/top-up",
+                    headers: {
+                        'X-CSRF-TOKEN': CSRF_TOKEN
+                    },
+                    data: {
+                        product_id: $scope.data.id
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            toastr.success(response.message);
+                        } else {
+                            toastr.warning(response.message);
+                        }
+                    },
+                    error: function (e) {
+                        toastr.error('Đã có lỗi xảy ra');
+                    },
+                    complete: function () {
+                        $scope.loading.submit = false;
+                        $scope.$applyAsync();
+                    }
+                });
+            });
+
             // Submit mode mới
             $scope.submit = function () {
                 $scope.loading.submit = false;

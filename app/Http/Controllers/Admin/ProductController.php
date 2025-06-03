@@ -96,7 +96,10 @@ class ProductController extends Controller
 
                 }
                 if(Auth::user()->type == User::SUPER_ADMIN || Auth::user()->type == User::QUAN_TRI_VIEN) {
-                    $result = $result . ' <a href="" title="thêm vào danh mục đặc biệt" class="dropdown-item add-category-special"><i class="fa fa-angle-right"></i>Thêm vào danh mục đặc biệt</a>';
+                    $result = $result . ' <a href="javascript:void(0)" title="thêm vào danh mục đặc biệt" class="dropdown-item add-category-special"><i class="fa fa-angle-right"></i>Thêm vào danh mục đặc biệt</a>';
+                }
+                if(Auth::user()->is_customer_vip) {
+                    $result = $result . ' <a href="javascript:void(0)" title="Top up" class="dropdown-item top-up"><i class="fa fa-angle-right"></i>Top up</a>';
                 }
                 $result = $result . '</div></div>';
                 return $result;
@@ -440,5 +443,22 @@ class ProductController extends Controller
             return $product;
         });
         return Response::json($products);
+    }
+
+    // Top up
+    public function topUp(Request $request, $id) {
+        $product = ThisModel::findOrFail($id);
+        if ($product->created_by != Auth::user()->id) {
+            return Response::json(['success' => false, 'message' => 'Bạn không có quyền thực hiện thao tác này']);
+        }
+        if (!Auth::user()->is_customer_vip) {
+            return Response::json(['success' => false, 'message' => 'Bạn không có quyền thực hiện thao tác này']);
+        }
+        if ($product->top_up_at && Carbon::parse($product->top_up_at)->addMinutes(10) > Carbon::now()) {
+            return Response::json(['success' => false, 'message' => 'Chỉ được top up 1 lần trong 10 phút']);
+        }
+        $product->top_up_at = Carbon::now();
+        $product->save();
+        return Response::json(['success' => true, 'message' => 'Thao tác thành công']);
     }
 }

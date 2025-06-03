@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
             Route::post('/importExcel', 'Admin\ProductController@importExcel')->name('Product.importExcel');
             Route::get('/act-delete', 'Admin\ProductController@actDelete')->name('products.delete.multi');
             Route::post('/{id}/deleteFile', 'Admin\ProductController@deleteFile')->name('products.deleteFile');
+            Route::get('/{id}/top-up', 'Admin\ProductController@topUp')->name('products.topUp');
         });
 
         Route::group(['prefix' => 'products', 'middleware' => 'checkType:'.User::KHACH_HANG], function () {

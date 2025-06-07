@@ -231,7 +231,7 @@
     <!-- sidebar start -->
     <div ng-cloak>
         <!-- left sidebar start-->
-        <div class="fixed top-0 left-0 lg:translate-x-0 -translate-x-full h-screen z-10 pt-32 transition-1" style="background: #0e1012">
+        <div class="fixed top-0 left-0 lg:translate-x-0 -translate-x-full h-screen z-10 pt-32 transition-1" style="background: #0e1012; width: 235px;">
             <div class="overflow-y-auto scrollbar-0 max-h-svh px-[8px] w-full h-full">
                 <div class="grid grid-cols-1 gap-20p divide-y divide-shap mb-40p">
                     <div class="small-nav">

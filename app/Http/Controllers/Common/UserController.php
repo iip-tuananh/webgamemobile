@@ -123,8 +123,11 @@ class UserController extends Controller
 			'roles.*' => 'required_unless:type,10|exists:roles,id',
 			'type' => 'required|in:'.implode(',', array_column(ThisModel::USER_TYPES, 'id')),
             'upgrade_type' => 'required_if:type,10|in:0,1',
-            'upgrade_to_date' => 'required_if:upgrade_type,1|date'
 		];
+
+        if ($request->upgrade_type == 1) {
+            $rule['upgrade_to_date'] = 'required|date';
+        }
 
 		$validate = Validator::make(
 			$request->all(),
@@ -181,8 +184,11 @@ class UserController extends Controller
 			'roles.*' => 'required_unless:type,10|exists:roles,id',
 			'type' => 'required|in:'.implode(',', array_column(ThisModel::USER_TYPES, 'id')),
             'upgrade_type' => 'required_if:type,10|in:0,1',
-            'upgrade_to_date' => 'required_if:upgrade_type,1|date'
 		];
+
+        if ($request->upgrade_type == 1) {
+            $rule['upgrade_to_date'] = 'required|date';
+        }
 
 		$validate = Validator::make(
 			$request->all(),

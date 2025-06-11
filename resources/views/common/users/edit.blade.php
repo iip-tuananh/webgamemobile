@@ -20,7 +20,6 @@
 app.controller('Common', function ($scope, $http) {
 	$scope.form = new User(@json($object), {scope: $scope});
 	$scope.form.roles = $scope.form.roles.map(val => val.id);
-	console.log($scope.form);
 
 	@include('common.users.formJs')
 
@@ -39,7 +38,9 @@ app.controller('Common', function ($scope, $http) {
 			success: function(response) {
 				if (response.success) {
 					toastr.success(response.message);
-					window.location.href = "{{ route('User.index') }}";
+                    if ({{ Auth::user()->type }} != @json(\App\Model\Common\User::KHACH_HANG)) {
+                        window.location.href = "{{ route('User.index') }}";
+                    }
 				} else {
 					toastr.warning(response.message);
 					$scope.errors = response.errors;

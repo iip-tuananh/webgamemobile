@@ -91,7 +91,7 @@
                                             </a>
                                             <div class="mt-20p">
                                                 <a href="{{ route('front.show-product-detail', $product->slug) }}"
-                                                    class="heading-4 link-1 mb-2 line-clamp-2" style="height: 60px;">
+                                                    class="heading-4 link-1 mb-2 line-clamp-2" style="height: 50px;">
                                                     {{ $product->title_seo }}
                                                 </a>
                                                 {{-- <p class="text-l-regular text-w-neutral-2 mb-20p">
